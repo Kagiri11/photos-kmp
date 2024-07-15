@@ -1,21 +1,14 @@
 plugins {
+    alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
-    kotlin("multiplatform")
-    id("org.jetbrains.compose")
-    kotlin("plugin.serialization") version "2.0.0"
 }
 
 kotlin {
+    android()
 
-    android {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
-    }
-
-    listOf(
+    jvm("desktop")
+    
+    /*listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
@@ -24,29 +17,28 @@ kotlin {
             baseName = "shared"
             isStatic = true
         }
-    }
+    }*/
 
     sourceSets {
-        commonMain{
-            dependencies{
-                implementation(compose.material)
-                implementation(compose.foundation)
-                implementation(compose.animation)
-                implementation(libs.koin.core)
-                implementation(libs.kotlin.coroutines.core)
-                implementation(libs.ktor.client.auth)
-                implementation(libs.ktor.client.content.negotiation)
-                implementation(libs.ktor.serialization)
-                implementation(libs.ktor.client.core)
-                implementation(libs.ktor.client.cio)
-                implementation(libs.ktor.client.logging)
-                implementation(libs.androidx.datastore)
-                implementation("com.google.code.gson:gson:2.11.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
-            }
+        sourceSets["commonMain"].dependencies {
+            //put your multiplatform dependencies here
+        }
+        sourceSets["commonTest"].dependencies {
+            implementation(libs.kotlin.test)
+        }
+
+        sourceSets["androidMain"].dependencies {
+        }
+        sourceSets["androidUnitTest"].dependencies {
+        }
+        sourceSets["androidInstrumentedTest"].dependencies {
+        }
+
+        sourceSets["desktopMain"].dependencies {
+        }
+        sourceSets["desktopTest"].dependencies {
         }
     }
-
 }
 
 android {
