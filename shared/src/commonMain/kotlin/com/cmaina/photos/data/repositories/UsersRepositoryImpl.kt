@@ -2,8 +2,8 @@ package com.cmaina.fotos.shared.data.repositories
 
 
 import com.cmaina.photos.data.network.models.users.UserDto
-import com.cmaina.fotos.shared.data.mappers.toDomain
-import com.cmaina.fotos.shared.data.network.InOut
+import com.cmaina.photos.data.mappers.toDomain
+import com.cmaina.photos.data.network.InOut
 import com.cmaina.fotos.shared.data.network.UsersRemoteSource
 import com.cmaina.fotos.shared.domain.models.users.User
 import com.cmaina.fotos.shared.domain.models.users.portfolio.UserPortFolioDomainModel

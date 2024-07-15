@@ -27,6 +27,14 @@ kotlin {
             implementation(libs.kotlin.coroutines.core)
             implementation(libs.koin.core)
             implementation("androidx.paging:paging-runtime:3.3.0")
+            implementation(libs.ktor.client.auth)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization)
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.cio)
+            implementation(libs.ktor.client.logging)
+            implementation ("io.github.aakira:napier:2.7.1")
+            implementation(libs.androidx.datastore)
         }
         sourceSets["commonTest"].dependencies {
             implementation(libs.kotlin.test)

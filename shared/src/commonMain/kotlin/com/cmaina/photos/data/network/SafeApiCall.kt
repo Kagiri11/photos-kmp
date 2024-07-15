@@ -1,17 +1,17 @@
-package com.cmaina.fotos.shared.data.network
+package com.cmaina.photos.data.network
 
-import com.cmaina.fotos.shared.domain.utils.Result
-import com.cmaina.fotos.shared.domain.utils.Result.*
+import com.cmaina.photos.domain.utils.Result
 import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.bodyAsText
 
 
 suspend inline fun <T : Any, reified R : Any> safeApiCall(
     apiCall: suspend () -> T
 ) =
     try {
-        Success(data = apiCall.invoke())
+        Result.Success(data = apiCall.invoke())
     } catch (e: Exception) {
-        Error(errorDetails = "")
+        com.cmaina.photos.domain.utils.Result.Error(errorDetails = "")
     }
 
 class InOut<in T : Any, out R : Any>(val item: @UnsafeVariance T) {
@@ -22,8 +22,8 @@ class InOut<in T : Any, out R : Any>(val item: @UnsafeVariance T) {
     ): Result<@UnsafeVariance R> {
 
         return when (response.status.value) {
-            200 -> Success(data = mapper.invoke(item))
-            else -> Error(errorDetails = "")
+            200 -> Result.Success(data = mapper.invoke(item))
+            else -> Result.Error(errorDetails = response.bodyAsText())
         }
     }
 }

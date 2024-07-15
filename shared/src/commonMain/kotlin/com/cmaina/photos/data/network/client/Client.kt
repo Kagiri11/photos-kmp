@@ -1,4 +1,4 @@
-package com.cmaina.fotos.shared.data.network.client
+package com.cmaina.photos.data.network.client
 
 import com.cmaina.fotos.shared.data.network.utils.TokenStorage
 import io.github.aakira.napier.Napier

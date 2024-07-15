@@ -1,12 +1,12 @@
-package com.cmaina.fotos.shared.data.repositories.paging
+package com.cmaina.photos.data.repositories.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.cmaina.fotos.shared.data.mappers.toDomain
-import com.cmaina.fotos.shared.data.network.InOut
+import com.cmaina.photos.data.mappers.toDomain
+import com.cmaina.photos.data.network.InOut
 import com.cmaina.fotos.shared.data.network.PhotosRemoteSource
 import com.cmaina.photos.data.network.models.photos.PhotoListItem
-import com.cmaina.fotos.shared.domain.models.photos.Photo
+import com.cmaina.photos.domain.models.photos.Photo
 import io.ktor.client.call.body
 
 class PhotosPagingSource(private val photosRemoteSource: PhotosRemoteSource) :
@@ -18,7 +18,7 @@ class PhotosPagingSource(private val photosRemoteSource: PhotosRemoteSource) :
         val result = InOut<List<PhotoListItem>, List<Photo>>(call.body())
             .apiCall(call) { it.map { it.toDomain() } }
         return when (result) {
-            is Result.Success -> {
+            is com.cmaina.photos.domain.utils.Result.Success -> {
                 val dataResponse = result.data
                 LoadResult.Page(
                     data = dataResponse,
@@ -27,7 +27,7 @@ class PhotosPagingSource(private val photosRemoteSource: PhotosRemoteSource) :
                 )
             }
 
-            is Result.Error -> {
+            is com.cmaina.photos.domain.utils.Result.Error -> {
                 LoadResult.Error(Throwable(message = result.errorDetails))
             }
         }

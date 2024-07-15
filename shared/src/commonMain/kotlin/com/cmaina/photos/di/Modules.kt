@@ -1,9 +1,5 @@
 package com.cmaina.photos.di
 
-import com.cmaina.fotos.shared.presentation.screens.home.HomeViewModel
-import com.cmaina.fotos.shared.presentation.screens.photodetails.PhotoDetailsViewModel
-import com.cmaina.fotos.shared.presentation.screens.settings.SettingsViewModel
-import com.cmaina.fotos.shared.presentation.screens.user.UserViewModel
 import org.koin.dsl.module
 
 val networkModule = module {
