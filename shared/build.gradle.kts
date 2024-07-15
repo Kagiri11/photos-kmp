@@ -27,8 +27,8 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
+        commonMain{
+            dependencies{
                 implementation(compose.material)
                 implementation(compose.foundation)
                 implementation(compose.animation)
