@@ -1,4 +1,4 @@
-package com.cmaina.fotos.shared.di
+package com.cmaina.photos.di
 
 import com.cmaina.fotos.shared.data.network.sources.authRemoteSource
 import com.cmaina.fotos.shared.data.network.sources.photosRemoteSource
@@ -19,9 +19,9 @@ import com.cmaina.fotos.shared.utils.AppSettings
 import org.koin.dsl.module
 
 val networkModule = module {
-    factory { photosRemoteSource }
+/*    factory { photosRemoteSource }
     factory { usersRemoteSource }
-    factory { authRemoteSource }
+    factory { authRemoteSource }*/
 }
 
 val dataModule = module {
@@ -29,10 +29,10 @@ val dataModule = module {
 }
 
 val repositoryModule = module {
-    single<PhotosRepository> { PhotosRepositoryImpl(photosRemoteSource = get()) }
+    /*single<PhotosRepository> { PhotosRepositoryImpl(photosRemoteSource = get()) }
     factory<UsersRepository> { UsersRepositoryImpl(usersRemoteSource = get()) }
     single<AuthRepository> { AuthRepositoryImpl(authRemoteSource = get(), preferences = get()) }
-    factory<AppRepository> { AppRepositoryImpl(settings = AppSettings) }
+    factory<AppRepository> { AppRepositoryImpl(settings = AppSettings) }*/
 }
 
 val presentationModule = module {
