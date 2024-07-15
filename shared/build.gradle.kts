@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    kotlin("plugin.serialization") version "2.0.0"
 }
 
 kotlin {
@@ -22,6 +23,10 @@ kotlin {
     sourceSets {
         sourceSets["commonMain"].dependencies {
             //put your multiplatform dependencies here
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
+            implementation(libs.kotlin.coroutines.core)
+            implementation(libs.koin.core)
+            implementation("androidx.paging:paging-runtime:3.3.0")
         }
         sourceSets["commonTest"].dependencies {
             implementation(libs.kotlin.test)
