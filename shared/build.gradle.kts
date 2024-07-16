@@ -10,17 +10,6 @@ kotlin {
 
     jvm("desktop")
 
-    /*listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = "shared"
-            isStatic = true
-        }
-    }*/
-
     sourceSets {
         sourceSets["commonMain"].dependencies {
             implementation(compose.animation)
@@ -35,6 +24,7 @@ kotlin {
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
             implementation(libs.kotlin.coroutines.core)
             implementation(libs.koin.core)
+            implementation(libs.koin.composeVM)
             implementation("androidx.paging:paging-runtime:3.3.0")
             implementation(libs.ktor.client.auth)
             implementation(libs.ktor.client.content.negotiation)
@@ -44,6 +34,7 @@ kotlin {
             implementation(libs.ktor.client.logging)
             implementation ("io.github.aakira:napier:2.7.1")
             implementation(libs.androidx.datastore)
+            implementation("androidx.datastore:datastore-preferences-core:1.1.0")
             implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.0-alpha03")
         }
         sourceSets["commonTest"].dependencies {

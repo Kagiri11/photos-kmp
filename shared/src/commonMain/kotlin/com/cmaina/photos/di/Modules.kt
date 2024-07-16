@@ -11,16 +11,18 @@ import com.cmaina.photos.domain.repositories.AppRepository
 import com.cmaina.photos.domain.repositories.AuthRepository
 import com.cmaina.photos.domain.repositories.PhotosRepository
 import com.cmaina.photos.domain.repositories.UsersRepository
+import com.cmaina.photos.presentation.screens.home.HomeViewModel
+import com.cmaina.photos.presentation.screens.photodetails.PhotoDetailsViewModel
+import com.cmaina.photos.presentation.screens.settings.SettingsViewModel
+import com.cmaina.photos.presentation.screens.user.UserViewModel
+import org.koin.compose.viewmodel.dsl.viewModelOf
+import org.koin.core.module.Module
 import org.koin.dsl.module
 
 val networkModule = module {
     factory { photosRemoteSource }
     factory { usersRemoteSource }
     factory { authRemoteSource }
-}
-
-val dataModule = module {
-    single { provideDataStore(get()) }
 }
 
 val repositoryModule = module {
@@ -31,10 +33,10 @@ val repositoryModule = module {
 }
 
 val presentationModule = module {
-   /* factory { HomeViewModel(photosRepository = get()) }
-    factory { PhotoDetailsViewModel(photosRepository = get(), authRepository = get()) }
-    factory { SettingsViewModel(appRepository = get()) }
-    factory { UserViewModel(usersRepository = get(), photosRepository = get()) }*/
+    viewModelOf(::HomeViewModel)
+    viewModelOf(::PhotoDetailsViewModel)
+    viewModelOf(::SettingsViewModel)
+    viewModelOf(::UserViewModel)
 }
 
-expect fun platformModule() : Module
+expect fun platformModule(): Module
