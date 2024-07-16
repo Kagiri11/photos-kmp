@@ -24,6 +24,7 @@ kotlin {
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
             implementation(libs.kotlin.coroutines.core)
             implementation(libs.koin.core)
+            implementation(libs.koin.android1)
             implementation(libs.koin.composeVM)
             implementation("androidx.paging:paging-runtime:3.3.0")
             implementation(libs.ktor.client.auth)
@@ -58,6 +59,7 @@ kotlin {
 android {
     namespace = "com.cmaina.photos"
     compileSdk = 34
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = 24
     }
