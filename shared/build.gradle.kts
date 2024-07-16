@@ -37,6 +37,7 @@ kotlin {
             implementation(libs.androidx.datastore)
             implementation("androidx.datastore:datastore-preferences-core:1.1.0")
             implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.0-alpha03")
+            implementation("org.jetbrains.androidx.navigation:navigation-compose:2.7.0-alpha07")
         }
         sourceSets["commonTest"].dependencies {
             implementation(libs.kotlin.test)
@@ -50,6 +51,7 @@ kotlin {
         }
 
         sourceSets["desktopMain"].dependencies {
+            implementation(compose.desktop.currentOs)
         }
         sourceSets["desktopTest"].dependencies {
         }

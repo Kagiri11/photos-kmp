@@ -12,11 +12,14 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import com.cmaina.photos.presentation.components.settingscomponents.Setting
 import com.cmaina.photos.presentation.components.settingscomponents.SettingItemDialog
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 
 
+@OptIn(KoinExperimentalAPI::class)
 @Composable
 fun SettingsScreen(
-    settingsViewModel: SettingsViewModel
+    settingsViewModel: SettingsViewModel = koinViewModel()
 ) {
     val isAppDarkTheme = settingsViewModel.appTheme.collectAsState().value
     val isThemeDialogOpen = settingsViewModel.isThemeDialogOpen.collectAsState().value

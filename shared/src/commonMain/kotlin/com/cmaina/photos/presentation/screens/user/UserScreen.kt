@@ -20,6 +20,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,14 +34,18 @@ import com.cmaina.photos.presentation.components.userscreencomponents.FollowAndM
 import com.cmaina.photos.presentation.components.userscreencomponents.FollowingSection
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 
+@OptIn(KoinExperimentalAPI::class)
 @Composable
 fun UserScreen(
     onScreenLoad: () -> Unit,
     onBackPressed: () -> Unit,
     onUserPhotoClicked: (String) -> Unit,
-    uiState: UserUiState
+    userViewModel: UserViewModel = koinViewModel()
 ) {
+    val uiState = userViewModel.uiState.collectAsState().value
 
     LaunchedEffect(key1 = true) {
         onScreenLoad()

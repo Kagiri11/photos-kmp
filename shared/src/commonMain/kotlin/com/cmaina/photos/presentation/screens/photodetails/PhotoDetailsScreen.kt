@@ -18,6 +18,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,7 +33,10 @@ import com.cmaina.photos.presentation.components.photoscards.AsyncImageBlur
 import com.cmaina.photos.presentation.components.photoscards.PhotosPager
 import com.cmaina.photos.presentation.components.photostext.FotosText
 import com.cmaina.photos.presentation.components.photostext.FotosTitleText
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 
+@OptIn(KoinExperimentalAPI::class)
 @Composable
 fun PhotoDetailsScreen(
     onInitialLoadEvent: () -> Unit,
@@ -42,8 +46,9 @@ fun PhotoDetailsScreen(
     onPageSwappedEvent: (String) -> Unit,
     messageIsPresent: Boolean,
     onUserRequestsAuthenticationEvent: (String) -> Unit,
-    uiState: PhotoDetailsUiState
+    photoDetailsViewModel: PhotoDetailsViewModel = koinViewModel()
 ) {
+    val uiState = photoDetailsViewModel.uiState.collectAsState().value
     LaunchedEffect(key1 = true) {
         onInitialLoadEvent()
     }

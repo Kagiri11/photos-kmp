@@ -9,18 +9,23 @@ import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.cmaina.photos.presentation.components.photoscards.PhotoCardItem
 import com.cmaina.photos.presentation.components.photostext.FotosTitleText
 import com.cmaina.photos.presentation.utils.lazyItems
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 
+@OptIn(KoinExperimentalAPI::class)
 @Composable
 fun HomeScreen(
-    uiState: HomeUiState,
+    homeViewModel: HomeViewModel = koinViewModel(),
     onPhotoClicked: (String) -> Unit
 ) {
+    val uiState = homeViewModel.uiState.collectAsState().value
     val lazyStaggeredGridState = rememberLazyStaggeredGridState()
 
     Column(modifier = Modifier.fillMaxSize()) {
