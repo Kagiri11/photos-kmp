@@ -1,4 +1,4 @@
-package com.cmaina.fotos.shared.presentation.components.userscreencomponents
+package com.cmaina.photos.presentation.components.userscreencomponents
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
@@ -14,9 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
-import com.cmaina.fotos.shared.domain.models.photos.Photo
 import com.cmaina.photos.presentation.components.photoscards.AsyncImageBlur
-import com.cmaina.fotos.shared.presentation.utils.myItems
+import com.cmaina.photos.domain.models.photos.Photo
+import com.cmaina.photos.presentation.utils.items
 
 @Composable
 fun UserPhotos(
@@ -30,15 +30,13 @@ fun UserPhotos(
         columns = GridCells.Fixed(3),
         contentPadding = PaddingValues(1.dp)
     ) {
-        myItems(photos){pic ->
-            pic?.let {
-                UserPhoto(
-                    imageBlurHash = pic.blurHash ?: "",
-                    userImageUrl = pic.photoUrls?.small ?: "",
-                    contentDescription = pic.description ?: "",
-                    onClick = { onUserPhotoClicked(pic.id) }
-                )
-            }
+        items(photos){pic ->
+            UserPhoto(
+                imageBlurHash = pic.blurHash,
+                userImageUrl = pic.photoUrls.small ?: "",
+                contentDescription = pic.description,
+                onClick = { onUserPhotoClicked(pic.id) }
+            )
         }
     }
 }
