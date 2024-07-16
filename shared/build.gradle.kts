@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
+    id("org.jetbrains.compose")
 }
 
 kotlin {
@@ -22,6 +23,14 @@ kotlin {
 
     sourceSets {
         sourceSets["commonMain"].dependencies {
+            implementation(compose.animation)
+            implementation(compose.foundation)
+            implementation(compose.animation)
+            implementation(compose.material)
+            implementation(libs.paging.compose.common)
+            implementation("media.kamel:kamel-image:0.9.1")
+            implementation("androidx.paging:paging-common:3.3.0")
+            implementation("androidx.paging:paging-compose-android:3.3.0")
             //put your multiplatform dependencies here
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
             implementation(libs.kotlin.coroutines.core)
@@ -35,6 +44,7 @@ kotlin {
             implementation(libs.ktor.client.logging)
             implementation ("io.github.aakira:napier:2.7.1")
             implementation(libs.androidx.datastore)
+            implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.0-alpha03")
         }
         sourceSets["commonTest"].dependencies {
             implementation(libs.kotlin.test)
