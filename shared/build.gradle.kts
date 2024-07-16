@@ -33,7 +33,7 @@ kotlin {
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.cio)
             implementation(libs.ktor.client.logging)
-            implementation ("io.github.aakira:napier:2.7.1")
+            implementation("io.github.aakira:napier:2.7.1")
             implementation(libs.androidx.datastore)
             implementation("androidx.datastore:datastore-preferences-core:1.1.0")
             implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.0-alpha03")
@@ -68,5 +68,11 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+compose.desktop {
+    application {
+        mainClass = "MainKt"
     }
 }
