@@ -7,8 +7,8 @@ import com.cmaina.photos.data.network.models.photos.PhotoListItem
 import com.cmaina.photos.data.network.models.photostats.PhotoStatistics
 import com.cmaina.photos.data.mappers.toDomain
 import com.cmaina.photos.data.network.InOut
-import com.cmaina.fotos.shared.data.network.PhotosRemoteSource
-import com.cmaina.fotos.shared.data.network.sources.usersRemoteSource
+import com.cmaina.photos.data.network.sources.PhotosRemoteSource
+import com.cmaina.photos.data.network.sources.usersRemoteSource
 import com.cmaina.photos.data.repositories.paging.PhotosPagingSource
 import com.cmaina.photos.data.repositories.paging.SearchedPhotosPagingSource
 import com.cmaina.photos.data.repositories.paging.UserPhotosPagingSource

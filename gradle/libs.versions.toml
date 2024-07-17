@@ -13,7 +13,7 @@ appCompat = "1.4.1"
 coroutines = "1.7.1"
 koin = "3.2.0-beta-1"
 kotlin = "2.0.0"
-ktorVersion = "2.3.4"
+ktorVersion = "2.3.12"
 benchmark = "1.1.0"
 multiplatformPaging = "3.3.0-alpha02-0.5.1"
 uiautomator = "2.2.0"
@@ -48,6 +48,7 @@ kotlinAndroid = "1.7.20"
 androidApp = "7.2.0"
 androidLib = "7.2.0"
 profileinstaller = "1.2.0"
+slf4j = "2.0.13"
 
 # Test versions
 jUnit = "4.13.2"
@@ -116,12 +117,16 @@ kotlin-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coro
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktorVersion" }
 ktor-client-android = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktorVersion" }
+ktor-client-json = { group = "io.ktor", name = "ktor-client-json", version.ref = "ktorVersion" }
+ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktorVersion" }
+ktor-client-serialization = { group = "io.ktor", name = "ktor-client-serialization", version.ref = "ktorVersion" }
 ktor-client-auth = { group = "io.ktor", name = "ktor-client-auth", version.ref = "ktorVersion" }
 ktor-client-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktorVersion" }
 ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktorVersion" }
-ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktorVersion" }
 ktor-client-mock = { group = "io.ktor", name = "ktor-client-mock", version.ref = "ktorVersion" }
-ktor-serialization = { group = "io.ktor", name = "ktor-serialization-gson", version.ref = "ktorVersion" }
+ktor-client-java = { group = "io.ktor", name = "ktor-client-java", version.ref = "ktorVersion" }
+ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktorVersion" }
+slf4j = { group = "org.slf4j", name = "slf4j-simple", version.ref = "slf4j" }
 kotlin-reflection = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "reflection" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockK" }
 paging-common = { module = "app.cash.paging:paging-common", version.ref = "pagingCommon" }

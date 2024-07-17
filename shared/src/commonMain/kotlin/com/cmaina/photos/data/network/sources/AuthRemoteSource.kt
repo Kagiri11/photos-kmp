@@ -1,4 +1,4 @@
-package com.cmaina.photos.data.network
+package com.cmaina.photos.data.network.sources
 
 import com.cmaina.fotos.shared.data.Constants.BASEURL
 import io.ktor.client.HttpClient

@@ -4,7 +4,7 @@ package com.cmaina.photos.data.repositories
 import com.cmaina.photos.data.network.models.users.UserDto
 import com.cmaina.photos.data.mappers.toDomain
 import com.cmaina.photos.data.network.InOut
-import com.cmaina.fotos.shared.data.network.UsersRemoteSource
+import com.cmaina.photos.data.network.sources.UsersRemoteSource
 import com.cmaina.photos.domain.models.users.User
 import com.cmaina.photos.domain.models.users.portfolio.UserPortFolioDomainModel
 import com.cmaina.photos.domain.models.users.statistics.UserStatistics

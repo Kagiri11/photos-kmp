@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.cmaina.photos.data.mappers.toDomain
 import com.cmaina.photos.data.network.InOut
-import com.cmaina.fotos.shared.data.network.PhotosRemoteSource
+import com.cmaina.photos.data.network.sources.PhotosRemoteSource
 import com.cmaina.photos.data.network.models.search.PhotoSearchResultDto
 import com.cmaina.photos.domain.models.photos.Photo
 import com.cmaina.photos.domain.models.search.PhotoSearchResultDomainModel

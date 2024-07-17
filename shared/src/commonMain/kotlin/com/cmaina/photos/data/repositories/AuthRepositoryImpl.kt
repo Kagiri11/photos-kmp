@@ -4,7 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import com.cmaina.photos.data.mappers.toDomain
-import com.cmaina.photos.data.network.AuthRemoteSource
+import com.cmaina.photos.data.network.sources.AuthRemoteSource
 import com.cmaina.photos.data.network.InOut
 import com.cmaina.photos.data.network.models.auth.AuthRemoteResponse
 import com.cmaina.photos.domain.models.auth.AuthDomainResponse
