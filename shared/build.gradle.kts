@@ -1,14 +1,16 @@
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.compose.compiler)
     id("org.jetbrains.compose")
 }
 
 kotlin {
-    android()
+    androidTarget()
 
-    jvm("desktop")
+    jvm()
 
     sourceSets {
         sourceSets["commonMain"].dependencies {
@@ -16,17 +18,14 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.animation)
             implementation(compose.material)
+            implementation(libs.kamel.image)
+            implementation(libs.paging.common)
             implementation(libs.paging.compose.common)
-            implementation("media.kamel:kamel-image:0.9.1")
-            implementation("androidx.paging:paging-common:3.3.0")
-            implementation("androidx.paging:paging-compose-android:3.3.0")
             //put your multiplatform dependencies here
-            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
+            implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlin.coroutines.core)
-            implementation(libs.koin.core)
-            implementation(libs.koin.android1)
+            api(libs.koin.core)
             implementation(libs.koin.composeVM)
-            implementation("androidx.paging:paging-runtime:3.3.0")
             implementation(libs.ktor.client.auth)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization)
@@ -36,7 +35,6 @@ kotlin {
             implementation("io.github.aakira:napier:2.7.1")
             implementation(libs.androidx.datastore)
             implementation("androidx.datastore:datastore-preferences-core:1.1.0")
-            implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.0-alpha03")
             implementation("org.jetbrains.androidx.navigation:navigation-compose:2.7.0-alpha07")
         }
         sourceSets["commonTest"].dependencies {
@@ -49,11 +47,9 @@ kotlin {
         }
         sourceSets["androidInstrumentedTest"].dependencies {
         }
-
-        sourceSets["desktopMain"].dependencies {
-            implementation(compose.desktop.currentOs)
-        }
-        sourceSets["desktopTest"].dependencies {
+        sourceSets["jvmMain"].dependencies {
+            implementation(libs.kotlin.coroutines.core)
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.9.0-RC")
         }
     }
 }
@@ -68,11 +64,5 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
-    }
-}
-
-compose.desktop {
-    application {
-        mainClass = "MainKt"
     }
 }

@@ -16,4 +16,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Photos"
 include(":androidApp")
+include(":desktopApp")
 include(":shared")
