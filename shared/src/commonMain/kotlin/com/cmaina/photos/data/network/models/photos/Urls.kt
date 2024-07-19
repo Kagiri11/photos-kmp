@@ -1,8 +1,9 @@
 package com.cmaina.photos.data.network.models.photos
 
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-
+@Serializable
 data class Urls(
     @SerialName("full")
     val full: String?,

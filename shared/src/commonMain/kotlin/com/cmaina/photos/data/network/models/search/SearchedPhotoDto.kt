@@ -21,7 +21,6 @@ data class SearchedPhotoDto(
     val links: PhotoLinks,
     val promoted_at: String,
     val sponsorship: Sponsorship?,
-    val topic_submissions: TopicSubmissions,
     val updated_at: String,
     val urls: Urls,
     val user: User,

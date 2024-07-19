@@ -1,5 +1,8 @@
 package com.cmaina.photos.data.network.models.photos
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Sponsor(
     val accepted_tos: Boolean?,
     val bio: String?,
@@ -9,7 +12,7 @@ data class Sponsor(
     val instagram_username: String?,
     val last_name: String?,
     val sponsorLinks: SponsorLinks?,
-    val location: Any?,
+    val location: String?,
     val name: String?,
     val portfolio_url: String?,
     val profile_image: ProfileImage?,

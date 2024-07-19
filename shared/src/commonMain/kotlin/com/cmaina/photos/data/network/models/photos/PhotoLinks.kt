@@ -1,8 +1,10 @@
 package com.cmaina.photos.data.network.models.photos
 
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 
+@Serializable
 data class PhotoLinks(
     @SerialName("download")
     val download: String?,

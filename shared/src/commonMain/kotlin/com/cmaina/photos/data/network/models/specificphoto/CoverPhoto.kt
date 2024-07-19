@@ -3,7 +3,6 @@ package com.cmaina.photos.data.network.models.specificphoto
 import com.cmaina.photos.data.network.models.photos.PhotoLinks
 import com.cmaina.photos.data.network.models.photos.Urls
 import com.cmaina.photos.data.network.models.photos.User
-import com.cmaina.photos.data.network.models.search.TopicSubmissions
 
 data class CoverPhoto(
     val alt_description: String,
@@ -20,7 +19,6 @@ data class CoverPhoto(
     val links: PhotoLinks,
     val promoted_at: String,
     val sponsorship: Any,
-    val topic_submissions: TopicSubmissions,
     val updated_at: String,
     val urls: Urls,
     val user: User,

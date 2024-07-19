@@ -8,7 +8,7 @@ import com.cmaina.photos.data.network.models.photostats.PhotoStatistics
 import com.cmaina.photos.data.mappers.toDomain
 import com.cmaina.photos.data.network.InOut
 import com.cmaina.photos.data.network.sources.PhotosRemoteSource
-import com.cmaina.photos.data.network.sources.usersRemoteSource
+import com.cmaina.photos.data.network.sources.UsersRemoteSource
 import com.cmaina.photos.data.repositories.paging.PhotosPagingSource
 import com.cmaina.photos.data.repositories.paging.SearchedPhotosPagingSource
 import com.cmaina.photos.data.repositories.paging.UserPhotosPagingSource
@@ -20,7 +20,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
 class PhotosRepositoryImpl(
-    private val photosRemoteSource: PhotosRemoteSource
+    private val photosRemoteSource: PhotosRemoteSource,
+    private val usersRemoteSource: UsersRemoteSource
 ) : PhotosRepository {
 
     override suspend fun fetchPhotos(): com.cmaina.photos.domain.utils.Result<Flow<PagingData<Photo>>> {

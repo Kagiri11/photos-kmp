@@ -1,7 +1,9 @@
 package com.cmaina.photos.data.network.models.photos
 
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Sponsorship(
     @SerialName("impression_urls")
     val impression_urls: List<String>?,
