@@ -39,6 +39,7 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @OptIn(KoinExperimentalAPI::class)
 @Composable
 fun PhotoDetailsScreen(
+    photoId: String,
     onInitialLoadEvent: () -> Unit,
     onUserSectionClickedEvent: (String) -> Unit,
     onImageLikedEvent: () -> Unit,
@@ -49,6 +50,11 @@ fun PhotoDetailsScreen(
     photoDetailsViewModel: PhotoDetailsViewModel = koinViewModel()
 ) {
     val uiState = photoDetailsViewModel.uiState.collectAsState().value
+
+    LaunchedEffect(Unit) {
+        photoDetailsViewModel.fetchPhoto(photoId)
+    }
+
     LaunchedEffect(key1 = true) {
         onInitialLoadEvent()
     }
@@ -60,7 +66,7 @@ fun PhotoDetailsScreen(
     }
 
     if (messageIsPresent) {
-        NotAuthenticatedDialog(
+       /* NotAuthenticatedDialog(
             openDialog = true,
             onDismissed = {
                 onDialogDismissedEvent()
@@ -68,7 +74,7 @@ fun PhotoDetailsScreen(
             onUserAcceptedAction = {
                 // start auth process
             }
-        )
+        )*/
     }
 
     when (uiState) {
@@ -147,14 +153,14 @@ fun ColumnScope.LikeAndDownloadSection(
                 blurHash = ""
             )
             FotosText(modifier = Modifier, text = userName)
-            Image(
+            /*Image(
                 painter = painterResource(""),
                 contentDescription = ""
             )
             Image(
                 painter = painterResource(""),
                 contentDescription = ""
-            )
+            )*/
         }
 
         FotosTitleText("$numberOfLikes likes", MaterialTheme.colors.onPrimary)
