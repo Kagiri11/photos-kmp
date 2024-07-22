@@ -36,7 +36,6 @@ internal fun PhotoListItem.toDomain() = Photo(
     likes = likes ?: 0,
     photoUrls = urls!!.toDomain(),
     user = user?.toDomain()!!,
-    relatedPhotos = this.collections.results.map { it.id to (it.coverPhoto.urls.full ?: "") }
 )
 
 internal fun User.toDomain() = PhotoUser(
@@ -68,7 +67,6 @@ internal fun UserProfileImage.toDomain() = DomainUserProfileImage(
 
 internal fun Social.toDomain() = DomainUserSocial(
     instagramUsername = instagram_username,
-    paypalEmail = paypal_email,
     portfolioUrl = portfolio_url,
     twitterUsername = twitter_username
 )
@@ -125,10 +123,7 @@ internal fun SearchedPhotoDto.toDomain() = Photo(
     likedByUser = liked_by_user,
     likes = likes,
     photoUrls = urls.toDomain(),
-    user = this.user.toDomain(),
-    relatedPhotos = this.collections.results.map {
-        it.id to (it.coverPhoto.urls.full ?: "")
-    }
+    user = this.user.toDomain()
 )
 
 internal fun AuthRemoteResponse.toDomain() = AuthDomainResponse(

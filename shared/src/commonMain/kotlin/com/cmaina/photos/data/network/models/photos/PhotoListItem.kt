@@ -27,8 +27,6 @@ data class PhotoListItem(
     val links: PhotoLinks?,
     @SerialName("promoted_at")
     val promotedAt: String?,
-    @SerialName("sponsorship")
-    val sponsorship: Sponsorship?,
     @SerialName("updated_at")
     val updatedAt: String?,
     @SerialName("urls")
@@ -36,11 +34,5 @@ data class PhotoListItem(
     @SerialName("user")
     val user: User?,
     @SerialName("width")
-    val width: Int?,
-    @SerialName("views")
-    val views: Int?,
-    @SerialName("downloads")
-    val downloads: Int?,
-    @SerialName("related_collections")
-    val collections: Collections
+    val width: Int?
 )

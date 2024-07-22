@@ -9,7 +9,7 @@ data class Photo(
     val likedByUser: Boolean,
     val likes: Int,
     val user: com.cmaina.photos.domain.models.photos.PhotoUser,
-    val relatedPhotos: List<Pair<String, String>>
+    val relatedPhotos: List<Pair<String, String>> = emptyList()
 )
 
 

@@ -2,7 +2,6 @@ package com.cmaina.photos.data.network.models.search
 
 import com.cmaina.photos.data.network.models.photos.Collections
 import com.cmaina.photos.data.network.models.photos.PhotoLinks
-import com.cmaina.photos.data.network.models.photos.Sponsorship
 import com.cmaina.photos.data.network.models.photos.Urls
 import com.cmaina.photos.data.network.models.photos.User
 
@@ -20,7 +19,6 @@ data class SearchedPhotoDto(
     val likes: Int,
     val links: PhotoLinks,
     val promoted_at: String,
-    val sponsorship: Sponsorship?,
     val updated_at: String,
     val urls: Urls,
     val user: User,
