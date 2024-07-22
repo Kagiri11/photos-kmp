@@ -46,13 +46,13 @@ fun HomeScreen(
                     contentPadding = PaddingValues(1.dp),
                     state = lazyStaggeredGridState
                 ) {
-                    lazyItems(photos) { pic ->
+                    lazyItems(photos) { photo ->
                         PhotoCardItem(
-                            blurHash = pic?.blurHash ?: "",
-                            imageUrl = pic?.photoUrls?.small ?: "",
-                            contentDescription = pic?.description ?: "",
+                            blurHash = photo?.blurHash ?: "",
+                            imageUrl = photo?.photoUrls?.small ?: "",
+                            contentDescription = photo?.description ?: "",
                             onPhotoClicked = {
-                                onPhotoClicked(pic?.id!!)
+                                onPhotoClicked(photo?.id!!)
                             }
                         )
                     }

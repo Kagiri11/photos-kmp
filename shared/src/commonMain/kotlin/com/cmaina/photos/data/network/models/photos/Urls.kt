@@ -6,11 +6,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Urls(
     @SerialName("full")
-    val full: String?,
+    val full: String,
     @SerialName("raw")
-    val raw: String?,
+    val raw: String,
     @SerialName("regular")
-    val regular: String?,
+    val regular: String,
     @SerialName("small")
     val small: String?,
     @SerialName("small_s3")

@@ -57,14 +57,13 @@ class PhotoDetailsViewModel(
             when (val result = photosRepository.getSpecificPhoto(photoId = photoId)) {
                 is Result.Success -> {
                     with(result.data) {
-
-
                         val details = Details(
                             userName = user.userName,
                             userPhotoImageUrl = user.userPhotoImageUrl,
                             numberOfLikes = likes,
-                            relatedImages = emptyList(),
-                            photoIsLikedByUser = false
+                            relatedImages = listOf("" to this.photoUrls.full),
+                            photoIsLikedByUser = false,
+                            photoImageUrl = this.photoUrls.full
                         )
                         _uiState.value =
                             PhotoDetailsUiState.Success(details = details)
@@ -109,5 +108,6 @@ data class Details(
     val userPhotoImageUrl: String,
     val numberOfLikes: Int,
     val relatedImages: List<Pair<String, String>>,
+    val photoImageUrl: String,
     val photoIsLikedByUser: Boolean
 )
