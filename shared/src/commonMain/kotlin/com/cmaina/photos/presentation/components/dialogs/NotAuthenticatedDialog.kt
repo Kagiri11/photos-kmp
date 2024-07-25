@@ -46,11 +46,11 @@ fun NotAuthenticatedDialog(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.SpaceAround
                 ) {
-                    Icon(
+                    /*Icon(
                         painter = painterResource(""),
                         tint = MaterialTheme.colors.onPrimary,
                         contentDescription = "alert icon"
-                    )
+                    )*/
                     FotosTitleText(
                         text = "Please sign in to continue",
                         textColor = MaterialTheme.colors.onPrimary

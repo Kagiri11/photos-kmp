@@ -7,6 +7,7 @@ import com.cmaina.photos.data.network.models.photos.PhotoListItem
 import com.cmaina.photos.data.network.models.photostats.PhotoStatistics
 import com.cmaina.photos.data.mappers.toDomain
 import com.cmaina.photos.data.network.InOut
+import com.cmaina.photos.data.network.models.specificphoto.SpecificPhoto
 import com.cmaina.photos.data.network.sources.PhotosRemoteSource
 import com.cmaina.photos.data.network.sources.UsersRemoteSource
 import com.cmaina.photos.data.repositories.paging.PhotosPagingSource
@@ -43,13 +44,17 @@ class PhotosRepositoryImpl(
     }
 
 
-    override suspend fun getSpecificPhoto(photoId: String): com.cmaina.photos.domain.utils.Result<Photo> {
+    override suspend fun getSpecificPhoto(photoId: String): com.cmaina.photos.domain.utils.Result<SpecificPhoto> {
         val call = photosRemoteSource.fetchPhoto(photoId)
-        return InOut<PhotoListItem, Photo>(
+        return InOut<SpecificPhoto, SpecificPhoto>(
             call.body()
         ).apiCall(
             response = call,
-            mapper = { it.toDomain() }
+            mapper = {
+                println()
+                println("PhotoListItem => $it")
+                it
+            }
         )
     }
 

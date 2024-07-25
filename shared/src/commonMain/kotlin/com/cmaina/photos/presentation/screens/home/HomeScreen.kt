@@ -8,10 +8,13 @@ import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.cmaina.photos.presentation.components.photoscards.PhotoCardItem
 import com.cmaina.photos.presentation.components.photostext.FotosTitleText
@@ -29,10 +32,9 @@ fun HomeScreen(
     val lazyStaggeredGridState = rememberLazyStaggeredGridState()
 
     Column(modifier = Modifier.fillMaxSize()) {
-        FotosTitleText(
+        Text(
             text = "Explore",
-            textColor = MaterialTheme.colors.onPrimary,
-            modifier = Modifier
+            style = TextStyle(fontSize = 30.sp, color = MaterialTheme.colors.onBackground)
         )
 
         when (uiState) {

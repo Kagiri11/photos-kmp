@@ -8,7 +8,7 @@ class PhotosApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        initKoin{
+        initKoin {
             androidContext(this@PhotosApplication)
         }
     }

@@ -12,7 +12,7 @@ data class User(
     @SerialName("first_name")
     val first_name: String?,
     @SerialName("for_hire")
-    val for_hire: Boolean?,
+    val forHire: Boolean?,
     @SerialName("id")
     val id: String?,
     @SerialName("last_name")
@@ -20,7 +20,7 @@ data class User(
     @SerialName("location")
     val location: String?,
     @SerialName("name")
-    val name: String?,
+    val name: String,
     @SerialName("portfolio_url")
     val portfolio_url: String?,
     @SerialName("profile_image")

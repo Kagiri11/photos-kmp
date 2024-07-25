@@ -50,11 +50,11 @@ fun Setting(
         Row(
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Icon(
+            /*Icon(
                 painter = painterResource(""),
                 contentDescription = "",
                 tint = MaterialTheme.colors.onPrimary
-            )
+            )*/
             Spacer(modifier = Modifier.width(20.dp))
             Column {
                 FotosText(

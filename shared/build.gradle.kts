@@ -8,7 +8,13 @@ plugins {
 }
 
 kotlin {
-    androidTarget()
+    androidTarget{
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = "1.8"
+            }
+        }
+    }
 
     jvm()
 
@@ -21,6 +27,7 @@ kotlin {
             implementation(libs.kamel.image)
             implementation(libs.paging.common)
             implementation(libs.paging.compose.common)
+            api("org.lighthousegames:logging:1.5.0")
             //put your multiplatform dependencies here
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlin.coroutines.core)
@@ -34,6 +41,7 @@ kotlin {
             implementation(libs.ktor.client.json)
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation("io.github.aakira:napier:2.7.1")
+            implementation("org.slf4j:slf4j-api:2.0.12")
             implementation(libs.androidx.datastore)
             implementation("androidx.datastore:datastore-preferences-core:1.1.0")
             implementation("org.jetbrains.androidx.navigation:navigation-compose:2.7.0-alpha07")

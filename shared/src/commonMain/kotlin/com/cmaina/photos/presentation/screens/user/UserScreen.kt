@@ -88,7 +88,7 @@ fun UserDetailsScreen(
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 Spacer(modifier = Modifier.width(20.dp))
-                Image(
+                /*Image(
 //                painter = painterResource(id = R.drawable.ic_baseline_chevron_left_24),
                     painter = painterResource(""),
                     contentDescription = "back",
@@ -96,13 +96,13 @@ fun UserDetailsScreen(
                         .size(30.dp)
                         .clickable(onClick = onBackPressed),
                     colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary)
-                )
+                )*/
                 Spacer(modifier = Modifier.weight(1f))
-                Image(
+                /*Image(
                     painter = painterResource(""),
                     contentDescription = "more",
                     colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary)
-                )
+                )*/
                 Spacer(modifier = Modifier.width(20.dp))
             }
         }

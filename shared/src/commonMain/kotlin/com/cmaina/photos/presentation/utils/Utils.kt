@@ -1,6 +1,5 @@
 package com.cmaina.photos.presentation.utils
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.lazy.grid.LazyGridItemScope
 import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridItemScope

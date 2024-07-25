@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ColumnScope.PhotosPager(
-    images: List<Pair<String, String>>,
+    images: List<String>,
     pageInIteration: (Int) -> Unit,
     onPageSwapped: (String) -> Unit
 ) {
@@ -27,9 +27,9 @@ fun ColumnScope.PhotosPager(
         images.size
     }
 
-    HorizontalPager(state = pagerState, ){ page ->
+    HorizontalPager(state = pagerState) { page ->
         pageInIteration(pagerState.currentPage)
-        onPageSwapped(images[page].first)
+//        onPageSwapped(images[page].first)
         Card(
             modifier = Modifier
                 .fillMaxHeight(0.95f)
@@ -38,7 +38,7 @@ fun ColumnScope.PhotosPager(
         ) {
             AsyncImageBlur(
                 blurHash = "",
-                imageUrl = images[page].second,
+                imageUrl = images[page],
                 modifier = Modifier.fillMaxSize(),
                 contentDescription = ""
             )

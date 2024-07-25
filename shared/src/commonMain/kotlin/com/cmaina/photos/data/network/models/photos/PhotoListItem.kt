@@ -34,5 +34,25 @@ data class PhotoListItem(
     @SerialName("user")
     val user: User?,
     @SerialName("width")
-    val width: Int?
+    val width: Int?,
+    @SerialName("related_collections")
+    val relatedCollections: RelatedCollections? = null
+)
+
+@Serializable
+data class RelatedCollections(
+    @SerialName("results")
+    val collections: List<Collection>
+)
+
+@Serializable
+data class Collection(
+    @SerialName("preview_photos")
+    val previewPhotos: List<PreviewPhoto>
+)
+
+@Serializable
+data class PreviewPhoto(
+    val id: String,
+    val urls: Urls
 )

@@ -6,12 +6,12 @@ import io.ktor.client.statement.bodyAsText
 
 
 suspend inline fun <T : Any, reified R : Any> safeApiCall(
-    apiCall: suspend () -> T
+    apiCall: () -> T
 ) =
     try {
         Result.Success(data = apiCall.invoke())
     } catch (e: Exception) {
-        com.cmaina.photos.domain.utils.Result.Error(errorDetails = "")
+        Result.Error(errorDetails = "")
     }
 
 class InOut<in T : Any, out R : Any>(val item: @UnsafeVariance T) {

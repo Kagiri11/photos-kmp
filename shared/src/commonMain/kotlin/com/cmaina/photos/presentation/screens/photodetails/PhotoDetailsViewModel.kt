@@ -6,10 +6,12 @@ import com.cmaina.photos.domain.models.specificphoto.PreviewPhoto
 import com.cmaina.photos.domain.repositories.AuthRepository
 import com.cmaina.photos.domain.repositories.PhotosRepository
 import com.cmaina.photos.domain.utils.Result
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import org.slf4j.Logger
 
 class PhotoDetailsViewModel(
     private val photosRepository: PhotosRepository,
@@ -57,13 +59,18 @@ class PhotoDetailsViewModel(
             when (val result = photosRepository.getSpecificPhoto(photoId = photoId)) {
                 is Result.Success -> {
                     with(result.data) {
+                        println()
+                        println("Photo => $this")
+                        val images =
+                            this.relatedCollections.collections.flatMap { it.previewPhotos.map { it.urls.regular } }
+                                .toMutableList()
+                        images.add(this.urls.regular)
                         val details = Details(
-                            userName = user.userName,
-                            userPhotoImageUrl = user.userPhotoImageUrl,
+                            userName = user.name,
+                            userPhotoImageUrl = user.userProfileImage.medium,
                             numberOfLikes = likes,
-                            relatedImages = listOf("" to this.photoUrls.full),
-                            photoIsLikedByUser = false,
-                            photoImageUrl = this.photoUrls.full
+                            relatedImages = images,
+                            photoIsLikedByUser = false
                         )
                         _uiState.value =
                             PhotoDetailsUiState.Success(details = details)
@@ -107,7 +114,6 @@ data class Details(
     val userName: String,
     val userPhotoImageUrl: String,
     val numberOfLikes: Int,
-    val relatedImages: List<Pair<String, String>>,
-    val photoImageUrl: String,
+    val relatedImages: List<String>,
     val photoIsLikedByUser: Boolean
 )
