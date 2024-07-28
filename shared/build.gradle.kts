@@ -44,6 +44,7 @@ kotlin {
             implementation("org.slf4j:slf4j-api:2.0.12")
             implementation(libs.androidx.datastore)
             implementation("androidx.datastore:datastore-preferences-core:1.1.0")
+            implementation(libs.material3.window.size)
             implementation("org.jetbrains.androidx.navigation:navigation-compose:2.7.0-alpha07")
         }
         sourceSets["commonTest"].dependencies {
