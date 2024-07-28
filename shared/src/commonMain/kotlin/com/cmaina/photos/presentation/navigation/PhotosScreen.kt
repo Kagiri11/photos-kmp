@@ -4,5 +4,6 @@ enum class PhotosScreen(val route: String) {
     Home("home"),
     PhotoDetails("photo_details"),
     Settings("settings"),
-    User("user")
+    User("user"),
+    Favorites("favorites"),
 }
