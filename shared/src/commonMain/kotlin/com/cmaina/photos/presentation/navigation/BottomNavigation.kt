@@ -1,11 +1,15 @@
 package com.cmaina.photos.presentation.navigation
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -14,6 +18,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import org.jetbrains.compose.resources.painterResource
 
 val TopLevelDestinations = listOf(
     PhotosScreen.Home,
@@ -58,17 +63,17 @@ fun RowScope.AddBottomNavItem(
         label = {
             Text(
                 text = screen.name,
-                style = TextStyle(color = if (isSelected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.primary)
+//                style = TextStyle(color = if (isSelected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.primary)
+                style = TextStyle(color = MaterialTheme.colors.onPrimary)
             )
         },
-        alwaysShowLabel = isSelected,
+        alwaysShowLabel = true,
         icon = {
-            // TODO: Add icon to bottom nav screens
-            /*Icon(
-                painter = painterResource(id = screen.icon),
-                contentDescription = screen.label,
-                tint = if (isSelected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.onPrimary
-            )*/
+            Icon(
+                imageVector = screen.icon,
+                contentDescription = "Bottom nav Icon",
+                tint = if (isSelected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.primary
+            )
         },
     )
 }
