@@ -1,11 +1,28 @@
 package com.cmaina.photos.presentation.screens
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.cmaina.photos.presentation.navigation.BottomNav
@@ -18,24 +35,43 @@ import com.cmaina.photos.presentation.ui.theme.PhotosTheme
 @Composable
 fun MainScreen() {
     val windowSize = calculateWindowSizeClass()
-    val windowIsCompacted = windowSize.widthSizeClass < WindowWidthSizeClass.Medium
     val navController: NavHostController = rememberNavController()
 
     PhotosTheme {
-        when (windowIsCompacted) {
-            true -> {
-                Scaffold(
-                    bottomBar = { BottomNav(navController) },
-                    content = { PhotosApp(navController) }
-                )
+        AnimatedContent(
+            targetState = windowSize.widthSizeClass < WindowWidthSizeClass.Medium,
+            label = "MainScreen",
+            transitionSpec = {
+                fadeIn(
+                    animationSpec = tween(3000)
+                ) togetherWith fadeOut(animationSpec = tween(3000))
             }
+        ) { targetState ->
+            when (targetState) {
+                true -> {
+                    Scaffold(
+                        bottomBar = { BottomNav(navController) },
+                        content = { PhotosApp(navController) }
+                    )
+                }
 
-            false -> {
-                Row {
-                    NavigationRail(navController)
-                    PhotosApp(navController)
+                false -> {
+                    Surface {
+                        Row {
+                            NavigationRail(navController)
+                            Spacer(modifier = Modifier.width(10.dp))
+                            Card(
+                                modifier = Modifier.fillMaxSize(),
+                                shape = RoundedCornerShape(0),
+                                elevation = 10.dp
+                            ) {
+                                PhotosApp(navController)
+                            }
+                        }
+                    }
                 }
             }
+
         }
     }
 }

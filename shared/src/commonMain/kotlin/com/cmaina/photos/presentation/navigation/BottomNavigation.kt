@@ -63,8 +63,8 @@ fun RowScope.AddBottomNavItem(
         label = {
             Text(
                 text = screen.name,
-//                style = TextStyle(color = if (isSelected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.primary)
-                style = TextStyle(color = MaterialTheme.colors.onPrimary)
+                style = TextStyle(color = if (isSelected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.primary)
+//                style = TextStyle(color = MaterialTheme.colors.onPrimary)
             )
         },
         alwaysShowLabel = true,

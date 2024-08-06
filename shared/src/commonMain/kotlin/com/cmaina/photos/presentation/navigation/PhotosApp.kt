@@ -1,15 +1,12 @@
 package com.cmaina.photos.presentation.navigation
 
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.cmaina.photos.presentation.screens.favorites.FavoritesScreen
 import com.cmaina.photos.presentation.screens.home.HomeScreen
 import com.cmaina.photos.presentation.screens.photodetails.PhotoDetailsScreen
 import com.cmaina.photos.presentation.screens.settings.SettingsScreen
@@ -64,12 +61,5 @@ fun PhotosApp(
                 onUserPhotoClicked = {}
             )
         }
-    }
-}
-
-@Composable
-fun FavoritesScreen() {
-    Surface(modifier = Modifier.fillMaxSize()) {
-        // TODO: Add favorites screen content here
     }
 }
