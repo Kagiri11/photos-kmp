@@ -8,7 +8,7 @@ Desktop - ✅\
 iOS - soon.
 
 ## 🛠️ WIP 🛠️
-> Please note that this project is still under development and some features may not work as expected.
+> Please note that this project is still under development.
 
 ## Screenshots
 
