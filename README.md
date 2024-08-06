@@ -1,10 +1,14 @@
 # Photos Multiplatform :camera:
 
-Photos is an application that displays images from the unsplash API. Currently supports Android and Desktop. iOS support soon.
+Photos is a multiplatform application that displays images from the unsplash API. 
+Supports;
+Android - ✅
+Desktop - ✅
+iOS - soon.
 
 ## 🛠️ WIP 🛠️
 > Please note that this project is still under development and some features may not work as expected.
-> 
+
 ## Screenshots
 
 <p align="center">
