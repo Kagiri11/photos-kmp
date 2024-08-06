@@ -1,6 +1,7 @@
 # Photos Multiplatform :camera:
 
 Photos is a multiplatform application that displays images from the unsplash API. 
+
 Supports;
 Android - ✅
 Desktop - ✅
