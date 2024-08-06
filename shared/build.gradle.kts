@@ -4,7 +4,9 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.serialization)
     alias(libs.plugins.compose.compiler)
-    id("org.jetbrains.compose")
+//    id("org.jetbrains.compose")
+    alias(libs.plugins.compose.multiplatform)
+    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 kotlin {
@@ -16,7 +18,7 @@ kotlin {
         }
     }
 
-    jvm()
+    jvm("desktop")
 
     sourceSets {
         sourceSets["commonMain"].dependencies {
@@ -24,6 +26,7 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.animation)
             implementation(compose.material)
+            implementation(compose.components.resources)
             implementation(libs.kamel.image)
             implementation(libs.paging.common)
             implementation(libs.paging.compose.common)
@@ -44,7 +47,10 @@ kotlin {
             implementation("org.slf4j:slf4j-api:2.0.12")
             implementation(libs.androidx.datastore)
             implementation("androidx.datastore:datastore-preferences-core:1.1.0")
+            implementation(libs.material3.window.size)
             implementation("org.jetbrains.androidx.navigation:navigation-compose:2.7.0-alpha07")
+            api("dev.icerock.moko:resources:0.24.1")
+            api("dev.icerock.moko:resources-compose:0.24.1")
         }
         sourceSets["commonTest"].dependencies {
             implementation(libs.kotlin.test)
@@ -56,8 +62,9 @@ kotlin {
         }
         sourceSets["androidInstrumentedTest"].dependencies {
         }
-        sourceSets["jvmMain"].dependencies {
+        sourceSets["desktopMain"].dependencies {
             implementation(libs.kotlin.coroutines.core)
+            // TODO: Migrate these dependencies to version catalogs
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.9.0-RC")
         }
     }
@@ -74,4 +81,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+}
+
+multiplatformResources{
+    resourcesPackage.set("com.cmaina.photos.resources") // required
+    resourcesClassName.set("MokoRes")
 }

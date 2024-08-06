@@ -5,8 +5,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.cmaina.photos.presentation.screens.favorites.FavoritesScreen
 import com.cmaina.photos.presentation.screens.home.HomeScreen
 import com.cmaina.photos.presentation.screens.photodetails.PhotoDetailsScreen
 import com.cmaina.photos.presentation.screens.settings.SettingsScreen
@@ -14,7 +14,7 @@ import com.cmaina.photos.presentation.screens.user.UserScreen
 
 @Composable
 fun PhotosApp(
-    navController: NavHostController = rememberNavController(),
+    navController: NavHostController,
     startDestination: String = PhotosScreen.Home.route
 ) {
     NavHost(
@@ -48,6 +48,10 @@ fun PhotosApp(
 
         composable(route = PhotosScreen.Settings.route) {
             SettingsScreen()
+        }
+
+        composable(route = PhotosScreen.Favorites.route) {
+            FavoritesScreen()
         }
 
         composable(route = PhotosScreen.User.route) {
