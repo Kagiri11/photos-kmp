@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.cmaina.photos.presentation.ui.theme.FotosGreyShadeThreeLightTheme
+import com.cmaina.photos.presentation.utils.navigateTopScreens
 
 @Composable
 fun NavigationRail(navHostController: NavHostController) {
@@ -33,11 +34,7 @@ fun NavigationRail(navHostController: NavHostController) {
                     )
                 },
                 onClick = {
-                    // TODO: Make this a shared code logic
-                    navHostController.navigate(screen.route) {
-                        popUpTo(navHostController.graph.startDestinationRoute!!)
-                        launchSingleTop = true
-                    }
+                    navHostController.navigateTopScreens(screen)
                 },
                 label = {
                     Text(
