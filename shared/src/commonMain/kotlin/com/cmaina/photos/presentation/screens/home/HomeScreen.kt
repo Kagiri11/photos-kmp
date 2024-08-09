@@ -32,6 +32,7 @@ import org.koin.core.annotation.KoinExperimentalAPI
 fun HomeScreen(
     homeViewModel: HomeViewModel = koinViewModel(), onPhotoClicked: (String) -> Unit
 ) {
+    println("HomeScreenViewModel hash => ${homeViewModel.hashCode()}")
     val uiState = homeViewModel.uiState.collectAsState().value
     val lazyStaggeredGridState = rememberLazyStaggeredGridState()
     Column(

@@ -15,11 +15,13 @@ interface PhotosRepository {
 
     suspend fun getSpecificPhoto(photoId: String): Result<SpecificPhoto>
 
-    suspend fun fetchUserPhotos(username: String): Flow<androidx.paging.PagingData<com.cmaina.photos.domain.models.photos.Photo>>
+    suspend fun fetchUserPhotos(username: String): Flow<androidx.paging.PagingData<Photo>>
 
     suspend fun getPhotoStatistics(photoId: String): Flow<Result<DomainPhotoStatistics>>
 
-    suspend fun searchPhoto(searchString: String): Flow<PagingData<com.cmaina.photos.domain.models.photos.Photo>>
+    suspend fun searchPhoto(searchString: String): Flow<PagingData<Photo>>
 
     suspend fun likePhoto(id: String): Result<Photo>
+
+    suspend fun fetchLikedPhotos(): Flow<List<Photo>>
 }

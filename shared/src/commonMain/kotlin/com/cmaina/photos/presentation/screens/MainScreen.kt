@@ -5,6 +5,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,10 +18,6 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -28,7 +25,6 @@ import androidx.navigation.compose.rememberNavController
 import com.cmaina.photos.presentation.navigation.BottomNav
 import com.cmaina.photos.presentation.navigation.NavigationRail
 import com.cmaina.photos.presentation.navigation.PhotosApp
-import com.cmaina.photos.presentation.navigation.TopLevelDestinations
 import com.cmaina.photos.presentation.ui.theme.PhotosTheme
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -51,7 +47,11 @@ fun MainScreen() {
                 true -> {
                     Scaffold(
                         bottomBar = { BottomNav(navController) },
-                        content = { PhotosApp(navController) }
+                        content = {
+                            PhotosApp(
+                                navController = navController
+                            )
+                        }
                     )
                 }
 
@@ -71,7 +71,6 @@ fun MainScreen() {
                     }
                 }
             }
-
         }
     }
 }

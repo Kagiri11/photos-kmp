@@ -3,6 +3,7 @@ package com.cmaina.photos.presentation.screens.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.cmaina.photos.domain.models.photos.Photo
 import com.cmaina.photos.domain.repositories.PhotosRepository
 import com.cmaina.photos.domain.utils.Result
@@ -26,18 +27,21 @@ class HomeViewModel(
     private fun fetchPhotos() {
         viewModelScope.launch {
             _uiState.value = when (val result = photosRepository.fetchPhotos()) {
-                is Result.Success -> HomeUiState.Success(pagedPhotos = result.data)
+                is Result.Success -> HomeUiState.Success(
+                    pagedPhotos = result.data.cachedIn(viewModelScope)
+                )
+
                 is Result.Error -> HomeUiState.Error(errorMessage = result.errorDetails)
             }
         }
     }
 }
 
-sealed interface HomeUiState{
+sealed interface HomeUiState {
 
-    data class Success(val pagedPhotos: Flow<PagingData<Photo>>): HomeUiState
+    data class Success(val pagedPhotos: Flow<PagingData<Photo>>) : HomeUiState
 
-    object Loading: HomeUiState
+    object Loading : HomeUiState
 
-    data class Error(val errorMessage: String): HomeUiState
+    data class Error(val errorMessage: String) : HomeUiState
 }
