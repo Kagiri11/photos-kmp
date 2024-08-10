@@ -12,9 +12,9 @@ data class Urls(
     @SerialName("regular")
     val regular: String,
     @SerialName("small")
-    val small: String?,
+    val small: String = "",
     @SerialName("small_s3")
-    val small_s3: String?,
+    val small_s3: String = "",
     @SerialName("thumb")
     val thumb: String?
 )

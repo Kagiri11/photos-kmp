@@ -22,16 +22,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import coil3.annotation.ExperimentalCoilApi
+import coil3.compose.setSingletonImageLoaderFactory
 import com.cmaina.photos.presentation.navigation.BottomNav
 import com.cmaina.photos.presentation.navigation.NavigationRail
 import com.cmaina.photos.presentation.navigation.PhotosApp
 import com.cmaina.photos.presentation.ui.theme.PhotosTheme
+import com.cmaina.photos.presentation.utils.getAsyncImageLoader
 
-@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class, ExperimentalCoilApi::class)
 @Composable
 fun MainScreen() {
     val windowSize = calculateWindowSizeClass()
     val navController: NavHostController = rememberNavController()
+
+    setSingletonImageLoaderFactory { context ->
+        getAsyncImageLoader(context)
+    }
 
     PhotosTheme {
         AnimatedContent(

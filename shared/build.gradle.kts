@@ -22,12 +22,16 @@ kotlin {
             implementation(libs.androidx.datastore)
             implementation(libs.androidx.datastore.preferences.core)
 
+            implementation(libs.coil.compose.core)
+            implementation(libs.coil.compose)
+            implementation(libs.coil.mp)
+            implementation(libs.coil.network.ktor)
+
             implementation(compose.animation)
             implementation(compose.foundation)
             implementation(compose.animation)
             implementation(compose.material)
             implementation(compose.components.resources)
-            implementation(compose.materialIconsExtended)
 
             api(libs.koin.core)
             implementation(libs.kotlin.coroutines.core)

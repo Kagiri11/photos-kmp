@@ -32,8 +32,6 @@ import com.cmaina.photos.presentation.components.userscreencomponents.UserPhotos
 import com.cmaina.photos.presentation.components.photostext.FotosTitleText
 import com.cmaina.photos.presentation.components.userscreencomponents.FollowAndMessageButtons
 import com.cmaina.photos.presentation.components.userscreencomponents.FollowingSection
-import io.kamel.image.KamelImage
-import io.kamel.image.asyncPainterResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -113,13 +111,13 @@ fun UserDetailsScreen(
                     .size(80.dp),
                 shape = CircleShape
             ) {
-                val painter = asyncPainterResource(data = userUiDetails.userImageUrl)
+                /*val painter = asyncPainterResource(data = userUiDetails.userImageUrl)
                 KamelImage(
                     resource = painter,
                     contentDescription = "",
                     modifier = Modifier
                         .fillMaxSize()
-                )
+                )*/
             }
 
             FotosTitleText(

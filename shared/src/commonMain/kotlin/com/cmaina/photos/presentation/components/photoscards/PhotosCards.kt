@@ -8,28 +8,30 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
 
 @Composable
 fun PhotoCardItem(
-    blurHash: String,
     imageUrl: String,
     contentDescription: String,
     onPhotoClicked: () -> Unit
 ) {
-
     Card(
+        shape = RoundedCornerShape(2),
         modifier = Modifier
             .height(230.dp)
             .fillMaxWidth()
             .padding(1.dp)
-            .clickable(onClick = onPhotoClicked),
-        shape = RoundedCornerShape(2),
+            .clickable(
+                onClick = onPhotoClicked
+            ),
     ) {
-        AsyncImageBlur(
-            blurHash = blurHash,
-            imageUrl = imageUrl,
-            contentDescription = contentDescription
+        AsyncImage(
+            contentDescription = contentDescription,
+            contentScale = ContentScale.Crop,
+            model = imageUrl
         )
     }
 }

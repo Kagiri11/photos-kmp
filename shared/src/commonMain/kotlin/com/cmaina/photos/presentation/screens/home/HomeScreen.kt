@@ -1,6 +1,5 @@
 package com.cmaina.photos.presentation.screens.home
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,13 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
-import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
-import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -27,9 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.cmaina.photos.presentation.components.photoscards.PhotoCardItem
-import com.cmaina.photos.presentation.components.photostext.FotosTitleText
 import com.cmaina.photos.presentation.utils.items
-import com.cmaina.photos.presentation.utils.lazyItems
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -69,12 +60,12 @@ fun HomeScreen(
                     items(
                         items = photos
                     ) { photo ->
-                        PhotoCardItem(blurHash = photo?.blurHash ?: "",
-                            imageUrl = photo?.photoUrls?.small ?: "",
-                            contentDescription = photo?.description ?: "",
-                            onPhotoClicked = {
-                                onPhotoClicked(photo?.id!!)
-                            })
+                        PhotoCardItem(
+                            imageUrl = photo.photoUrls.small,
+                            contentDescription = photo.description,
+                        ) {
+                            onPhotoClicked(photo.id)
+                        }
                     }
                 }
             }

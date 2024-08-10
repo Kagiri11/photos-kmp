@@ -6,6 +6,10 @@ import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridItemScope
 import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridScope
 import androidx.compose.runtime.Composable
 import androidx.paging.compose.LazyPagingItems
+import coil3.ImageLoader
+import coil3.PlatformContext
+import coil3.request.crossfade
+import coil3.util.DebugLogger
 
 inline fun <T : Any> LazyStaggeredGridScope.lazyItems(
     items: LazyPagingItems<T>,
@@ -22,3 +26,6 @@ inline fun <T : Any> LazyGridScope.items(
     items: LazyPagingItems<T>,
     crossinline itemContent: @Composable LazyGridItemScope.(value: T) -> Unit
 ) { items(count = items.itemCount) { index -> items[index]?.let { itemContent(it) } } }
+
+fun getAsyncImageLoader(context: PlatformContext)=
+    ImageLoader.Builder(context).crossfade(true).logger(DebugLogger()).build()
