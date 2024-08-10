@@ -1,5 +1,6 @@
 package com.cmaina.photos.presentation.screens.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -15,6 +16,7 @@ import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridS
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -38,6 +40,7 @@ fun HomeScreen(
 ) {
     val uiState = homeViewModel.uiState.collectAsState().value
     val lazyGridState = rememberLazyGridState()
+
     Column(
         modifier = Modifier.fillMaxSize().padding(horizontal = 5.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
@@ -76,5 +79,4 @@ fun HomeScreen(
             }
         }
     }
-
 }
