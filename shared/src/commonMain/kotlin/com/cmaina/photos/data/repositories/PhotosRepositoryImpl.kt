@@ -25,6 +25,10 @@ class PhotosRepositoryImpl(
     private val usersRemoteSource: UsersRemoteSource
 ) : PhotosRepository {
 
+    override suspend fun fetchLikedPhotos(): Flow<List<Photo>> {
+        return flowOf()
+    }
+
     override suspend fun fetchPhotos(): com.cmaina.photos.domain.utils.Result<Flow<PagingData<Photo>>> {
         val pagingConfig = PagingConfig(pageSize = 30)
         val photosPager = Pager(pagingConfig) {

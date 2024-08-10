@@ -20,7 +20,7 @@ fun PhotoCardItem(
 
     Card(
         modifier = Modifier
-            .height((180..250).random().dp)
+            .height(230.dp)
             .fillMaxWidth()
             .padding(1.dp)
             .clickable(onClick = onPhotoClicked),

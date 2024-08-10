@@ -6,6 +6,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
@@ -23,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.cmaina.photos.presentation.components.photoscards.PhotoCardItem
 import com.cmaina.photos.presentation.components.photostext.FotosTitleText
+import com.cmaina.photos.presentation.utils.items
 import com.cmaina.photos.presentation.utils.lazyItems
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -32,9 +36,8 @@ import org.koin.core.annotation.KoinExperimentalAPI
 fun HomeScreen(
     homeViewModel: HomeViewModel = koinViewModel(), onPhotoClicked: (String) -> Unit
 ) {
-    println("HomeScreenViewModel hash => ${homeViewModel.hashCode()}")
     val uiState = homeViewModel.uiState.collectAsState().value
-    val lazyStaggeredGridState = rememberLazyStaggeredGridState()
+    val lazyGridState = rememberLazyGridState()
     Column(
         modifier = Modifier.fillMaxSize().padding(horizontal = 5.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
@@ -52,13 +55,16 @@ fun HomeScreen(
             is HomeUiState.Error -> {}
             is HomeUiState.Success -> {
                 val photos = uiState.pagedPhotos.collectAsLazyPagingItems()
-                LazyVerticalStaggeredGrid(
+                LazyVerticalGrid(
                     modifier = Modifier.fillMaxWidth(),
-                    columns = StaggeredGridCells.Fixed(2),
+                    columns = GridCells.Adaptive(150.dp),
                     contentPadding = PaddingValues(1.dp),
-                    state = lazyStaggeredGridState
+                    state = lazyGridState
                 ) {
-                    lazyItems(photos) { photo ->
+
+                    items(
+                        items = photos
+                    ){ photo ->
                         PhotoCardItem(blurHash = photo?.blurHash ?: "",
                             imageUrl = photo?.photoUrls?.small ?: "",
                             contentDescription = photo?.description ?: "",

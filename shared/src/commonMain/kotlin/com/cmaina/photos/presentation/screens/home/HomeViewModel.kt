@@ -10,6 +10,7 @@ import com.cmaina.photos.domain.utils.Result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
@@ -26,12 +27,11 @@ class HomeViewModel(
 
     private fun fetchPhotos() {
         viewModelScope.launch {
-            _uiState.value = when (val result = photosRepository.fetchPhotos()) {
-                is Result.Success -> HomeUiState.Success(
-                    pagedPhotos = result.data.cachedIn(viewModelScope)
-                )
-
-                is Result.Error -> HomeUiState.Error(errorMessage = result.errorDetails)
+            _uiState.update {
+                when (val result = photosRepository.fetchPhotos()) {
+                    is Result.Success -> HomeUiState.Success(result.data.cachedIn(viewModelScope))
+                    is Result.Error -> HomeUiState.Error(errorMessage = result.errorDetails)
+                }
             }
         }
     }
