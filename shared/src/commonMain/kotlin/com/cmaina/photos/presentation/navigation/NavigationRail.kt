@@ -11,7 +11,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.cmaina.photos.presentation.ui.theme.FotosGreyShadeThreeLightTheme
 import com.cmaina.photos.presentation.utils.navigateTopScreens
 
 @Composable
@@ -24,6 +23,8 @@ fun NavigationRail(navHostController: NavHostController) {
     ) {
         TopLevelDestinations.forEach { screen ->
             val isSelected = navBackStackEntry?.destination?.route == screen.route
+            val color =
+                if (isSelected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.primaryVariant
             NavigationRailItem(
                 selected = isSelected,
                 icon = {

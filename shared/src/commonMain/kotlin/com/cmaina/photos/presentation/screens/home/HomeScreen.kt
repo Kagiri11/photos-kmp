@@ -64,7 +64,7 @@ fun HomeScreen(
 
                     items(
                         items = photos
-                    ){ photo ->
+                    ) { photo ->
                         PhotoCardItem(blurHash = photo?.blurHash ?: "",
                             imageUrl = photo?.photoUrls?.small ?: "",
                             contentDescription = photo?.description ?: "",

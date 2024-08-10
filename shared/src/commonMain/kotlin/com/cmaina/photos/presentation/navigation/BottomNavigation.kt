@@ -49,6 +49,8 @@ fun RowScope.AddBottomNavItem(
     navController: NavHostController,
 ) {
     val isSelected = currentScreen?.hierarchy?.any { it.route == screen.route } == true
+    val color =
+        if (isSelected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.primaryVariant
     BottomNavigationItem(
         selected = isSelected,
         onClick = {
@@ -57,7 +59,7 @@ fun RowScope.AddBottomNavItem(
         label = {
             Text(
                 text = screen.name,
-                style = TextStyle(color = if (isSelected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.primary)
+                style = TextStyle(color = color)
             )
         },
         alwaysShowLabel = true,
@@ -65,7 +67,7 @@ fun RowScope.AddBottomNavItem(
             Icon(
                 imageVector = screen.icon,
                 contentDescription = "Bottom nav Icon",
-                tint = if (isSelected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.primary
+                tint = color
             )
         },
     )
