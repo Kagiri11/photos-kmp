@@ -14,11 +14,11 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.cmaina.photos.presentation.utils.navigateTopScreens
 
 @Composable
-fun NavigationRail(navHostController: NavHostController) {
+fun NavigationRail(navHostController: NavHostController,modifier: Modifier) {
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
 
     NavigationRail(
-        modifier = Modifier.fillMaxHeight(),
+        modifier = modifier.fillMaxHeight(),
         backgroundColor = MaterialTheme.colors.primary
     ) {
         TopLevelDestinations.forEach { screen ->
@@ -27,20 +27,13 @@ fun NavigationRail(navHostController: NavHostController) {
                 if (isSelected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.primaryVariant
             NavigationRailItem(
                 selected = isSelected,
+                onClick = { navHostController.navigateTopScreens(screen) },
+                label = { Text(text = screen.name, color = color) },
                 icon = {
                     Icon(
                         imageVector = screen.icon,
                         contentDescription = "Bottom nav Icon",
-                        tint = if (isSelected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.primaryVariant
-                    )
-                },
-                onClick = {
-                    navHostController.navigateTopScreens(screen)
-                },
-                label = {
-                    Text(
-                        text = screen.name,
-                        color = if (isSelected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.primaryVariant
+                        tint = color
                     )
                 }
             )

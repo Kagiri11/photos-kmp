@@ -58,10 +58,10 @@ fun MainScreen() {
                 false -> {
                     Surface {
                         Row {
-                            NavigationRail(navController)
+                            NavigationRail(navController, modifier = Modifier.weight(0.1f, fill = true))
                             Spacer(modifier = Modifier.width(10.dp))
                             Card(
-                                modifier = Modifier.fillMaxSize(),
+                                modifier = Modifier.fillMaxSize().weight(0.8f),
                                 shape = RoundedCornerShape(0),
                                 elevation = 10.dp
                             ) {
