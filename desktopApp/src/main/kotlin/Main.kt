@@ -10,6 +10,7 @@ lateinit var koin: Koin
 fun main() {
     koin = initKoin().koin
     return application {
+        Thread.currentThread().contextClassLoader = this.javaClass.classLoader
         Window(
             onCloseRequest = ::exitApplication,
             title = "Photos Desktop"

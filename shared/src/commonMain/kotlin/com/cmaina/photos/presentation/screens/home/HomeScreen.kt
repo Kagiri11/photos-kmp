@@ -46,7 +46,8 @@ fun HomeScreen(
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         Text(
-            text = "Explore", style = TextStyle(
+            text = "Explore",
+            style = TextStyle(
                 fontSize = 30.sp,
                 color = MaterialTheme.colors.onBackground,
                 fontWeight = FontWeight.Bold

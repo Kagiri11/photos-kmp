@@ -49,8 +49,7 @@ kotlin {
             implementation("androidx.datastore:datastore-preferences-core:1.1.0")
             implementation(libs.material3.window.size)
             implementation("org.jetbrains.androidx.navigation:navigation-compose:2.7.0-alpha07")
-            api("dev.icerock.moko:resources:0.24.1")
-            api("dev.icerock.moko:resources-compose:0.24.1")
+            implementation("org.jetbrains.compose.material:material-icons-extended-desktop:1.6.10")
         }
         sourceSets["commonTest"].dependencies {
             implementation(libs.kotlin.test)
