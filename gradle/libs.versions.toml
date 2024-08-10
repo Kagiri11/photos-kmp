@@ -2,8 +2,13 @@
 agp = "8.0.2"
 compose-material3 = "1.2.1"
 androidx-activityCompose = "1.8.0"
+datastorePreferencesCore = "1.1.1"
 kamelImage = "0.9.1"
+kotlinxCoroutinesSwing = "1.9.0-RC"
 kotlinxSerializationJson = "1.7.1"
+materialIconsExtendedDesktop = "1.6.10"
+napier = "2.7.1"
+navigationCompose = "2.7.0-alpha07"
 pagingCommon = "3.3.0-alpha02-0.5.1"
 retrofit = "2.9.0"
 room = "2.6.1"
@@ -16,6 +21,7 @@ kotlin = "2.0.0"
 ktorVersion = "2.3.12"
 benchmark = "1.1.0"
 multiplatformPaging = "3.3.0-alpha02-0.5.1"
+slf4jApi = "2.0.12"
 uiautomator = "2.2.0"
 sandwich = "1.2.4"
 reflection = "1.6.21"
@@ -62,12 +68,12 @@ koinComposeMultiplatform = "1.2.0-Beta4"
 uiDesktop = "1.6.8"
 
 [libraries]
+androidx-datastore-preferences-core = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastorePreferencesCore" }
 androidx-paging-common = { module = "androidx.paging:paging-common", version.ref = "paging" }
 androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "paging" }
 kamel-image = { module = "media.kamel:kamel-image", version.ref = "kamelImage" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 compose-ui = { module = "androidx.compose.ui:ui", version = "1.6.8" }
-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
@@ -82,7 +88,6 @@ androidx-compose-ui-util = { group = "androidx.compose.ui", name = "ui-util", ve
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "compose" }
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "compose" }
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "compose" }
-androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose" }
 androidx-constraintlayout-compose = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "constraintLayout" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core" }
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashScreen" }
@@ -115,6 +120,7 @@ koin-android1 = { group = "io.insert-koin", name = "koin-android", version.ref =
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
 koin-composeVM = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinComposeMultiplatform" }
 kotlin-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinxCoroutinesSwing" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktorVersion" }
 ktor-client-android = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktorVersion" }
@@ -127,6 +133,9 @@ ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-conte
 ktor-client-mock = { group = "io.ktor", name = "ktor-client-mock", version.ref = "ktorVersion" }
 ktor-client-java = { group = "io.ktor", name = "ktor-client-java", version.ref = "ktorVersion" }
 ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktorVersion" }
+material-icons-extended-desktop = { module = "org.jetbrains.compose.material:material-icons-extended-desktop", version.ref = "materialIconsExtendedDesktop" }
+napier = { module = "io.github.aakira:napier", version.ref = "napier" }
+navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 slf4j = { group = "org.slf4j", name = "slf4j-simple", version.ref = "slf4j" }
 kotlin-reflection = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "reflection" }
 material3-window-size = { group = "dev.chrisbanes.material3", name = "material3-window-size-class-multiplatform", version.ref = "materialWindowSize"}
@@ -134,6 +143,7 @@ mockk = { group = "io.mockk", name = "mockk", version.ref = "mockK" }
 paging-common = { module = "app.cash.paging:paging-common", version.ref = "pagingCommon" }
 skydoves-sandwich = { group = "com.github.skydoves", name = "sandwich", version.ref = "sandwich" }
 skydoves-landscapist-fresco = { group = "com.github.skydoves", name = "landscapist-fresco", version.ref = "landscapist" }
+slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4jApi" }
 square-retrofit2-okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okHttpLoggingInterceptor" }
 square-retrofit2-okhttp3-mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "mockwebserver" }
 square-retrofit2-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
