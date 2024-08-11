@@ -3,13 +3,16 @@ package com.cmaina.photos.presentation.screens.settings
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
@@ -58,10 +61,17 @@ fun SettingsScreen(
             modifier = Modifier
                 .semantics { contentDescription = "setting column" }
                 .fillMaxWidth(),
-            verticalArrangement = Arrangement.Top
+            verticalArrangement = Arrangement.spacedBy(1.dp)
         ) {
+            Text(
+                text = "Display",
+                style = MaterialTheme.typography.body1.copy(
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold
+                )
+            )
+
             Setting(
-                settingName = "Display",
                 settingAttribute = "Theme",
                 attributeValue = when (uiState.appTheme) {
                     AppTheme.Dark -> "Dark"
@@ -78,14 +88,9 @@ fun SettingsScreen(
             }
 
             Setting(
-                settingName = "Display",
                 settingAttribute = "Language",
                 attributeValue = "English",
-                settingIcon = when (uiState.appTheme) {
-                    AppTheme.Dark -> Icons.Default.DarkMode
-                    AppTheme.Light -> Icons.Default.LightMode
-                    AppTheme.SystemDefault -> if (isSystemInDarkTheme()) Icons.Default.DarkMode else Icons.Default.LightMode
-                },
+                settingIcon = Icons.Default.Language,
             ) {
                 settingsViewModel.changeDialogOpenState()
             }

@@ -35,8 +35,6 @@ import photos.shared.generated.resources.add
 
 @Composable
 fun Setting(
-    modifier: Modifier = Modifier.semantics { contentDescription = "setting column" },
-    settingName: String,
     settingAttribute: String,
     attributeValue: String,
     settingIcon: ImageVector,
@@ -51,13 +49,6 @@ fun Setting(
                 contentDescription = "setting column"
             }
     ) {
-        Text(
-            text = settingName,
-            style = MaterialTheme.typography.body1.copy(
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold
-            )
-        )
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable { onClick() }.fillMaxWidth()
