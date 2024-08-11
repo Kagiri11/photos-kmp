@@ -29,8 +29,7 @@ fun BottomNav(navHostController: NavHostController) {
     val currentScreen = navBackStackEntry?.destination
 
     BottomNavigation(
-        modifier = Modifier.fillMaxWidth(),
-        backgroundColor = MaterialTheme.colors.primary
+        modifier = Modifier.fillMaxWidth()
     ) {
         TopLevelDestinations.forEach { screen ->
             AddBottomNavItem(

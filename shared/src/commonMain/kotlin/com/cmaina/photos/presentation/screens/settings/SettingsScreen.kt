@@ -57,10 +57,12 @@ fun SettingsScreen(
             )
         )
 
+        Spacer(modifier = Modifier.height(5.dp))
+
         Column(
             modifier = Modifier
                 .semantics { contentDescription = "setting column" }
-                .fillMaxWidth(),
+                .fillMaxWidth().padding(horizontal = 5.dp),
             verticalArrangement = Arrangement.spacedBy(1.dp)
         ) {
             Text(
