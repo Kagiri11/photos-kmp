@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
 }
 
 kotlin {
@@ -33,6 +35,8 @@ kotlin {
             implementation(compose.material)
             implementation(compose.materialIconsExtended)
             implementation(compose.components.resources)
+            implementation(libs.room.runtime)
+            implementation(libs.sqlite.bundled)
 
             api(libs.koin.core)
             implementation(libs.kotlin.coroutines.core)
@@ -75,6 +79,10 @@ kotlin {
     }
 }
 
+room {
+    schemaDirectory("$projectDir/schemas")
+}
+
 android {
     namespace = "com.cmaina.photos"
     compileSdk = 34
@@ -86,4 +94,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+}
+
+dependencies {
+    ksp(libs.room.compiler)
 }

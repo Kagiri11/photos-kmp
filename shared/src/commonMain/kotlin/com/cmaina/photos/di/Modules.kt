@@ -1,5 +1,7 @@
 package com.cmaina.photos.di
 
+import com.cmaina.photos.data.local.PhotosDatabase
+import com.cmaina.photos.data.local.getPhotosDatabase
 import com.cmaina.photos.data.network.client.createClient
 import com.cmaina.photos.data.network.sources.AuthRemoteSource
 import com.cmaina.photos.data.network.sources.PhotosRemoteSource
@@ -21,6 +23,11 @@ import org.koin.compose.viewmodel.dsl.viewModelOf
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
+val localModule = module {
+    single { getPhotosDatabase(builder = get()) }
+    single { get<PhotosDatabase>().favoritePhotosDao() }
+}
+
 val networkModule = module {
     single<HttpClient> { createClient() }
     factory { PhotosRemoteSource(client = get()) }
@@ -32,7 +39,8 @@ val repositoryModule = module {
     single<PhotosRepository> {
         PhotosRepositoryImpl(
             photosRemoteSource = get(),
-            usersRemoteSource = get()
+            usersRemoteSource = get(),
+            favoritePhotosDao = get()
         )
     }
     factory<UsersRepository> { UsersRepositoryImpl(usersRemoteSource = get()) }

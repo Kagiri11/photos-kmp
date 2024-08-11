@@ -39,9 +39,7 @@ fun SettingItemDialog(
 ) {
     if (openDialog) {
         Dialog(
-            onDismissRequest = {
-                settingsViewModel.changeDialogOpenState()
-            },
+            onDismissRequest = { settingsViewModel.changeDialogOpenState() },
             properties = DialogProperties(usePlatformDefaultWidth = false)
         ) {
             Card(
@@ -50,7 +48,6 @@ fun SettingItemDialog(
                     .fillMaxHeight(0.3f)
                     .fillMaxWidth(0.8f)
                     .semantics { contentDescription = "Setting dialog" }
-
             ) {
                 Column(
                     modifier = Modifier
@@ -60,7 +57,6 @@ fun SettingItemDialog(
                 ) {
                     Row(modifier = Modifier.fillMaxWidth()) {
                         Spacer(modifier = Modifier.width(14.dp))
-//                        FotosText(text = "Choose theme", textColor = MaterialTheme.colors.onPrimary)
                         Text(
                             text = "Choose theme", style = TextStyle(
                                 color = MaterialTheme.colors.onPrimary,

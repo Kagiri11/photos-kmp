@@ -3,11 +3,13 @@ package com.cmaina.photos.di
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
 
-fun initKoin(enableNetworkLogs: Boolean = false, appDeclaration: KoinAppDeclaration = {}) = startKoin {
-    appDeclaration()
-    modules(appModules())
-}
+fun initKoin(appDeclaration: KoinAppDeclaration = {}) =
+    startKoin {
+        appDeclaration()
+        modules(appModules())
+    }
 
-fun initKoin() = initKoin(enableNetworkLogs = false) {}
+fun initKoin() = initKoin {}
 
-fun appModules() = listOf(networkModule, repositoryModule, presentationModule, platformModule())
+fun appModules() =
+    listOf(localModule, networkModule, repositoryModule, presentationModule, platformModule())

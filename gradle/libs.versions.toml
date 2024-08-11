@@ -23,6 +23,9 @@ preferenceDatastore = "1.1.1"
 androidApp = "7.2.2"
 materialWindowSize = "0.5.0"
 koinComposeMultiplatform = "1.2.0-Beta4"
+roomKMP = "2.7.0-alpha06"
+ksp = "2.0.20-RC-1.0.24"
+sqlite = "2.5.0-SNAPSHOT"
 
 # Tests
 
@@ -58,13 +61,19 @@ ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-conte
 ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktorVersion" }
 
 material-icons-extended-desktop = { module = "org.jetbrains.compose.material:material-icons-extended-desktop", version.ref = "materialIconsExtendedDesktop" }
-material3-window-size = { group = "dev.chrisbanes.material3", name = "material3-window-size-class-multiplatform", version.ref = "materialWindowSize"}
+material3-window-size = { group = "dev.chrisbanes.material3", name = "material3-window-size-class-multiplatform", version.ref = "materialWindowSize" }
 
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 
 paging-common = { module = "app.cash.paging:paging-common", version.ref = "pagingCommon" }
 paging-compose-common = { module = "app.cash.paging:paging-compose-common", version.ref = "multiplatformPaging" }
+
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomKMP" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomKMP" }
+sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+
+
 
 slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4jApi" }
 
@@ -77,3 +86,5 @@ composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMul
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+room = { id = "androidx.room", version.ref = "roomKMP" }
