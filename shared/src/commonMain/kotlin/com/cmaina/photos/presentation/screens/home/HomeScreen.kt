@@ -38,6 +38,7 @@ fun HomeScreen(
     ) {
         Text(
             text = "Explore",
+            modifier = Modifier.padding(start = 10.dp, top = 5.dp),
             style = TextStyle(
                 fontSize = 30.sp,
                 color = MaterialTheme.colors.onBackground,

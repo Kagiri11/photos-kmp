@@ -25,7 +25,14 @@ inline fun <T : Any> LazyStaggeredGridScope.lazyItems(
 inline fun <T : Any> LazyGridScope.items(
     items: LazyPagingItems<T>,
     crossinline itemContent: @Composable LazyGridItemScope.(value: T) -> Unit
-) { items(count = items.itemCount) { index -> items[index]?.let { itemContent(it) } } }
+) {
+    items(count = items.itemCount) { index -> items[index]?.let { itemContent(it) } }
+}
 
-fun getAsyncImageLoader(context: PlatformContext)=
+fun getAsyncImageLoader(context: PlatformContext) =
     ImageLoader.Builder(context).crossfade(true).logger(DebugLogger()).build()
+
+object PreferenceKeys {
+    const val AppTheme = "app_theme"
+    const val AppLanguage = "app_language"
+}

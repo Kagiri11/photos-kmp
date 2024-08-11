@@ -36,12 +36,12 @@ fun ColumnScope.PhotosPager(
                 .fillMaxWidth(0.95f),
             shape = RoundedCornerShape(2)
         ) {
-            AsyncImageBlur(
+            /*AsyncImageBlur(
                 blurHash = "",
                 imageUrl = images[page],
                 modifier = Modifier.fillMaxSize(),
                 contentDescription = ""
-            )
+            )*/
         }
     }
 }

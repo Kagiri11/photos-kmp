@@ -31,6 +31,7 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.animation)
             implementation(compose.material)
+            implementation(compose.materialIconsExtended)
             implementation(compose.components.resources)
 
             api(libs.koin.core)
@@ -46,7 +47,7 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
 
             implementation(libs.material3.window.size)
-            implementation(libs.material.icons.extended.desktop)
+//            implementation(libs.material.icons.extended.desktop)
             implementation(libs.navigation.compose)
 
             implementation(libs.napier)

@@ -28,8 +28,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
 import com.cmaina.photos.presentation.components.dialogs.NotAuthenticatedDialog
-import com.cmaina.photos.presentation.components.photoscards.AsyncImageBlur
 import com.cmaina.photos.presentation.components.photoscards.PhotosPager
 import com.cmaina.photos.presentation.components.photostext.FotosText
 import com.cmaina.photos.presentation.components.photostext.FotosTitleText
@@ -146,11 +146,9 @@ fun ColumnScope.LikeAndDownloadSection(
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Row {
-            AsyncImageBlur(
-                modifier = Modifier,
-                imageUrl = userPhotoUrl,
+            AsyncImage(
+                model = userPhotoUrl,
                 contentDescription = "",
-                blurHash = ""
             )
             FotosText(modifier = Modifier, text = userName)
             /*Image(

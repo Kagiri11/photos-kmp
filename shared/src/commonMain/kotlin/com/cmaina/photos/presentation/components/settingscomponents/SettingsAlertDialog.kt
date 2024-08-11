@@ -14,24 +14,28 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.RadioButton
 import androidx.compose.material.RadioButtonDefaults
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.cmaina.photos.domain.models.settings.AppTheme
 import com.cmaina.photos.presentation.components.photostext.FotosText
 import com.cmaina.photos.presentation.screens.settings.SettingsViewModel
 
 @Composable
 fun SettingItemDialog(
     openDialog: Boolean,
-    isAppInDarkMode: Boolean,
+    appTheme: AppTheme,
     settingsViewModel: SettingsViewModel,
-    onLightClicked: () -> Unit,
-    onDarkClicked: () -> Unit,
+    onOptionSelected: (AppTheme) -> Unit
 ) {
     if (openDialog) {
         Dialog(
@@ -56,21 +60,28 @@ fun SettingItemDialog(
                 ) {
                     Row(modifier = Modifier.fillMaxWidth()) {
                         Spacer(modifier = Modifier.width(14.dp))
-                        FotosText(text = "Choose theme", textColor = MaterialTheme.colors.onPrimary)
+//                        FotosText(text = "Choose theme", textColor = MaterialTheme.colors.onPrimary)
+                        Text(
+                            text = "Choose theme", style = TextStyle(
+                                color = MaterialTheme.colors.onPrimary,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Medium
+                            )
+                        )
                     }
+
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Start,
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-//                                mainViewModel.changeAppTheme(dataStore, false)
-                                onLightClicked()
+                                onOptionSelected(AppTheme.Light)
                             }
                     ) {
                         RadioButton(
-                            selected = isAppInDarkMode.not(),
-                            onClick = {},
+                            selected = appTheme == AppTheme.Light,
+                            onClick = { onOptionSelected(AppTheme.Light) },
                             colors = RadioButtonDefaults.colors(selectedColor = MaterialTheme.colors.onPrimary)
                         )
                         FotosText(text = "Light")
@@ -81,16 +92,32 @@ fun SettingItemDialog(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-//                                mainViewModel.changeAppTheme(dataStore, true)
-                                onDarkClicked()
+                                onOptionSelected(AppTheme.Dark)
                             }
                     ) {
                         RadioButton(
-                            selected = isAppInDarkMode,
-                            onClick = {},
+                            selected = appTheme == AppTheme.Dark,
+                            onClick = { onOptionSelected(AppTheme.Dark) },
                             colors = RadioButtonDefaults.colors(selectedColor = MaterialTheme.colors.onPrimary)
                         )
                         FotosText(text = "Dark")
+                    }
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Start,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+//                                mainViewModel.changeAppTheme(dataStore, true)
+                                onOptionSelected(AppTheme.SystemDefault)
+                            }
+                    ) {
+                        RadioButton(
+                            selected = appTheme == AppTheme.SystemDefault,
+                            onClick = { onOptionSelected(AppTheme.SystemDefault) },
+                            colors = RadioButtonDefaults.colors(selectedColor = MaterialTheme.colors.onPrimary)
+                        )
+                        FotosText(text = "System Default")
                     }
                 }
             }

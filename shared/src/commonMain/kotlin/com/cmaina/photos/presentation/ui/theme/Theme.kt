@@ -5,6 +5,13 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import com.cmaina.photos.domain.models.settings.AppTheme
+import com.cmaina.photos.presentation.screens.settings.SettingsUiState
+import com.cmaina.photos.presentation.screens.settings.SettingsViewModel
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 
 private val DarkColorPalette = darkColors(
     primary = FotosBlack,
@@ -30,12 +37,18 @@ private val LightColorPalette = lightColors(
     onSurface = FotosBlack,
 )
 
+@OptIn(KoinExperimentalAPI::class)
 @Composable
-fun PhotosTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
+fun PhotosTheme(
+    uiState: SettingsUiState,
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
+    println("Charlo App Theme in theme => ${uiState.appTheme}")
+    val colors = when (uiState.appTheme) {
+        AppTheme.Light -> LightColorPalette
+        AppTheme.Dark -> DarkColorPalette
+        AppTheme.SystemDefault -> if (darkTheme) DarkColorPalette else LightColorPalette
     }
 
     MaterialTheme(

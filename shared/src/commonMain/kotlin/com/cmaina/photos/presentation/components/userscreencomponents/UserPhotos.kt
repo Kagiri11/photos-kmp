@@ -14,7 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
-import com.cmaina.photos.presentation.components.photoscards.AsyncImageBlur
+import coil3.compose.AsyncImage
 import com.cmaina.photos.domain.models.photos.Photo
 import com.cmaina.photos.presentation.utils.items
 
@@ -30,10 +30,9 @@ fun UserPhotos(
         columns = GridCells.Fixed(3),
         contentPadding = PaddingValues(1.dp)
     ) {
-        items(photos){pic ->
+        items(photos) { pic ->
             UserPhoto(
-                imageBlurHash = pic.blurHash,
-                userImageUrl = pic.photoUrls.small ?: "",
+                userImageUrl = pic.photoUrls.small,
                 contentDescription = pic.description,
                 onClick = { onUserPhotoClicked(pic.id) }
             )
@@ -44,7 +43,6 @@ fun UserPhotos(
 @Composable
 fun UserPhoto(
     contentDescription: String,
-    imageBlurHash: String,
     userImageUrl: String,
     onClick: () -> Unit
 ) {
@@ -57,10 +55,9 @@ fun UserPhoto(
         shape = RoundedCornerShape(2),
         elevation = 0.dp
     ) {
-        AsyncImageBlur(
-            blurHash = imageBlurHash,
-            imageUrl = userImageUrl,
+        AsyncImage(
             modifier = Modifier.fillMaxSize(),
+            model = userImageUrl,
             contentDescription = contentDescription
         )
     }

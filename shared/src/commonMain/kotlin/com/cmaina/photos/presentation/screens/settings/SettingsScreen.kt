@@ -1,5 +1,6 @@
 package com.cmaina.photos.presentation.screens.settings
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,8 +10,12 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.LightMode
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -18,6 +23,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.cmaina.photos.domain.models.settings.AppTheme
 import com.cmaina.photos.presentation.components.settingscomponents.Setting
 import com.cmaina.photos.presentation.components.settingscomponents.SettingItemDialog
 import org.koin.compose.viewmodel.koinViewModel
@@ -29,14 +35,18 @@ import org.koin.core.annotation.KoinExperimentalAPI
 fun SettingsScreen(
     settingsViewModel: SettingsViewModel = koinViewModel()
 ) {
-    val isAppDarkTheme = settingsViewModel.appTheme.collectAsState().value
-    val isThemeDialogOpen = settingsViewModel.isThemeDialogOpen.collectAsState().value
+    val uiState by settingsViewModel.uiState.collectAsState()
+
+    LaunchedEffect(uiState) {
+        println("Charlo Settings ui state => $uiState ")
+    }
+
     Column(
         modifier = Modifier.fillMaxSize().padding(horizontal = 5.dp),
     ) {
         Text(
+            modifier = Modifier.padding(start = 10.dp, top = 5.dp),
             text = "Settings",
-            modifier = Modifier,
             style = TextStyle(
                 fontSize = 30.sp,
                 color = MaterialTheme.colors.onBackground,
@@ -48,28 +58,46 @@ fun SettingsScreen(
             modifier = Modifier
                 .semantics { contentDescription = "setting column" }
                 .fillMaxWidth(),
-            verticalArrangement = Arrangement.Top,
-
-            ) {
+            verticalArrangement = Arrangement.Top
+        ) {
             Setting(
                 settingName = "Display",
                 settingAttribute = "Theme",
-                attributeValue = if (isAppDarkTheme) "Dark" else "Light",
-                settingIcon = Icons.Default.DarkMode
+                attributeValue = when (uiState.appTheme) {
+                    AppTheme.Dark -> "Dark"
+                    AppTheme.Light -> "Light"
+                    AppTheme.SystemDefault -> "System Default"
+                },
+                settingIcon = when (uiState.appTheme) {
+                    AppTheme.Dark -> Icons.Default.DarkMode
+                    AppTheme.Light -> Icons.Default.LightMode
+                    AppTheme.SystemDefault -> if (isSystemInDarkTheme()) Icons.Default.DarkMode else Icons.Default.LightMode
+                },
             ) {
                 settingsViewModel.changeDialogOpenState()
             }
-            SettingItemDialog(
-                openDialog = isThemeDialogOpen,
-                isAppInDarkMode = isAppDarkTheme,
-                settingsViewModel = settingsViewModel,
-                {
-                    settingsViewModel.changeAppTheme(false)
+
+            Setting(
+                settingName = "Display",
+                settingAttribute = "Language",
+                attributeValue = "English",
+                settingIcon = when (uiState.appTheme) {
+                    AppTheme.Dark -> Icons.Default.DarkMode
+                    AppTheme.Light -> Icons.Default.LightMode
+                    AppTheme.SystemDefault -> if (isSystemInDarkTheme()) Icons.Default.DarkMode else Icons.Default.LightMode
                 },
-                {
-                    settingsViewModel.changeAppTheme(true)
-                }
-            )
+            ) {
+                settingsViewModel.changeDialogOpenState()
+            }
+        }
+
+        SettingItemDialog(
+            openDialog = uiState.isThemeDialogOpen,
+            appTheme = uiState.appTheme,
+            settingsViewModel = settingsViewModel
+        ) { theme ->
+            settingsViewModel.changeAppTheme(theme)
+            settingsViewModel.changeDialogOpenState()
         }
     }
 }

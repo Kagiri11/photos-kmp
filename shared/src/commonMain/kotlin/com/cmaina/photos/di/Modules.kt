@@ -29,10 +29,15 @@ val networkModule = module {
 }
 
 val repositoryModule = module {
-    single<PhotosRepository> { PhotosRepositoryImpl(photosRemoteSource = get(), usersRemoteSource = get()) }
+    single<PhotosRepository> {
+        PhotosRepositoryImpl(
+            photosRemoteSource = get(),
+            usersRemoteSource = get()
+        )
+    }
     factory<UsersRepository> { UsersRepositoryImpl(usersRemoteSource = get()) }
     single<AuthRepository> { AuthRepositoryImpl(authRemoteSource = get(), preferences = get()) }
-    factory<AppRepository> { AppRepositoryImpl() }
+    factory<AppRepository> { AppRepositoryImpl(preferences = get()) }
 }
 
 val presentationModule = module {

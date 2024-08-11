@@ -1,17 +1,42 @@
 package com.cmaina.photos.data.repositories
 
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.intPreferencesKey
+import com.cmaina.photos.domain.models.settings.AppTheme
 import com.cmaina.photos.domain.repositories.AppRepository
+import com.cmaina.photos.presentation.utils.PreferenceKeys
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 
 class AppRepositoryImpl(
-
+    private val preferences: DataStore<Preferences>
 ) : AppRepository {
 
-    override suspend fun fetchAppTheme(): Flow<Boolean> {
-        return flowOf(false)
+    private val themePreference = intPreferencesKey(PreferenceKeys.AppTheme)
+
+    override suspend fun fetchAppTheme(): Flow<AppTheme> {
+        return preferences.data.map {
+            when (it[themePreference]) {
+                0 -> AppTheme.Light
+                1 -> AppTheme.Dark
+                else -> AppTheme.SystemDefault
+            }
+        }
     }
 
-    override suspend fun saveAppTheme(appTheme: Boolean) {}
+    override suspend fun saveAppTheme(theme: AppTheme) {
+        preferences.updateData {
+            it.toMutablePreferences().apply {
+                set(
+                    themePreference, when (theme) {
+                        AppTheme.Light -> 0
+                        AppTheme.Dark -> 1
+                        AppTheme.SystemDefault -> 2
+                    }
+                )
+            }
+        }
+    }
 
 }
