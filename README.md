@@ -4,15 +4,15 @@ This Kotlin Multiplatform project fetches photos from the Unsplash API and displ
 
 Supports;\
 Android - ✅\
-Desktop - ✅\
+Desktop - ✅
 
 ## 🛠️ WIP 🛠️
 > Please note that this project is still under development.
 >
 ## Project Structure
-- shared: Contains platform-independent code, including data models, network requests, business logic, and shared UI components. 
-- desktop: Contains desktop-specific UI logic and integration using a framework like Compose Multiplatform Desktop.
-- android: Contains Android-specific UI logic and integration using Jetpack Compose.
+- **shared**: Contains platform-independent code, including data models, network requests, business logic, and shared UI components. 
+- **desktopApp**: Contains jvm-specific logic e.g dependency injection.
+- **androidApp**: Contains Android-specific logic e.g dependency injection.
 
 ## Screenshots
 
