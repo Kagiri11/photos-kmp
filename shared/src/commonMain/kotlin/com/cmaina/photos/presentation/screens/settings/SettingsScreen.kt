@@ -39,11 +39,6 @@ fun SettingsScreen(
     settingsViewModel: SettingsViewModel = koinViewModel()
 ) {
     val uiState by settingsViewModel.uiState.collectAsState()
-
-    LaunchedEffect(uiState) {
-        println("Charlo Settings ui state => $uiState ")
-    }
-
     Column(
         modifier = Modifier.fillMaxSize().padding(horizontal = 5.dp),
     ) {

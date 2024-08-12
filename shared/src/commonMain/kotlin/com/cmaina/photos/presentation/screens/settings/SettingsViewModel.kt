@@ -19,13 +19,11 @@ class SettingsViewModel(private val appRepository: AppRepository) : ViewModel() 
     }
 
     fun changeDialogOpenState() {
-        println("Charlo App changing dialog state => ${_uiState.value}")
         _uiState.update { it.copy(isThemeDialogOpen = !_uiState.value.isThemeDialogOpen) }
     }
 
     private fun fetchAppTheme() = viewModelScope.launch {
         appRepository.fetchAppTheme().collect { theme ->
-            println("Charlo App Theme vm => $theme")
             _uiState.update { it.copy(appTheme = theme) }
         }
     }
