@@ -22,7 +22,9 @@ interface PhotosRepository {
 
     suspend fun searchPhoto(searchString: String): Flow<PagingData<Photo>>
 
-    suspend fun favoritePhoto(photo: FavoritePhoto): Result<Photo>
+    suspend fun savePhoto(photo: FavoritePhoto)
+
+    suspend fun unSavePhoto(photoId: String)
 
     suspend fun fetchFavoritePhotos(): Flow<List<FavoritePhoto>>
 }

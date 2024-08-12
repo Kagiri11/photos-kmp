@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.cmaina.photos.domain.models.photos.Photo
 import com.cmaina.photos.presentation.components.photoscards.PhotoCardItem
 import com.cmaina.photos.presentation.utils.items
 import org.koin.compose.viewmodel.koinViewModel
@@ -27,7 +28,7 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @OptIn(KoinExperimentalAPI::class)
 @Composable
 fun HomeScreen(
-    homeViewModel: HomeViewModel = koinViewModel(), onPhotoClicked: (String) -> Unit
+    homeViewModel: HomeViewModel = koinViewModel()
 ) {
     val uiState = homeViewModel.uiState.collectAsState().value
     val lazyGridState = rememberLazyGridState()
@@ -65,7 +66,8 @@ fun HomeScreen(
                             imageUrl = photo.photoUrls.small,
                             contentDescription = photo.description,
                         ) {
-                            onPhotoClicked(photo.id)
+                            homeViewModel.favoritePhoto(photo)
+//                          Navigate to photo details screen. To be done once designs are corrected.
                         }
                     }
                 }

@@ -2,6 +2,8 @@ package com.cmaina.photos.presentation.screens.photodetails
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cmaina.photos.domain.models.photos.FavoritePhoto
+import com.cmaina.photos.domain.models.photos.Photo
 import com.cmaina.photos.domain.models.specificphoto.PreviewPhoto
 import com.cmaina.photos.domain.repositories.AuthRepository
 import com.cmaina.photos.domain.repositories.PhotosRepository
@@ -46,12 +48,8 @@ class PhotoDetailsViewModel(
         }
     }
 
-    fun likePhoto(photoID: String) = viewModelScope.launch {
-        photosRepository.likePhoto(photoID)
-    }
-
-    fun changeMessageStatus() {
-        _messageToUser.value = !_messageToUser.value
+    fun likePhoto(photo: Photo) = viewModelScope.launch {
+        photosRepository.savePhoto(FavoritePhoto(id = photo.id, imageUrl = photo.photoUrls.regular))
     }
 
     fun fetchPhoto(photoId: String) {
@@ -59,9 +57,7 @@ class PhotoDetailsViewModel(
             when (val result = photosRepository.getSpecificPhoto(photoId = photoId)) {
                 is Result.Success -> {
                     with(result.data) {
-                        println()
-                        println("Photo => $this")
-                        val images =
+                        /*val images =
                             this.relatedCollections.collections.flatMap { it.previewPhotos.map { it.urls.regular } }
                                 .toMutableList()
                         images.add(this.urls.regular)
@@ -73,7 +69,7 @@ class PhotoDetailsViewModel(
                             photoIsLikedByUser = false
                         )
                         _uiState.value =
-                            PhotoDetailsUiState.Success(details = details)
+                            PhotoDetailsUiState.Success(details = details)*/
                     }
                 }
 

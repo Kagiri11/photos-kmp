@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.cmaina.photos.domain.models.photos.FavoritePhoto
 import com.cmaina.photos.domain.models.photos.Photo
 import com.cmaina.photos.domain.repositories.PhotosRepository
 import com.cmaina.photos.domain.utils.Result
@@ -16,7 +17,7 @@ import org.koin.core.component.KoinComponent
 
 class HomeViewModel(
     private val photosRepository: PhotosRepository
-) : ViewModel(), KoinComponent {
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow<HomeUiState>(HomeUiState.Loading)
     val uiState: StateFlow<HomeUiState> get() = _uiState
@@ -34,6 +35,10 @@ class HomeViewModel(
                 }
             }
         }
+    }
+
+    fun favoritePhoto(photo: Photo) = viewModelScope.launch {
+        photosRepository.savePhoto(FavoritePhoto(id = photo.id, imageUrl = photo.photoUrls.regular))
     }
 }
 

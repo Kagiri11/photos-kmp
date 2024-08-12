@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.cmaina.photos.domain.repositories.PhotosRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class FavoritesViewModel(
@@ -14,13 +15,17 @@ class FavoritesViewModel(
     private val _uiState = MutableStateFlow(FavoritesUiState())
     val uiState: StateFlow<FavoritesUiState> get() = _uiState
 
-    fun fetchFavoritePhotos() = viewModelScope.launch {
-        photosRepository.fetchFavoritePhotos().collect { photos ->
+    init {
+        fetchFavoritePhotos()
+    }
 
+    private fun fetchFavoritePhotos() = viewModelScope.launch {
+        photosRepository.fetchFavoritePhotos().collect { photos ->
+            _uiState.update { it.copy(favoritePhotos = photos) }
         }
     }
 
-    fun unFavoritePhoto(id: String) = viewModelScope.launch {
-
+    fun unFavoritePhoto(photoId: String) = viewModelScope.launch {
+        photosRepository.unSavePhoto(photoId)
     }
 }

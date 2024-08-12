@@ -8,7 +8,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.cmaina.photos.presentation.screens.favorites.FavoritesScreen
 import com.cmaina.photos.presentation.screens.home.HomeScreen
-import com.cmaina.photos.presentation.screens.home.HomeViewModel
 import com.cmaina.photos.presentation.screens.photodetails.PhotoDetailsScreen
 import com.cmaina.photos.presentation.screens.settings.SettingsScreen
 import com.cmaina.photos.presentation.screens.user.UserScreen
@@ -23,11 +22,7 @@ fun PhotosApp(
         startDestination = startDestination
     ) {
         composable(route = PhotosScreen.Home.route) {
-            HomeScreen(
-                onPhotoClicked = { photoId ->
-                    navController.navigate(PhotosScreen.PhotoDetails.route + "/$photoId")
-                }
-            )
+            HomeScreen()
         }
 
         composable(

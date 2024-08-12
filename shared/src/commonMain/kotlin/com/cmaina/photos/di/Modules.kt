@@ -14,6 +14,7 @@ import com.cmaina.photos.domain.repositories.AppRepository
 import com.cmaina.photos.domain.repositories.AuthRepository
 import com.cmaina.photos.domain.repositories.PhotosRepository
 import com.cmaina.photos.domain.repositories.UsersRepository
+import com.cmaina.photos.presentation.screens.favorites.FavoritesViewModel
 import com.cmaina.photos.presentation.screens.home.HomeViewModel
 import com.cmaina.photos.presentation.screens.photodetails.PhotoDetailsViewModel
 import com.cmaina.photos.presentation.screens.settings.SettingsViewModel
@@ -53,6 +54,7 @@ val presentationModule = module {
     viewModelOf(::PhotoDetailsViewModel)
     viewModelOf(::SettingsViewModel)
     viewModelOf(::UserViewModel)
+    viewModelOf(::FavoritesViewModel)
 }
 
 expect fun platformModule(): Module

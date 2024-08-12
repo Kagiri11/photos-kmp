@@ -7,7 +7,7 @@ import com.cmaina.photos.data.local.dao.FavoritePhotosDao
 import com.cmaina.photos.domain.models.photos.FavoritePhoto
 import kotlinx.coroutines.Dispatchers
 
-@Database(entities = [FavoritePhoto::class], version = 1)
+@Database(entities = [FavoritePhoto::class], version = 1, exportSchema = false)
 abstract class PhotosDatabase : RoomDatabase() {
     abstract fun favoritePhotosDao(): FavoritePhotosDao
 }

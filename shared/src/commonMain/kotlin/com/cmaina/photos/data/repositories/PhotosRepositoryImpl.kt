@@ -57,8 +57,6 @@ class PhotosRepositoryImpl(
         ).apiCall(
             response = call,
             mapper = {
-                println()
-                println("PhotoListItem => $it")
                 it
             }
         )
@@ -95,13 +93,11 @@ class PhotosRepositoryImpl(
         return searchedPhotosPager
     }
 
-    override suspend fun favoritePhoto(photo: FavoritePhoto): Result<Photo> {
-        val call = photosRemoteSource.likePhoto(photo.id)
-        return InOut<PhotoListItem, Photo>(call.body())
-            .apiCall(
-                response = call,
-            ) {
-                it.toDomain()
-            }
+    override suspend fun savePhoto(photo: FavoritePhoto) {
+        favoritePhotosDao.insert(photo)
+    }
+
+    override suspend fun unSavePhoto(photoId: String) {
+        favoritePhotosDao.deletePhoto(photoId)
     }
 }
