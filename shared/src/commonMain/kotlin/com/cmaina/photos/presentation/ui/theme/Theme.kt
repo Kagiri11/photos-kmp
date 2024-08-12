@@ -37,14 +37,12 @@ private val LightColorPalette = lightColors(
     onSurface = FotosBlack,
 )
 
-@OptIn(KoinExperimentalAPI::class)
 @Composable
 fun PhotosTheme(
     uiState: SettingsUiState,
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    println("Charlo App Theme in theme => ${uiState.appTheme}")
     val colors = when (uiState.appTheme) {
         AppTheme.Light -> LightColorPalette
         AppTheme.Dark -> DarkColorPalette
