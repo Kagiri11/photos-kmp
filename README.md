@@ -1,14 +1,18 @@
 # Photos Multiplatform :camera:
 
-Photos is a multiplatform application that displays images from the unsplash API.
+This Kotlin Multiplatform project fetches photos from the Unsplash API and displays them on both desktop and Android platforms. It leverages a shared module for platform-agnostic logic, data models, and UI components
 
 Supports;\
 Android - ✅\
 Desktop - ✅\
-iOS - soon.
 
 ## 🛠️ WIP 🛠️
 > Please note that this project is still under development.
+>
+## Project Structure
+- shared: Contains platform-independent code, including data models, network requests, business logic, and shared UI components. 
+- desktop: Contains desktop-specific UI logic and integration using a framework like Compose Multiplatform Desktop.
+- android: Contains Android-specific UI logic and integration using Jetpack Compose.
 
 ## Screenshots
 
