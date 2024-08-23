@@ -27,8 +27,18 @@ import androidx.compose.ui.unit.sp
 import com.cmaina.photos.domain.models.settings.AppTheme
 import com.cmaina.photos.presentation.components.settingscomponents.Setting
 import com.cmaina.photos.presentation.components.settingscomponents.SettingItemDialog
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
+import photos.shared.generated.resources.Res
+import photos.shared.generated.resources.display
+import photos.shared.generated.resources.language
+import photos.shared.generated.resources.language_en
+import photos.shared.generated.resources.settings_screen_title
+import photos.shared.generated.resources.theme
+import photos.shared.generated.resources.theme_dark
+import photos.shared.generated.resources.theme_light
+import photos.shared.generated.resources.theme_sys_default
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
@@ -39,7 +49,7 @@ fun SettingsScreen(settingsViewModel: SettingsViewModel = koinViewModel()) {
     ) {
         Text(
             modifier = Modifier.padding(start = 10.dp, top = 5.dp),
-            text = "Settings",
+            text = stringResource(Res.string.settings_screen_title),
             style = TextStyle(
                 fontSize = 30.sp,
                 color = MaterialTheme.colors.onBackground,
@@ -56,7 +66,7 @@ fun SettingsScreen(settingsViewModel: SettingsViewModel = koinViewModel()) {
             verticalArrangement = Arrangement.spacedBy(1.dp)
         ) {
             Text(
-                text = "Display",
+                text = stringResource(Res.string.display),
                 style = MaterialTheme.typography.body1.copy(
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold
@@ -64,11 +74,11 @@ fun SettingsScreen(settingsViewModel: SettingsViewModel = koinViewModel()) {
             )
 
             Setting(
-                settingAttribute = "Theme",
+                settingAttribute = stringResource(Res.string.theme),
                 attributeValue = when (uiState.appTheme) {
-                    AppTheme.Dark -> "Dark"
-                    AppTheme.Light -> "Light"
-                    AppTheme.SystemDefault -> "System Default"
+                    AppTheme.Dark -> stringResource(Res.string.theme_dark)
+                    AppTheme.Light -> stringResource(Res.string.theme_light)
+                    AppTheme.SystemDefault -> stringResource(Res.string.theme_sys_default)
                 },
                 settingIcon = when (uiState.appTheme) {
                     AppTheme.Dark -> Icons.Default.DarkMode
@@ -80,8 +90,8 @@ fun SettingsScreen(settingsViewModel: SettingsViewModel = koinViewModel()) {
             }
 
             Setting(
-                settingAttribute = "Language",
-                attributeValue = "English",
+                settingAttribute = stringResource(Res.string.language),
+                attributeValue = stringResource(Res.string.language_en),
                 settingIcon = Icons.Default.Language,
             ) {
                 settingsViewModel.changeDialogOpenState()

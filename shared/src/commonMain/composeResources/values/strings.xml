@@ -1,6 +1,21 @@
 <resources>
+    <string name = "app_name">Photos</string>
+
     <string name = "home_screen_title">Explore</string>
     <string name = "settings_screen_title">Settings</string>
     <string name = "display">Display</string>
     <string name = "photos_desktop_title">Photos Desktop</string>
+    <string name = "theme">Theme</string>
+    <string name = "theme_dark">Dark</string>
+    <string name = "theme_light">Light</string>
+    <string name = "theme_sys_default">Dark</string>
+    <string name = "language">Language</string>
+    <string name = "language_en">English</string>
+    <string name = "language_it">Italian</string>
+
+    // Bottom Nav and Navigation Rail
+    <string name = "bottom_nav_home">Home</string>
+    <string name = "bottom_nav_favorites">Favorites</string>
+    <string name = "bottom_nav_settings">Settings</string>
+
 </resources>
