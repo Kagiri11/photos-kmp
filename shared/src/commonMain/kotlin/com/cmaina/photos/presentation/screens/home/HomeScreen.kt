@@ -22,13 +22,17 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.cmaina.photos.domain.models.photos.Photo
 import com.cmaina.photos.presentation.components.photoscards.PhotoCardItem
 import com.cmaina.photos.presentation.utils.items
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
+import photos.shared.generated.resources.Res
+import photos.shared.generated.resources.home_screen_title
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
 fun HomeScreen(
-    homeViewModel: HomeViewModel = koinViewModel()
+    homeViewModel: HomeViewModel = koinViewModel(),
+    onPhotoClicked: (Photo) -> Unit
 ) {
     val uiState = homeViewModel.uiState.collectAsState().value
     val lazyGridState = rememberLazyGridState()
@@ -38,7 +42,7 @@ fun HomeScreen(
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         Text(
-            text = "Explore",
+            text = stringResource(Res.string.home_screen_title),
             modifier = Modifier.padding(start = 10.dp, top = 5.dp),
             style = TextStyle(
                 fontSize = 30.sp,
@@ -49,7 +53,10 @@ fun HomeScreen(
 
         when (uiState) {
             is HomeUiState.Loading -> {}
-            is HomeUiState.Error -> {}
+            is HomeUiState.Error -> {
+                // Show snackbar with error message
+            }
+
             is HomeUiState.Success -> {
                 val photos = uiState.pagedPhotos.collectAsLazyPagingItems()
                 LazyVerticalGrid(
@@ -58,7 +65,6 @@ fun HomeScreen(
                     contentPadding = PaddingValues(1.dp),
                     state = lazyGridState
                 ) {
-
                     items(
                         items = photos
                     ) { photo ->
@@ -66,8 +72,7 @@ fun HomeScreen(
                             imageUrl = photo.photoUrls.small,
                             contentDescription = photo.description,
                         ) {
-                            homeViewModel.favoritePhoto(photo)
-//                          Navigate to photo details screen. To be done once designs are corrected.
+                            onPhotoClicked(photo)
                         }
                     }
                 }

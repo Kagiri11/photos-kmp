@@ -57,7 +57,7 @@ class PhotoDetailsViewModel(
             when (val result = photosRepository.getSpecificPhoto(photoId = photoId)) {
                 is Result.Success -> {
                     with(result.data) {
-                        /*val images =
+                        val images =
                             this.relatedCollections.collections.flatMap { it.previewPhotos.map { it.urls.regular } }
                                 .toMutableList()
                         images.add(this.urls.regular)
@@ -69,7 +69,7 @@ class PhotoDetailsViewModel(
                             photoIsLikedByUser = false
                         )
                         _uiState.value =
-                            PhotoDetailsUiState.Success(details = details)*/
+                            PhotoDetailsUiState.Success(details = details)
                     }
                 }
 

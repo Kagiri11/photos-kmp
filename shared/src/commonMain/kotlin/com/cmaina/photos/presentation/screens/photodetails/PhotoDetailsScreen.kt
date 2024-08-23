@@ -1,6 +1,5 @@
 package com.cmaina.photos.presentation.screens.photodetails
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,9 +13,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Button
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -26,10 +28,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.cmaina.photos.presentation.components.dialogs.NotAuthenticatedDialog
 import com.cmaina.photos.presentation.components.photoscards.PhotosPager
 import com.cmaina.photos.presentation.components.photostext.FotosText
 import com.cmaina.photos.presentation.components.photostext.FotosTitleText
@@ -39,14 +39,11 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @OptIn(KoinExperimentalAPI::class)
 @Composable
 fun PhotoDetailsScreen(
+    onBackBtnClicked: () -> Unit,
     photoId: String,
-    onInitialLoadEvent: () -> Unit,
     onUserSectionClickedEvent: (String) -> Unit,
     onImageLikedEvent: () -> Unit,
-    onDialogDismissedEvent: () -> Unit,
     onPageSwappedEvent: (String) -> Unit,
-    messageIsPresent: Boolean,
-    onUserRequestsAuthenticationEvent: (String) -> Unit,
     photoDetailsViewModel: PhotoDetailsViewModel = koinViewModel()
 ) {
     val uiState = photoDetailsViewModel.uiState.collectAsState().value
@@ -55,43 +52,38 @@ fun PhotoDetailsScreen(
         photoDetailsViewModel.fetchPhoto(photoId)
     }
 
-    LaunchedEffect(key1 = true) {
-        onInitialLoadEvent()
-    }
-    DisposableEffect(key1 = true) {
-//        onResume(context, onUserRequestsAuthenticationEvent)
-        onDispose {
-            // do something
-        }
-    }
-
-    if (messageIsPresent) {
-       /* NotAuthenticatedDialog(
-            openDialog = true,
-            onDismissed = {
-                onDialogDismissedEvent()
-            },
-            onUserAcceptedAction = {
-                // start auth process
-            }
-        )*/
-    }
-
     when (uiState) {
-        is PhotoDetailsUiState.Loading -> {}
-        is PhotoDetailsUiState.Error -> {}
+        is PhotoDetailsUiState.Loading -> {
+            println()
+            println("PhotoDetailsScreen ui state loading => : $uiState")
+        }
+
+        is PhotoDetailsUiState.Error -> {
+            println()
+            println("PhotoDetailsScreen ui state error => : ${uiState.errorMessage}")
+        }
+
         is PhotoDetailsUiState.Success -> {
+            println()
+            println("PhotoDetailsScreen ui state success => : ${uiState.details}")
 
             with(uiState.details) {
                 var page by remember { mutableStateOf(0) }
 
                 Column(modifier = Modifier.fillMaxSize()) {
+                    Button(
+                        onClick = onBackBtnClicked
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Navigate Back"
+                        )
+                    }
+
                     PhotosPager(
                         images = relatedImages,
-                        onPageSwapped = {
-                            onPageSwappedEvent(it)
-                        },
-                        pageInIteration = { page = it }
+                        pageInIteration = { page = it },
+                        onPageSwapped = { onPageSwappedEvent(it) }
                     )
 
                     Spacer(modifier = Modifier.height(5.dp))

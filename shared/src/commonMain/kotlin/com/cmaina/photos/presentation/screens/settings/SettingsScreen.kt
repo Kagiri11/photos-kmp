@@ -14,9 +14,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.LightMode
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -32,12 +30,9 @@ import com.cmaina.photos.presentation.components.settingscomponents.SettingItemD
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
-
 @OptIn(KoinExperimentalAPI::class)
 @Composable
-fun SettingsScreen(
-    settingsViewModel: SettingsViewModel = koinViewModel()
-) {
+fun SettingsScreen(settingsViewModel: SettingsViewModel = koinViewModel()) {
     val uiState by settingsViewModel.uiState.collectAsState()
     Column(
         modifier = Modifier.fillMaxSize().padding(horizontal = 5.dp),

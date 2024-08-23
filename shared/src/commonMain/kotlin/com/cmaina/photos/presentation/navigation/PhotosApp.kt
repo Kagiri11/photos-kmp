@@ -22,7 +22,11 @@ fun PhotosApp(
         startDestination = startDestination
     ) {
         composable(route = PhotosScreen.Home.route) {
-            HomeScreen()
+            HomeScreen(
+                onPhotoClicked = {
+                    navController.navigate(PhotosScreen.PhotoDetails.route + "/${it.id}")
+                }
+            )
         }
 
         composable(
@@ -32,13 +36,10 @@ fun PhotosApp(
             val photoId = backStackEntry.arguments?.getString("id") ?: return@composable
             PhotoDetailsScreen(
                 photoId = photoId,
-                onInitialLoadEvent = {},
                 onUserSectionClickedEvent = {},
                 onImageLikedEvent = {},
-                onDialogDismissedEvent = {},
                 onPageSwappedEvent = {},
-                messageIsPresent = true,
-                onUserRequestsAuthenticationEvent = {}
+                onBackBtnClicked = { navController.navigateUp() }
             )
         }
 

@@ -1,9 +1,9 @@
 plugins {
-    alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
 }
@@ -35,6 +35,7 @@ kotlin {
             implementation(compose.material)
             implementation(compose.materialIconsExtended)
             implementation(compose.components.resources)
+
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
 
@@ -51,7 +52,6 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
 
             implementation(libs.material3.window.size)
-//            implementation(libs.material.icons.extended.desktop)
             implementation(libs.navigation.compose)
 
             implementation(libs.napier)
@@ -75,6 +75,7 @@ kotlin {
         sourceSets["desktopMain"].dependencies {
             implementation(libs.kotlin.coroutines.core)
             implementation(libs.kotlinx.coroutines.swing)
+            implementation(compose.desktop.currentOs)
         }
     }
 }
