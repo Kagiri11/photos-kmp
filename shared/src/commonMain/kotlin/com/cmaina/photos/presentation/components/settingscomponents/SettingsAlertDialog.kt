@@ -32,12 +32,12 @@ import com.cmaina.photos.presentation.screens.settings.SettingsViewModel
 
 @Composable
 fun SettingItemDialog(
-    openDialog: Boolean,
+    isDialogOpen: Boolean,
     appTheme: AppTheme,
     settingsViewModel: SettingsViewModel,
     onOptionSelected: (AppTheme) -> Unit
 ) {
-    if (openDialog) {
+    if (isDialogOpen) {
         Dialog(
             onDismissRequest = { settingsViewModel.changeDialogOpenState() },
             properties = DialogProperties(usePlatformDefaultWidth = false)

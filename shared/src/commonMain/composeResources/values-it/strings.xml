@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name = "app_name">Photos Italian</string>
+
+    <string name = "home_screen_title">Esplorare</string>
+    <string name = "settings_screen_title">Impostazioni</string>
+    <string name = "display">Display</string>
+    <string name = "photos_desktop_title">Photos Desktop</string>
+    <string name = "theme">Tema</string>
+    <string name = "theme_dark">Buio</string>
+    <string name = "theme_light">Leggero</string>
+    <string name = "theme_sys_default">Predefinito del sistema</string>
+    <string name = "language">Lingua</string>
+    <string name = "language_en">Inglese</string>
+    <string name = "language_it">Italiano</string>
+
+    // Bottom Nav and Navigation Rail
+    <string name = "bottom_nav_home">Casa</string>
+    <string name = "bottom_nav_favorites">Preferiti</string>
+    <string name = "bottom_nav_settings">Impostazioni</string>
+
+</resources>

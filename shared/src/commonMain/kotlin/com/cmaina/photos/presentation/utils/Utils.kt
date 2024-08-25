@@ -36,3 +36,9 @@ object PreferenceKeys {
     const val AppTheme = "app_theme"
     const val AppLanguage = "app_language"
 }
+
+enum class Language {
+    English,
+    Italian,
+    German,
+}

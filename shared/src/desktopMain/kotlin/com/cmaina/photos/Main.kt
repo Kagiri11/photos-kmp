@@ -8,6 +8,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.core.Koin
 import photos.shared.generated.resources.Res
 import photos.shared.generated.resources.app_name
+import java.util.Locale
 
 lateinit var koin: Koin
 

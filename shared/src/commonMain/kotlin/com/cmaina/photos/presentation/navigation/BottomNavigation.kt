@@ -16,6 +16,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.cmaina.photos.presentation.utils.navigateTopScreens
+import org.jetbrains.compose.resources.stringResource
 
 val TopLevelDestinations = listOf(
     PhotosScreen.Home,
@@ -53,7 +54,7 @@ fun RowScope.AddBottomNavItem(
         unselectedContentColor = MaterialTheme.colors.primaryVariant,
         selected = isSelected,
         onClick = { navController.navigateTopScreens(screen) },
-        label = { if (!isSelected) Text(text = screen.name) },
+        label = { if (!isSelected) Text(text = stringResource(screen.label)) },
 
         icon = { Icon(imageVector = screen.icon, contentDescription = "Bottom nav Icon") },
     )

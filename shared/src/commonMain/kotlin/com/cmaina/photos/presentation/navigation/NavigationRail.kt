@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.cmaina.photos.presentation.utils.navigateTopScreens
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun NavigationRail(navHostController: NavHostController) {
@@ -33,14 +34,13 @@ fun NavigationRail(navHostController: NavHostController) {
     ) {
         TopLevelDestinations.forEach { screen ->
             val isSelected = navBackStackEntry?.destination?.route == screen.route
-            val isSekec: Int by animateIntAsState(targetValue = if (isSelected) 1 else 0)
 
             NavigationRailItem(
                 selectedContentColor = MaterialTheme.colors.onPrimary,
                 unselectedContentColor = MaterialTheme.colors.primaryVariant,
                 selected = isSelected,
                 label = {
-                    Text(text = if (isSekec == 1) "" else screen.name)
+                    Text(text = stringResource(screen.label))
                 },
                 onClick = { navHostController.navigateTopScreens(screen) },
                 icon = {

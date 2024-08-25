@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cmaina.photos.domain.models.settings.AppTheme
 import com.cmaina.photos.domain.repositories.AppRepository
+import com.cmaina.photos.presentation.utils.Language
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -16,6 +17,7 @@ class SettingsViewModel(private val appRepository: AppRepository) : ViewModel() 
 
     init {
         fetchAppTheme()
+        fetchAppLanguage()
     }
 
     fun changeDialogOpenState() {
@@ -33,9 +35,27 @@ class SettingsViewModel(private val appRepository: AppRepository) : ViewModel() 
             appRepository.saveAppTheme(theme)
         }
     }
+
+    fun changeLanguageSelectionDialogState() {
+        _uiState.update { it.copy(isLanguageSelectionDialogOpen = !_uiState.value.isLanguageSelectionDialogOpen) }
+    }
+
+    fun changeAppLanguage(language: Language) {
+        viewModelScope.launch {
+            appRepository.saveAppLanguage(language)
+        }
+    }
+
+    fun fetchAppLanguage() = viewModelScope.launch {
+        appRepository.fetchAppLanguage().collect { language ->
+            _uiState.update { it.copy(currentLanguage = language) }
+        }
+    }
 }
 
 data class SettingsUiState(
     val appTheme: AppTheme,
-    val isThemeDialogOpen: Boolean
+    val isThemeDialogOpen: Boolean,
+    val isLanguageSelectionDialogOpen: Boolean = false,
+    val currentLanguage: Language = Language.English
 )

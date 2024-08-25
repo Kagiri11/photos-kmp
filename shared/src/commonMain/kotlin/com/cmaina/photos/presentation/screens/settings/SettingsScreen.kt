@@ -25,8 +25,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cmaina.photos.domain.models.settings.AppTheme
+import com.cmaina.photos.presentation.components.settingscomponents.LanguageSelectionDialog
 import com.cmaina.photos.presentation.components.settingscomponents.Setting
 import com.cmaina.photos.presentation.components.settingscomponents.SettingItemDialog
+import com.cmaina.photos.presentation.utils.Language
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -44,6 +46,7 @@ import photos.shared.generated.resources.theme_sys_default
 @Composable
 fun SettingsScreen(settingsViewModel: SettingsViewModel = koinViewModel()) {
     val uiState by settingsViewModel.uiState.collectAsState()
+
     Column(
         modifier = Modifier.fillMaxSize().padding(horizontal = 5.dp),
     ) {
@@ -91,20 +94,33 @@ fun SettingsScreen(settingsViewModel: SettingsViewModel = koinViewModel()) {
 
             Setting(
                 settingAttribute = stringResource(Res.string.language),
-                attributeValue = stringResource(Res.string.language_en),
+                attributeValue = uiState.currentLanguage.name,
                 settingIcon = Icons.Default.Language,
             ) {
-                settingsViewModel.changeDialogOpenState()
+                settingsViewModel.changeLanguageSelectionDialogState()
             }
         }
 
         SettingItemDialog(
-            openDialog = uiState.isThemeDialogOpen,
+            isDialogOpen = uiState.isThemeDialogOpen,
             appTheme = uiState.appTheme,
             settingsViewModel = settingsViewModel
         ) { theme ->
             settingsViewModel.changeAppTheme(theme)
             settingsViewModel.changeDialogOpenState()
+        }
+
+        if (uiState.isLanguageSelectionDialogOpen) {
+            LanguageSelectionDialog(
+                currentLanguage = uiState.currentLanguage,
+                onLanguageSelected = {
+                    settingsViewModel.changeAppLanguage(it)
+                    settingsViewModel.changeLanguageSelectionDialogState()
+                },
+                onDialogDismissed = {
+                    settingsViewModel.changeLanguageSelectionDialogState()
+                }
+            )
         }
     }
 }

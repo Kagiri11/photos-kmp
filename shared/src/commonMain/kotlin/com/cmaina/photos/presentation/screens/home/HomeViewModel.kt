@@ -6,6 +6,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.cmaina.photos.domain.models.photos.FavoritePhoto
 import com.cmaina.photos.domain.models.photos.Photo
+import com.cmaina.photos.domain.repositories.AppRepository
 import com.cmaina.photos.domain.repositories.PhotosRepository
 import com.cmaina.photos.domain.utils.Result
 import kotlinx.coroutines.flow.Flow
@@ -16,7 +17,8 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
 class HomeViewModel(
-    private val photosRepository: PhotosRepository
+    private val photosRepository: PhotosRepository,
+    private val appRepository: AppRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<HomeUiState>(HomeUiState.Loading)
@@ -34,6 +36,12 @@ class HomeViewModel(
                     is Result.Error -> HomeUiState.Error(errorMessage = result.errorDetails)
                 }
             }
+        }
+    }
+
+    fun fetchAppLanguage() = viewModelScope.launch {
+        appRepository.fetchAppLanguage().collect { language ->
+//            _uiState.update { it.copy(currentLanguage = language) }
         }
     }
 
