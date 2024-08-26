@@ -3,6 +3,7 @@ package com.cmaina.photos.presentation.screens.settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cmaina.photos.domain.models.settings.AppTheme
+import com.cmaina.photos.domain.models.settings.AppThemes
 import com.cmaina.photos.domain.repositories.AppRepository
 import com.cmaina.photos.presentation.utils.Language
 import com.cmaina.photos.presentation.utils.LanguageList
@@ -13,7 +14,7 @@ import kotlinx.coroutines.launch
 
 class SettingsViewModel(private val appRepository: AppRepository) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(SettingsUiState(AppTheme.SystemDefault, false))
+    private val _uiState = MutableStateFlow(SettingsUiState(isThemeDialogOpen = false))
     val uiState = _uiState.asStateFlow()
 
     init {
@@ -55,7 +56,7 @@ class SettingsViewModel(private val appRepository: AppRepository) : ViewModel() 
 }
 
 data class SettingsUiState(
-    val appTheme: AppTheme,
+    val appTheme: AppTheme = AppThemes.first(),
     val isThemeDialogOpen: Boolean,
     val isLanguageSelectionDialogOpen: Boolean = false,
     val currentLanguage: Language = LanguageList.first()

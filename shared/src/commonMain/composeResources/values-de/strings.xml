@@ -13,7 +13,9 @@
     <string name="language">Sprache</string>
     <string name="language_en">Englisch</string>
     <string name="language_it">Italienisch</string>
+    <string name = "language_de">Deutsch</string>
     <string name="choose_theme">Thema auswählen</string>
+    <string name = "choose_language">Sprache wählen</string>
     <string name="theme_icon">Designsymbol</string>
     <string name="navigate_back">Zurück navigieren</string>
 

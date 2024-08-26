@@ -10,10 +10,12 @@ import androidx.compose.runtime.getValue
 import com.cmaina.photos.domain.models.settings.AppTheme
 import com.cmaina.photos.presentation.screens.settings.SettingsUiState
 import com.cmaina.photos.presentation.screens.settings.SettingsViewModel
+import com.cmaina.photos.presentation.utils.ThemeListener
+import kotlinx.coroutines.flow.update
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
-private val DarkColorPalette = darkColors(
+val DarkColorPalette = darkColors(
     primary = FotosBlack,
     primaryVariant = FotosGreyShadeThreeLightTheme,
     secondary = FotosBlack,
@@ -25,7 +27,7 @@ private val DarkColorPalette = darkColors(
     onSurface = FotosWhite
 )
 
-private val LightColorPalette = lightColors(
+val LightColorPalette = lightColors(
     primary = FotosWhite,
     primaryVariant = FotosGreyShadeThreeLightTheme,
     secondary = FotosBlack,
@@ -40,14 +42,10 @@ private val LightColorPalette = lightColors(
 @Composable
 fun PhotosTheme(
     uiState: SettingsUiState,
-    darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colors = when (uiState.appTheme) {
-        AppTheme.Light -> LightColorPalette
-        AppTheme.Dark -> DarkColorPalette
-        AppTheme.SystemDefault -> if (darkTheme) DarkColorPalette else LightColorPalette
-    }
+    ThemeListener.isAppInDarkTheme.update { isSystemInDarkTheme() }
+    val colors = uiState.appTheme.palette
 
     MaterialTheme(
         colors = colors,

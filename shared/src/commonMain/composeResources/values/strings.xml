@@ -13,7 +13,9 @@
     <string name = "language">Language</string>
     <string name = "language_en">English</string>
     <string name = "language_it">Italian</string>
+    <string name = "language_de">German</string>
     <string name = "choose_theme">Choose theme</string>
+    <string name = "choose_language">Choose language</string>
     <string name = "theme_icon">theme icon</string>
     <string name = "navigate_back">Navigate Back</string>
 

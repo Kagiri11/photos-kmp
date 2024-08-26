@@ -10,6 +10,7 @@ import coil3.ImageLoader
 import coil3.PlatformContext
 import coil3.request.crossfade
 import coil3.util.DebugLogger
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.serialization.Serializable
 
 inline fun <T : Any> LazyStaggeredGridScope.lazyItems(
@@ -36,6 +37,10 @@ fun getAsyncImageLoader(context: PlatformContext) =
 object PreferenceKeys {
     const val AppTheme = "app_theme"
     const val AppLanguage = "app_language"
+}
+
+object ThemeListener{
+    val isAppInDarkTheme = MutableStateFlow(false)
 }
 
 @Serializable

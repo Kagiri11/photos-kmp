@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import com.cmaina.photos.domain.models.settings.AppTheme
 import com.cmaina.photos.presentation.components.settingscomponents.LanguageSelectionDialog
 import com.cmaina.photos.presentation.components.settingscomponents.Setting
-import com.cmaina.photos.presentation.components.settingscomponents.SettingItemDialog
+import com.cmaina.photos.presentation.components.settingscomponents.ThemeDialog
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -76,16 +76,8 @@ fun SettingsScreen(settingsViewModel: SettingsViewModel = koinViewModel()) {
 
             Setting(
                 settingAttribute = stringResource(Res.string.theme),
-                attributeValue = when (uiState.appTheme) {
-                    AppTheme.Dark -> stringResource(Res.string.theme_dark)
-                    AppTheme.Light -> stringResource(Res.string.theme_light)
-                    AppTheme.SystemDefault -> stringResource(Res.string.theme_sys_default)
-                },
-                settingIcon = when (uiState.appTheme) {
-                    AppTheme.Dark -> Icons.Default.DarkMode
-                    AppTheme.Light -> Icons.Default.LightMode
-                    AppTheme.SystemDefault -> if (isSystemInDarkTheme()) Icons.Default.DarkMode else Icons.Default.LightMode
-                },
+                attributeValue = stringResource(uiState.appTheme.themeResource),
+                settingIcon = uiState.appTheme.icon,
             ) {
                 settingsViewModel.changeDialogOpenState()
             }
@@ -98,14 +90,14 @@ fun SettingsScreen(settingsViewModel: SettingsViewModel = koinViewModel()) {
                 settingsViewModel.changeLanguageSelectionDialogState()
             }
         }
-
-        SettingItemDialog(
-            isDialogOpen = uiState.isThemeDialogOpen,
-            appTheme = uiState.appTheme,
-            settingsViewModel = settingsViewModel
-        ) { theme ->
-            settingsViewModel.changeAppTheme(theme)
-            settingsViewModel.changeDialogOpenState()
+        if (uiState.isThemeDialogOpen) {
+            ThemeDialog(
+                appTheme = uiState.appTheme,
+                settingsViewModel = settingsViewModel
+            ) { theme ->
+                settingsViewModel.changeAppTheme(theme)
+                settingsViewModel.changeDialogOpenState()
+            }
         }
 
         if (uiState.isLanguageSelectionDialogOpen) {

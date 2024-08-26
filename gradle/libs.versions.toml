@@ -27,8 +27,6 @@ roomKMP = "2.7.0-alpha06"
 ksp = "2.0.20-RC-1.0.24"
 sqlite = "2.5.0-SNAPSHOT"
 
-# Tests
-
 [libraries]
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity" }
 androidx-datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "preferenceDatastore" }
