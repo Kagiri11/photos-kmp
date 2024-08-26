@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.NavigationRail
@@ -18,6 +19,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -29,7 +31,7 @@ fun NavigationRail(navHostController: NavHostController) {
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
 
     NavigationRail(
-        modifier = Modifier.fillMaxHeight(),
+        modifier = Modifier.fillMaxHeight().wrapContentWidth(),
         backgroundColor = MaterialTheme.colors.primary
     ) {
         TopLevelDestinations.forEach { screen ->
@@ -40,7 +42,7 @@ fun NavigationRail(navHostController: NavHostController) {
                 unselectedContentColor = MaterialTheme.colors.primaryVariant,
                 selected = isSelected,
                 label = {
-                    Text(text = stringResource(screen.label))
+                    Text(text = stringResource(screen.label), overflow = TextOverflow.Ellipsis)
                 },
                 onClick = { navHostController.navigateTopScreens(screen) },
                 icon = {

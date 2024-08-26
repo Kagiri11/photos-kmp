@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.core.component.KoinComponent
+import java.util.Locale
 
 class HomeViewModel(
     private val photosRepository: PhotosRepository,
@@ -25,6 +25,7 @@ class HomeViewModel(
     val uiState: StateFlow<HomeUiState> get() = _uiState
 
     init {
+        fetchAppLanguage()
         fetchPhotos()
     }
 
@@ -39,9 +40,9 @@ class HomeViewModel(
         }
     }
 
-    fun fetchAppLanguage() = viewModelScope.launch {
+    private fun fetchAppLanguage() = viewModelScope.launch {
         appRepository.fetchAppLanguage().collect { language ->
-//            _uiState.update { it.copy(currentLanguage = language) }
+            Locale.setDefault(Locale(language.initials))
         }
     }
 

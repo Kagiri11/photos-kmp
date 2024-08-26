@@ -28,14 +28,12 @@ import com.cmaina.photos.domain.models.settings.AppTheme
 import com.cmaina.photos.presentation.components.settingscomponents.LanguageSelectionDialog
 import com.cmaina.photos.presentation.components.settingscomponents.Setting
 import com.cmaina.photos.presentation.components.settingscomponents.SettingItemDialog
-import com.cmaina.photos.presentation.utils.Language
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 import photos.shared.generated.resources.Res
 import photos.shared.generated.resources.display
 import photos.shared.generated.resources.language
-import photos.shared.generated.resources.language_en
 import photos.shared.generated.resources.settings_screen_title
 import photos.shared.generated.resources.theme
 import photos.shared.generated.resources.theme_dark

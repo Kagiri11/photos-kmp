@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.cmaina.photos.presentation.utils.Language
+import com.cmaina.photos.presentation.utils.LanguageList
 
 @Composable
 fun LanguageSelectionDialog(
@@ -51,7 +52,7 @@ fun LanguageSelectionDialog(
                     )
                 }
 
-                Language.entries.forEach { language ->
+                LanguageList.forEach { language ->
                     LanguageSelectionItem(
                         isSelectedLanguage = currentLanguage == language,
                         language = language,

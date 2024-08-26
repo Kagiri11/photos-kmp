@@ -10,6 +10,7 @@ import coil3.ImageLoader
 import coil3.PlatformContext
 import coil3.request.crossfade
 import coil3.util.DebugLogger
+import kotlinx.serialization.Serializable
 
 inline fun <T : Any> LazyStaggeredGridScope.lazyItems(
     items: LazyPagingItems<T>,
@@ -37,8 +38,11 @@ object PreferenceKeys {
     const val AppLanguage = "app_language"
 }
 
-enum class Language {
-    English,
-    Italian,
-    German,
-}
+@Serializable
+data class Language(val name: String, val initials: String)
+
+val LanguageList = listOf(
+    Language("English", "en"),
+    Language("Italian", "it"),
+    Language("German", "de")
+)

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.cmaina.photos.domain.models.settings.AppTheme
 import com.cmaina.photos.domain.repositories.AppRepository
 import com.cmaina.photos.presentation.utils.Language
+import com.cmaina.photos.presentation.utils.LanguageList
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -57,5 +58,5 @@ data class SettingsUiState(
     val appTheme: AppTheme,
     val isThemeDialogOpen: Boolean,
     val isLanguageSelectionDialogOpen: Boolean = false,
-    val currentLanguage: Language = Language.English
+    val currentLanguage: Language = LanguageList.first()
 )

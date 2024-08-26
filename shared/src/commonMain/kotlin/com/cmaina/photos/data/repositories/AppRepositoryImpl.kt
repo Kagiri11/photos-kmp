@@ -7,9 +7,12 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import com.cmaina.photos.domain.models.settings.AppTheme
 import com.cmaina.photos.domain.repositories.AppRepository
 import com.cmaina.photos.presentation.utils.Language
+import com.cmaina.photos.presentation.utils.LanguageList
 import com.cmaina.photos.presentation.utils.PreferenceKeys
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import java.util.Locale
 
 class AppRepositoryImpl(
@@ -45,29 +48,16 @@ class AppRepositoryImpl(
 
     override suspend fun fetchAppLanguage(): Flow<Language> {
         return preferences.data.map {
-            when (it[languagePreference]) {
-                "English" -> Language.English
-                "Italian" -> Language.Italian
-                "German" -> Language.German
-                else -> Language.English
-            }
-
+            val languageJsonString = it[languagePreference] ?: return@map LanguageList.first()
+            Json.decodeFromString<Language>(languageJsonString)
         }
     }
 
     override suspend fun saveAppLanguage(language: Language) {
         preferences.updateData {
             it.toMutablePreferences().apply {
-                set(
-                    languagePreference, when (language) {
-                        Language.English -> "English"
-                        Language.Italian -> {
-                            Locale.setDefault(Locale("it"))
-                            "Italian"
-                        }
-                        Language.German -> "German"
-                    }
-                )
+                val languageJsonString = Json.encodeToString(language)
+                set(languagePreference, languageJsonString)
             }
         }
     }
