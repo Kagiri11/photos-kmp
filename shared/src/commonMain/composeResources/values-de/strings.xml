@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fotos</string>
+
+    <string name="home_screen_title">Erkunden</string>
+    <string name="settings_screen_title">Einstellungen</string>
+    <string name="display">Anzeige</string>
+    <string name="photos_desktop_title">Fotos Desktop</string>
+    <string name="theme">Thema</string>
+    <string name="theme_dark">Dunkel</string>
+    <string name="theme_light">Licht</string>
+    <string name="theme_sys_default">Systemstandard</string>
+    <string name="language">Sprache</string>
+    <string name="language_en">Englisch</string>
+    <string name="language_it">Italienisch</string>
+    <string name="choose_theme">Thema auswählen</string>
+    <string name="theme_icon">Designsymbol</string>
+    <string name="navigate_back">Zurück navigieren</string>
+
+    // Bottom Nav and Navigation Rail
+    <string name="bottom_nav_home">Heim</string>
+    <string name="bottom_nav_favorites">Favoriten</string>
+    <string name="bottom_nav_settings">Einstellungen</string>
+
+</resources>

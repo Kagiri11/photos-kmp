@@ -104,7 +104,6 @@ fun SettingItemDialog(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-//                                mainViewModel.changeAppTheme(dataStore, true)
                                 onOptionSelected(AppTheme.SystemDefault)
                             }
                     ) {

@@ -9,10 +9,13 @@
     <string name = "theme">Theme</string>
     <string name = "theme_dark">Dark</string>
     <string name = "theme_light">Light</string>
-    <string name = "theme_sys_default">Dark</string>
+    <string name = "theme_sys_default">System Default</string>
     <string name = "language">Language</string>
     <string name = "language_en">English</string>
     <string name = "language_it">Italian</string>
+    <string name = "choose_theme">Choose theme</string>
+    <string name = "theme_icon">theme icon</string>
+    <string name = "navigate_back">Navigate Back</string>
 
     // Bottom Nav and Navigation Rail
     <string name = "bottom_nav_home">Home</string>

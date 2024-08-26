@@ -53,9 +53,7 @@ fun HomeScreen(
 
         when (uiState) {
             is HomeUiState.Loading -> {}
-            is HomeUiState.Error -> {
-                // Show snackbar with error message
-            }
+            is HomeUiState.Error -> {}
 
             is HomeUiState.Success -> {
                 val photos = uiState.pagedPhotos.collectAsLazyPagingItems()

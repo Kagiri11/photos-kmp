@@ -26,6 +26,9 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.jetbrains.compose.resources.stringResource
+import photos.shared.generated.resources.Res
+import photos.shared.generated.resources.theme_icon
 
 @Composable
 fun Setting(
@@ -49,7 +52,7 @@ fun Setting(
         ) {
             Icon(
                 imageVector = settingIcon,
-                contentDescription = "theme icon"
+                contentDescription = stringResource(Res.string.theme_icon)
             )
             Spacer(modifier = Modifier.width(20.dp))
             Column {

@@ -33,8 +33,11 @@ import coil3.compose.AsyncImage
 import com.cmaina.photos.presentation.components.photoscards.PhotosPager
 import com.cmaina.photos.presentation.components.photostext.FotosText
 import com.cmaina.photos.presentation.components.photostext.FotosTitleText
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
+import photos.shared.generated.resources.Res
+import photos.shared.generated.resources.navigate_back
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
@@ -53,20 +56,12 @@ fun PhotoDetailsScreen(
     }
 
     when (uiState) {
-        is PhotoDetailsUiState.Loading -> {
-            println()
-            println("PhotoDetailsScreen ui state loading => : $uiState")
-        }
+        is PhotoDetailsUiState.Loading -> {}
 
         is PhotoDetailsUiState.Error -> {
-            println()
-            println("PhotoDetailsScreen ui state error => : ${uiState.errorMessage}")
         }
 
         is PhotoDetailsUiState.Success -> {
-            println()
-            println("PhotoDetailsScreen ui state success => : ${uiState.details}")
-
             with(uiState.details) {
                 var page by remember { mutableStateOf(0) }
 
@@ -76,7 +71,7 @@ fun PhotoDetailsScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Navigate Back"
+                            contentDescription = stringResource(Res.string.navigate_back)
                         )
                     }
 
