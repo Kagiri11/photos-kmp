@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.cmaina.photos.presentation.components.photostext.FotosText
 import com.cmaina.photos.presentation.utils.Language
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun LanguageSelectionItem(
@@ -31,6 +32,6 @@ fun LanguageSelectionItem(
             onClick = { onLanguageSelected(language) },
             colors = RadioButtonDefaults.colors(selectedColor = MaterialTheme.colors.onPrimary)
         )
-        FotosText(text = language.name)
+        FotosText(text = stringResource(language.resource))
     }
 }

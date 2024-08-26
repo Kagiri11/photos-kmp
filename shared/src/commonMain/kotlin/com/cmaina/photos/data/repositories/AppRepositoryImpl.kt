@@ -37,17 +37,16 @@ class AppRepositoryImpl(
     }
 
     override suspend fun fetchAppLanguage(): Flow<Language> {
-        return preferences.data.map {
-            val languageJsonString = it[languagePreference] ?: return@map LanguageList.first()
-            Json.decodeFromString<Language>(languageJsonString)
+        return preferences.data.map { pref ->
+            LanguageList.find { it.name == pref[languagePreference] }
+                ?: return@map LanguageList.first()
         }
     }
 
     override suspend fun saveAppLanguage(language: Language) {
         preferences.updateData {
             it.toMutablePreferences().apply {
-                val languageJsonString = Json.encodeToString(language)
-                set(languagePreference, languageJsonString)
+                set(languagePreference, language.name)
             }
         }
     }

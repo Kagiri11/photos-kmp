@@ -12,6 +12,11 @@ import coil3.request.crossfade
 import coil3.util.DebugLogger
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.serialization.Serializable
+import org.jetbrains.compose.resources.StringResource
+import photos.shared.generated.resources.Res
+import photos.shared.generated.resources.language_de
+import photos.shared.generated.resources.language_en
+import photos.shared.generated.resources.language_it
 
 inline fun <T : Any> LazyStaggeredGridScope.lazyItems(
     items: LazyPagingItems<T>,
@@ -43,11 +48,10 @@ object ThemeListener{
     val isAppInDarkTheme = MutableStateFlow(false)
 }
 
-@Serializable
-data class Language(val name: String, val initials: String)
+data class Language(val name: String, val initials: String, val resource: StringResource)
 
 val LanguageList = listOf(
-    Language("English", "en"),
-    Language("Italian", "it"),
-    Language("German", "de")
+    Language("English", "en", Res.string.language_en),
+    Language("Italian", "it", Res.string.language_it),
+    Language("German", "de", Res.string.language_de)
 )

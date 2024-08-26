@@ -7,7 +7,7 @@ import io.ktor.client.request.get
 
 class PhotosRemoteSource(private val client: HttpClient) {
 
-    suspend fun fetchPhotos(page: Int) = client.get(urlString = "${BASEURL}photos") {
+    suspend fun fetchPhotos(page: Int) = client.get("${BASEURL}photos") {
         url {
             parameters.append("page", "$page")
         }

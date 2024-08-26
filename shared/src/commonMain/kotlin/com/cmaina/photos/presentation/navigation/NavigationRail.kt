@@ -42,7 +42,11 @@ fun NavigationRail(navHostController: NavHostController) {
                 unselectedContentColor = MaterialTheme.colors.primaryVariant,
                 selected = isSelected,
                 label = {
-                    Text(text = stringResource(screen.label), overflow = TextOverflow.Ellipsis)
+                    Text(
+                        text = stringResource(screen.label),
+                        overflow = TextOverflow.Ellipsis,
+                        maxLines = 1
+                    )
                 },
                 onClick = { navHostController.navigateTopScreens(screen) },
                 icon = {

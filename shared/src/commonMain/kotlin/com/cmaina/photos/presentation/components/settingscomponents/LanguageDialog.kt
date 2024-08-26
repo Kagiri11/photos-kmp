@@ -21,6 +21,9 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.cmaina.photos.presentation.utils.Language
 import com.cmaina.photos.presentation.utils.LanguageList
+import org.jetbrains.compose.resources.stringResource
+import photos.shared.generated.resources.Res
+import photos.shared.generated.resources.choose_language
 
 @Composable
 fun LanguageSelectionDialog(
@@ -43,7 +46,7 @@ fun LanguageSelectionDialog(
                 Row(modifier = Modifier.fillMaxWidth()) {
                     Spacer(modifier = Modifier.width(14.dp))
                     Text(
-                        text = "Choose language",
+                        text = stringResource(Res.string.choose_language),
                         style = TextStyle(
                             color = MaterialTheme.colors.onPrimary,
                             fontSize = 16.sp,

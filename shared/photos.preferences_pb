@@ -1,5 +1,5 @@
 
-
-	app_theme*SYSTEM
-3
-app_language#*!{"name":"German","initials":"de"}
+
+	app_theme*DARK
+
+app_language*German
