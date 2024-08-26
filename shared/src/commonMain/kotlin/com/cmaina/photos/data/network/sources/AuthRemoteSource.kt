@@ -12,7 +12,7 @@ class AuthRemoteSource(private val client: HttpClient) {
         redirectUri: String = "fotos://callback",
         code: String,
         grantType: String = "authorization_code"
-    ) = client.post("${BASEURL}oauth/token") {
+    ) = client.post("oauth/token") {
         url {
             parameters.append("client_id", clientId)
             parameters.append("client_secret", clientSecret)

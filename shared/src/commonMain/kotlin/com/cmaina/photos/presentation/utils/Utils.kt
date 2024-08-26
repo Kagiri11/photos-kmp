@@ -36,9 +36,6 @@ inline fun <T : Any> LazyGridScope.items(
     items(count = items.itemCount) { index -> items[index]?.let { itemContent(it) } }
 }
 
-fun getAsyncImageLoader(context: PlatformContext) =
-    ImageLoader.Builder(context).crossfade(true).logger(DebugLogger()).build()
-
 object PreferenceKeys {
     const val AppTheme = "app_theme"
     const val AppLanguage = "app_language"
@@ -47,11 +44,3 @@ object PreferenceKeys {
 object ThemeListener{
     val isAppInDarkTheme = MutableStateFlow(false)
 }
-
-data class Language(val name: String, val initials: String, val resource: StringResource)
-
-val LanguageList = listOf(
-    Language("English", "en", Res.string.language_en),
-    Language("Italian", "it", Res.string.language_it),
-    Language("German", "de", Res.string.language_de)
-)

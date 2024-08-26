@@ -6,6 +6,7 @@ import io.ktor.client.*
 import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.cio.CIO
+import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.auth.Auth
 import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -21,6 +22,10 @@ fun createClient(): HttpClient = HttpClient(CIO) {
         json(
             Json { isLenient = true; ignoreUnknownKeys = true }
         )
+    }
+
+    install(DefaultRequest){
+        url("https://api.unsplash.com/")
     }
 
     install(Auth) {
