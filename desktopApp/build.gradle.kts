@@ -9,11 +9,14 @@ plugins {
 dependencies{
     implementation(project(":shared"))
     implementation(compose.desktop.currentOs)
+    implementation(compose.material)
+    implementation(compose.materialIconsExtended)
+    implementation(compose.components.resources)
 }
 
 compose.desktop {
     application {
-        mainClass = "MainKt"
+        mainClass = "app.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)

@@ -16,8 +16,14 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material.icons.automirrored.rounded.ArrowForward
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -25,11 +31,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.cmaina.photos.presentation.components.RelatedPhotosWrapper
 import com.cmaina.photos.presentation.components.photoscards.PhotosPager
 import com.cmaina.photos.presentation.components.photostext.FotosText
 import com.cmaina.photos.presentation.components.photostext.FotosTitleText
@@ -39,7 +47,7 @@ import org.koin.core.annotation.KoinExperimentalAPI
 import photos.shared.generated.resources.Res
 import photos.shared.generated.resources.navigate_back
 
-@OptIn(KoinExperimentalAPI::class)
+@OptIn(KoinExperimentalAPI::class, ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun PhotoDetailsScreen(
     onBackBtnClicked: () -> Unit,
@@ -50,6 +58,8 @@ fun PhotoDetailsScreen(
     photoDetailsViewModel: PhotoDetailsViewModel = koinViewModel()
 ) {
     val uiState = photoDetailsViewModel.uiState.collectAsState().value
+    val windowSize = calculateWindowSizeClass()
+    val isCompact = windowSize.widthSizeClass < WindowWidthSizeClass.Medium
 
     LaunchedEffect(Unit) {
         photoDetailsViewModel.fetchPhoto(photoId)
@@ -75,7 +85,7 @@ fun PhotoDetailsScreen(
                         )
                     }
 
-                    PhotosPager(
+                    RelatedPhotosWrapper(
                         images = relatedImages,
                         pageInIteration = { page = it },
                         onPageSwapped = { onPageSwappedEvent(it) }
@@ -83,6 +93,7 @@ fun PhotoDetailsScreen(
 
                     Spacer(modifier = Modifier.height(5.dp))
 
+                    // region: Indicators
                     Row(
                         Modifier
                             .height(50.dp)
@@ -100,8 +111,8 @@ fun PhotoDetailsScreen(
 
                             )
                         }
-
                     }
+                    // endregion
 
                     LikeAndDownloadSection(
                         userName = userName,

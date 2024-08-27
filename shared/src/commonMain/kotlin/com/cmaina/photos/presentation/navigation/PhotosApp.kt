@@ -15,7 +15,7 @@ import com.cmaina.photos.presentation.screens.user.UserScreen
 @Composable
 fun PhotosApp(
     navController: NavHostController,
-    startDestination: String = PhotosScreen.Home.route,
+    startDestination: String = PhotosScreen.Home.route
 ) {
     NavHost(
         navController = navController,
