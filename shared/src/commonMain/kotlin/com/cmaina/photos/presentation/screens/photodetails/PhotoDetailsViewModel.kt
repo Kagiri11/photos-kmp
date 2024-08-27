@@ -65,7 +65,7 @@ class PhotoDetailsViewModel(
                             userName = user.name,
                             userPhotoImageUrl = user.userProfileImage.medium,
                             numberOfLikes = likes,
-                            relatedImages = images,
+                            relatedImages = images.reversed(),
                             photoIsLikedByUser = false
                         )
                         _uiState.value =

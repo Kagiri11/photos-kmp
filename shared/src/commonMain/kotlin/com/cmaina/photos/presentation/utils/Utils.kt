@@ -29,6 +29,10 @@ inline fun <T : Any> LazyStaggeredGridScope.lazyItems(
     }
 }
 
+enum class ClickAction {
+    Prev, Next, None
+}
+
 inline fun <T : Any> LazyGridScope.items(
     items: LazyPagingItems<T>,
     crossinline itemContent: @Composable LazyGridItemScope.(value: T) -> Unit

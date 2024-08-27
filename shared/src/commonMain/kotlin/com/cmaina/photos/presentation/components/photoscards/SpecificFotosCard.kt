@@ -10,15 +10,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import coil3.compose.AsyncImage
-import kotlinx.coroutines.launch
-
-enum class ClickAction {
-    Prev, Next, None
-}
+import com.cmaina.photos.presentation.utils.ClickAction
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -28,7 +23,6 @@ fun PhotosPager(
     onPageSwapped: (String) -> Unit,
     action: ClickAction
 ) {
-    println("Recomposition due to action: $action")
     val pagerState = rememberPagerState(
         initialPage = 0,
         initialPageOffsetFraction = 0f
