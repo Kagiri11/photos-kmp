@@ -6,6 +6,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.core.Koin
 import photos.shared.generated.resources.Res
 import photos.shared.generated.resources.app_name
+import java.awt.Dimension
 
 lateinit var koin: Koin
 
@@ -17,6 +18,7 @@ fun main() {
             onCloseRequest = ::exitApplication,
             title = stringResource(Res.string.app_name)
         ) {
+            window.minimumSize = Dimension(1080,720)
             MainScreen()
         }
     }
