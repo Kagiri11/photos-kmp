@@ -84,7 +84,7 @@ fun SettingsScreen(settingsViewModel: SettingsViewModel = koinViewModel()) {
 
             Setting(
                 settingAttribute = stringResource(Res.string.language),
-                attributeValue = uiState.currentLanguage.name,
+                attributeValue = stringResource(uiState.currentLanguage.resource),
                 settingIcon = Icons.Default.Language,
             ) {
                 settingsViewModel.changeLanguageSelectionDialogState()
