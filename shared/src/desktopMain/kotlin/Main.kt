@@ -18,7 +18,7 @@ fun main() {
             onCloseRequest = ::exitApplication,
             title = stringResource(Res.string.app_name)
         ) {
-            window.minimumSize = Dimension(1080,720)
+            window.minimumSize = Dimension(1080, 720)
             MainScreen()
         }
     }
