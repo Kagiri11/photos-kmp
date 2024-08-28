@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Photos</string>
+
+    <string name="home_screen_title">يستكشف</string>
+    <string name="settings_screen_title">إعدادات</string>
+    <string name="display">عرض</string>
+    <string name="photos_desktop_title">Photos Desktop</string>
+    <string name="theme">سمة</string>
+    <string name="theme_dark">مظلم</string>
+    <string name="theme_light">ضوء</string>
+    <string name="theme_sys_default">إعدادات النظام</string>
+    <string name="language">لسان</string>
+    <string name="language_en">إنجليزي</string>
+    <string name="language_it">ايطالي</string>
+    <string name="language_de">الألمانية</string>
+    <string name="language_ar">عربي</string>
+    <string name="choose_theme">اختر الموضوع</string>
+    <string name="choose_language">اختر لغتك</string>
+    <string name="theme_icon">أيقونة الموضوع</string>
+    <string name="navigate_back">عُد</string>
+
+    // Bottom Nav and Navigation Rail
+    <string name="bottom_nav_home">بيت</string>
+    <string name="bottom_nav_favorites">المفضلة</string>
+    <string name="bottom_nav_settings">إعدادات</string>
+
+</resources>
