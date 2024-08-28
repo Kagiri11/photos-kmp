@@ -13,6 +13,7 @@
     <string name="language_en">Inglese</string>
     <string name="language_it">Italiano</string>
     <string name = "language_de">Tedesco</string>
+    <string name = "language_ar">Araba</string>
     <string name="choose_theme">Scegli il tema</string>
     <string name="choose_language">Scegli la lingua</string>
     <string name="theme_icon">icona del tema</string>

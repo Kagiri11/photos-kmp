@@ -18,9 +18,12 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -51,39 +54,44 @@ fun MainScreen(
         getAsyncImageLoader(context)
     }
 
-    PhotosTheme(uiState) {
-        AnimatedContent(
-            targetState = windowSize.widthSizeClass < WindowWidthSizeClass.Medium,
-            label = "MainScreen",
-            transitionSpec = {
-                fadeIn(
-                    animationSpec = tween(3000)
-                ) togetherWith fadeOut(animationSpec = tween(3000))
-            }
-        ) { targetState ->
-            when (targetState) {
-                true -> {
-                    Scaffold(
-                        bottomBar = { BottomNav(navController) },
-                        content = {
-                            PhotosApp(
-                                navController = navController
-                            )
-                        }
-                    )
-                }
+    val local =
+        if (uiState.currentLanguage.initials == "ar") LayoutDirection.Rtl else LayoutDirection.Ltr
 
-                false -> {
-                    Surface {
-                        Row {
-                            NavigationRail(navController)
-                            Spacer(modifier = Modifier.width(10.dp))
-                            Card(
-                                modifier = Modifier.fillMaxSize(),
-                                shape = RoundedCornerShape(0),
-                                elevation = 10.dp
-                            ) {
-                                PhotosApp(navController)
+    CompositionLocalProvider(LocalLayoutDirection provides local) {
+        PhotosTheme(uiState) {
+            AnimatedContent(
+                targetState = windowSize.widthSizeClass < WindowWidthSizeClass.Medium,
+                label = "MainScreen",
+                transitionSpec = {
+                    fadeIn(
+                        animationSpec = tween(3000)
+                    ) togetherWith fadeOut(animationSpec = tween(3000))
+                }
+            ) { targetState ->
+                when (targetState) {
+                    true -> {
+                        Scaffold(
+                            bottomBar = { BottomNav(navController) },
+                            content = {
+                                PhotosApp(
+                                    navController = navController
+                                )
+                            }
+                        )
+                    }
+
+                    false -> {
+                        Surface {
+                            Row {
+                                NavigationRail(navController)
+                                Spacer(modifier = Modifier.width(10.dp))
+                                Card(
+                                    modifier = Modifier.fillMaxSize(),
+                                    shape = RoundedCornerShape(0),
+                                    elevation = 10.dp
+                                ) {
+                                    PhotosApp(navController)
+                                }
                             }
                         }
                     }
