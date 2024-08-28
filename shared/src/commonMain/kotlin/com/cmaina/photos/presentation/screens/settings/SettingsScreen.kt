@@ -25,6 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cmaina.photos.domain.models.settings.AppTheme
+import com.cmaina.photos.domain.models.settings.AppThemeEntity
 import com.cmaina.photos.presentation.components.settingscomponents.LanguageSelectionDialog
 import com.cmaina.photos.presentation.components.settingscomponents.Setting
 import com.cmaina.photos.presentation.components.settingscomponents.ThemeDialog
@@ -77,7 +78,11 @@ fun SettingsScreen(settingsViewModel: SettingsViewModel = koinViewModel()) {
             Setting(
                 settingAttribute = stringResource(Res.string.theme),
                 attributeValue = stringResource(uiState.appTheme.themeResource),
-                settingIcon = uiState.appTheme.icon,
+                settingIcon = when (uiState.appTheme.entity) {
+                    AppThemeEntity.SYSTEM -> if (isSystemInDarkTheme()) Icons.Default.DarkMode else Icons.Default.LightMode
+                    AppThemeEntity.DARK -> Icons.Default.DarkMode
+                    AppThemeEntity.LIGHT -> Icons.Default.LightMode
+                },
             ) {
                 settingsViewModel.changeDialogOpenState()
             }

@@ -44,7 +44,3 @@ object PreferenceKeys {
     const val AppTheme = "app_theme"
     const val AppLanguage = "app_language"
 }
-
-object ThemeListener{
-    val isAppInDarkTheme = MutableStateFlow(false)
-}
