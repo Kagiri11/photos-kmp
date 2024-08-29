@@ -32,7 +32,7 @@ kotlin {
             implementation(compose.animation)
             implementation(compose.foundation)
             implementation(compose.animation)
-            implementation(compose.material)
+            implementation(compose.material3)
             implementation(compose.materialIconsExtended)
             implementation(compose.components.resources)
 

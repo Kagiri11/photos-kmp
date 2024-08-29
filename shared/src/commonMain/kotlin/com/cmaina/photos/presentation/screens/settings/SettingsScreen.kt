@@ -8,12 +8,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.LightMode
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -54,7 +54,7 @@ fun SettingsScreen(settingsViewModel: SettingsViewModel = koinViewModel()) {
             text = stringResource(Res.string.settings_screen_title),
             style = TextStyle(
                 fontSize = 30.sp,
-                color = MaterialTheme.colors.onBackground,
+                color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold
             )
         )
@@ -69,10 +69,10 @@ fun SettingsScreen(settingsViewModel: SettingsViewModel = koinViewModel()) {
         ) {
             Text(
                 text = stringResource(Res.string.display),
-                style = MaterialTheme.typography.body1.copy(
+                /*style = MaterialTheme.typography.body1.copy(
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold
-                )
+                )*/
             )
 
             Setting(

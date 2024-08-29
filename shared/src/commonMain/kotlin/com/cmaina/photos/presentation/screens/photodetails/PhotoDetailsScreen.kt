@@ -4,26 +4,27 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Button
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material.icons.automirrored.rounded.ArrowForward
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.BottomSheetScaffold
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
-import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -38,7 +39,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.cmaina.photos.presentation.components.RelatedPhotosWrapper
-import com.cmaina.photos.presentation.components.photoscards.PhotosPager
 import com.cmaina.photos.presentation.components.photostext.FotosText
 import com.cmaina.photos.presentation.components.photostext.FotosTitleText
 import org.jetbrains.compose.resources.stringResource
@@ -47,7 +47,7 @@ import org.koin.core.annotation.KoinExperimentalAPI
 import photos.shared.generated.resources.Res
 import photos.shared.generated.resources.navigate_back
 
-@OptIn(KoinExperimentalAPI::class, ExperimentalMaterial3WindowSizeClassApi::class)
+@OptIn(KoinExperimentalAPI::class, ExperimentalMaterial3Api::class)
 @Composable
 fun PhotoDetailsScreen(
     onBackBtnClicked: () -> Unit,
@@ -58,8 +58,10 @@ fun PhotoDetailsScreen(
     photoDetailsViewModel: PhotoDetailsViewModel = koinViewModel()
 ) {
     val uiState = photoDetailsViewModel.uiState.collectAsState().value
-    val windowSize = calculateWindowSizeClass()
-    val isCompact = windowSize.widthSizeClass < WindowWidthSizeClass.Medium
+    var showBottomSheet by remember { mutableStateOf(false) }
+    val sheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = false,
+    )
 
     LaunchedEffect(Unit) {
         photoDetailsViewModel.fetchPhoto(photoId)
@@ -75,7 +77,11 @@ fun PhotoDetailsScreen(
             with(uiState.details) {
                 var page by remember { mutableStateOf(0) }
 
-                Column(modifier = Modifier.fillMaxSize()) {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(5.dp)
+                ) {
                     Button(
                         onClick = onBackBtnClicked
                     ) {
@@ -94,7 +100,7 @@ fun PhotoDetailsScreen(
                     Spacer(modifier = Modifier.height(5.dp))
 
                     // region: Indicators
-                    Row(
+                    /*Row(
                         Modifier
                             .height(50.dp)
                             .fillMaxWidth(),
@@ -111,21 +117,28 @@ fun PhotoDetailsScreen(
 
                             )
                         }
+                    }*/
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(0.95f),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+
+                        LikeAndDownloadSection(
+                            userName = userName,
+                            userPhotoUrl = userPhotoImageUrl,
+                            numberOfLikes = numberOfLikes,
+                            userHasLikedPhoto = photoIsLikedByUser,
+                            onLikeClick = {
+
+                                onImageLikedEvent()
+                            },
+                            onDownloadClick = {},
+                            onUserSectionClicked = { onUserSectionClickedEvent(userName) }
+                        )
                     }
-                    // endregion
 
-                    LikeAndDownloadSection(
-                        userName = userName,
-                        userPhotoUrl = userPhotoImageUrl,
-                        numberOfLikes = numberOfLikes,
-                        userHasLikedPhoto = photoIsLikedByUser,
-                        onLikeClick = {
-
-                            onImageLikedEvent()
-                        },
-                        onDownloadClick = {},
-                        onUserSectionClicked = { onUserSectionClickedEvent(userName) }
-                    )
+                    Spacer(modifier = Modifier.height(5.dp))
                 }
             }
         }
@@ -133,7 +146,7 @@ fun PhotoDetailsScreen(
 }
 
 @Composable
-fun ColumnScope.LikeAndDownloadSection(
+fun LikeAndDownloadSection(
     userName: String,
     userPhotoUrl: String,
     numberOfLikes: Int,
@@ -145,21 +158,17 @@ fun ColumnScope.LikeAndDownloadSection(
     Column(modifier = Modifier.fillMaxWidth()) {
         Row {
             AsyncImage(
+                modifier = Modifier.clip(CircleShape),
                 model = userPhotoUrl,
                 contentDescription = "",
             )
-            FotosText(modifier = Modifier, text = userName)
-            /*Image(
-                painter = painterResource(""),
-                contentDescription = ""
-            )
-            Image(
-                painter = painterResource(""),
-                contentDescription = ""
-            )*/
+            Spacer(modifier = Modifier.size(10.dp))
+            Column {
+                Text(text = "$numberOfLikes likes", style = MaterialTheme.typography.titleLarge)
+                Text(text = userName, style = MaterialTheme.typography.bodyMedium)
+            }
         }
 
-        FotosTitleText("$numberOfLikes likes", MaterialTheme.colors.onPrimary)
     }
 
 }

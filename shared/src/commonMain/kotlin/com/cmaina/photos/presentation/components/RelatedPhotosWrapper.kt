@@ -3,14 +3,15 @@ package com.cmaina.photos.presentation.components
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.ArrowForward
+import androidx.compose.material3.Icon
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
@@ -30,7 +31,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
-fun RelatedPhotosWrapper(
+fun ColumnScope.RelatedPhotosWrapper(
     images: List<String>,
     pageInIteration: (Int) -> Unit,
     onPageSwapped: (String) -> Unit
@@ -46,7 +47,7 @@ fun RelatedPhotosWrapper(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.weight(0.8f)
     ) {
         if (!isCompact) {
             AnimatedContent(isOnFirstPage) {

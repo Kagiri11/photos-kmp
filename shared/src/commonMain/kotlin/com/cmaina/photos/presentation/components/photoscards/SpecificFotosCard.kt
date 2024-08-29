@@ -1,13 +1,15 @@
 package com.cmaina.photos.presentation.components.photoscards
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
+import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -17,7 +19,7 @@ import com.cmaina.photos.presentation.utils.ClickAction
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun PhotosPager(
+fun RowScope.PhotosPager(
     images: List<String>,
     pageInIteration: (Int) -> Unit,
     onPageSwapped: (String) -> Unit,
@@ -40,7 +42,7 @@ fun PhotosPager(
 
     HorizontalPager(
         state = pagerState,
-        modifier = Modifier.fillMaxWidth(0.90f).fillMaxHeight(0.95f)
+        modifier = Modifier.weight(0.8f)
     ) { page ->
         pageInIteration(pagerState.currentPage)
         onPageSwapped(images[page])

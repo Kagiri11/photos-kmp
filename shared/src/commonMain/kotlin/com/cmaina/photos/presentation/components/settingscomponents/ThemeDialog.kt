@@ -8,9 +8,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,7 +41,7 @@ fun ThemeDialog(
         properties = DialogProperties(usePlatformDefaultWidth = false)
     ) {
         Card(
-            backgroundColor = MaterialTheme.colors.primary,
+            colors = CardDefaults.cardColors(contentColor = MaterialTheme.colorScheme.primary),
             modifier = Modifier
                 .fillMaxHeight(0.3f)
                 .fillMaxWidth(0.8f)
@@ -56,7 +57,7 @@ fun ThemeDialog(
                     Spacer(modifier = Modifier.width(14.dp))
                     Text(
                         text = stringResource(Res.string.choose_theme), style = TextStyle(
-                            color = MaterialTheme.colors.onPrimary,
+                            color = MaterialTheme.colorScheme.onPrimary,
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Medium
                         )

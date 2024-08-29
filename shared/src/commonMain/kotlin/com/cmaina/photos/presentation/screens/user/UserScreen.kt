@@ -16,8 +16,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -78,7 +78,7 @@ fun UserDetailsScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.15f)
-                .background(color = MaterialTheme.colors.primary),
+                .background(color = MaterialTheme.colorScheme.primary),
         ) {
             Spacer(modifier = Modifier.height(40.dp))
             Row(
@@ -144,7 +144,7 @@ fun UserDetailsScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight(0.5f)
-                    .background(MaterialTheme.colors.primary),
+                    .background(MaterialTheme.colorScheme.primary),
                 photos = flowOfPhotos,
                 onUserPhotoClicked = onUserPhotoClicked
             )

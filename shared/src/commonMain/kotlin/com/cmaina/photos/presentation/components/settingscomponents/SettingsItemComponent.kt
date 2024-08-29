@@ -10,14 +10,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -58,14 +58,14 @@ fun Setting(
             Column {
                 Text(
                     text = settingAttribute,
-                    color = MaterialTheme.colors.onPrimary,
-                    style = MaterialTheme.typography.body1.copy(
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    style = MaterialTheme.typography.bodyMedium.copy(
                         fontSize = 16.sp,
                     )
                 )
                 Text(
                     text = attributeValue,
-                    style = MaterialTheme.typography.body1.copy(
+                    style = MaterialTheme.typography.bodyMedium.copy(
                         fontSize = 11.sp
                     )
                 )
