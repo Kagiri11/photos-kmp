@@ -16,7 +16,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -28,6 +33,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.collectAsLazyPagingItems
+import coil3.compose.AsyncImage
 import com.cmaina.photos.presentation.components.userscreencomponents.UserPhotos
 import com.cmaina.photos.presentation.components.photostext.FotosTitleText
 import com.cmaina.photos.presentation.components.userscreencomponents.FollowAndMessageButtons
@@ -38,16 +44,11 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @OptIn(KoinExperimentalAPI::class)
 @Composable
 fun UserScreen(
-    onScreenLoad: () -> Unit,
     onBackPressed: () -> Unit,
     onUserPhotoClicked: (String) -> Unit,
     userViewModel: UserViewModel = koinViewModel()
 ) {
     val uiState = userViewModel.uiState.collectAsState().value
-
-    LaunchedEffect(key1 = true) {
-        onScreenLoad()
-    }
 
     when (uiState) {
         is UserUiState.Loading -> {}
@@ -59,7 +60,6 @@ fun UserScreen(
                     userUiDetails = uiState.uiDetails,
                     onUserPhotoClicked = onUserPhotoClicked
                 )
-
             }
         }
     }
@@ -86,21 +86,20 @@ fun UserDetailsScreen(
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 Spacer(modifier = Modifier.width(20.dp))
-                /*Image(
-//                painter = painterResource(id = R.drawable.ic_baseline_chevron_left_24),
-                    painter = painterResource(""),
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "back",
                     modifier = Modifier
                         .size(30.dp)
-                        .clickable(onClick = onBackPressed),
-                    colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary)
-                )*/
+                        .clickable(onClick = onBackPressed)
+                )
+
                 Spacer(modifier = Modifier.weight(1f))
-                /*Image(
-                    painter = painterResource(""),
-                    contentDescription = "more",
-                    colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary)
-                )*/
+
+                Icon(
+                    imageVector = Icons.Default.MoreVert,
+                    contentDescription = "More"
+                )
                 Spacer(modifier = Modifier.width(20.dp))
             }
         }
@@ -111,13 +110,13 @@ fun UserDetailsScreen(
                     .size(80.dp),
                 shape = CircleShape
             ) {
-                /*val painter = asyncPainterResource(data = userUiDetails.userImageUrl)
-                KamelImage(
-                    resource = painter,
-                    contentDescription = "",
+                AsyncImage(
                     modifier = Modifier
-                        .fillMaxSize()
-                )*/
+                        .fillMaxSize(),
+                    contentDescription = "",
+                    model = userUiDetails.userImageUrl
+                )
+                
             }
 
             FotosTitleText(

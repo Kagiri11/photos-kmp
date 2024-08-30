@@ -5,15 +5,14 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
@@ -28,12 +27,14 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import coil3.annotation.ExperimentalCoilApi
 import coil3.compose.setSingletonImageLoaderFactory
 import com.cmaina.photos.presentation.navigation.BottomNav
 import com.cmaina.photos.presentation.navigation.NavigationRail
 import com.cmaina.photos.presentation.navigation.PhotosApp
+import com.cmaina.photos.presentation.navigation.TopLevelDestinations
 import com.cmaina.photos.presentation.screens.settings.SettingsViewModel
 import com.cmaina.photos.presentation.ui.theme.PhotosTheme
 import com.cmaina.photos.presentation.utils.getAsyncImageLoader
@@ -58,6 +59,9 @@ fun MainScreen(
 
     val local =
         if (uiState.currentLanguage.initials == "ar") LayoutDirection.Rtl else LayoutDirection.Ltr
+    val currentDestination = navController.currentBackStackEntryAsState().value?.destination
+    val isTopLevelDestination = TopLevelDestinations.any { it.route == currentDestination?.route }
+
 
     CompositionLocalProvider(LocalLayoutDirection provides local) {
         PhotosTheme(uiState) {
@@ -73,9 +77,10 @@ fun MainScreen(
                 when (targetState) {
                     true -> {
                         Scaffold(
-                            bottomBar = { BottomNav(navController) },
+                            bottomBar = { if(isTopLevelDestination) BottomNav(navController)},
                             content = {
                                 PhotosApp(
+                                    modifier = Modifier.padding(it),
                                     navController = navController
                                 )
                             }
@@ -92,7 +97,7 @@ fun MainScreen(
                                     shape = RoundedCornerShape(0),
                                     elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)
                                 ) {
-                                    PhotosApp(navController)
+                                    PhotosApp(navController = navController)
                                 }
                             }
                         }

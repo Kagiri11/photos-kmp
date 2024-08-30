@@ -11,9 +11,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -68,7 +68,7 @@ fun FollowingSection(modifier: Modifier, photos: Int, followers: Int, following:
 fun DetailsColumn(text: String, number: Int) {
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.width(100.dp)) {
         FotosText(text = text)
-        FotosTitleText(text = number.toString(), textColor = MaterialTheme.colors.primary)
+        FotosTitleText(text = number.toString(), textColor = MaterialTheme.colorScheme.primary)
     }
 }
 
@@ -86,8 +86,7 @@ fun UserButton(
         modifier = modifier
             .height(55.dp),
         border = BorderStroke(width = 1.dp, color = Color.Black),
-        colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-        elevation = ButtonDefaults.elevation(0.dp)
+        colors = ButtonDefaults.buttonColors(contentColor = buttonColor)
     ) {
         FotosText(text = text, textColor = textColor)
     }

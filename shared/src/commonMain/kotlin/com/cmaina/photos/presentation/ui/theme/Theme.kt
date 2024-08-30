@@ -1,16 +1,15 @@
 package com.cmaina.photos.presentation.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import com.cmaina.photos.domain.models.settings.AppThemeEntity
 import com.cmaina.photos.presentation.screens.settings.SettingsUiState
 
-val DarkColorPalette = darkColors(
+val DarkColorPalette = darkColorScheme(
     primary = FotosBlack,
-    primaryVariant = FotosGreyShadeThreeLightTheme,
     secondary = FotosBlack,
     background = FotosBlack,
     surface = FotosBlack,
@@ -20,9 +19,8 @@ val DarkColorPalette = darkColors(
     onSurface = FotosWhite
 )
 
-val LightColorPalette = lightColors(
+val LightColorPalette = lightColorScheme(
     primary = FotosWhite,
-    primaryVariant = FotosGreyShadeThreeLightTheme,
     secondary = FotosBlack,
     background = FotosWhite,
     surface = FotosWhite,
@@ -44,7 +42,7 @@ fun PhotosTheme(
     }
 
     MaterialTheme(
-        colors = colors,
+        colorScheme = colors,
         content = content
     )
 }

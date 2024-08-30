@@ -51,6 +51,7 @@ fun RowScope.PhotosPager(
             shape = RoundedCornerShape(2)
         ) {
             AsyncImage(
+                modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop,
                 model = images[page],
                 contentDescription = "related image"

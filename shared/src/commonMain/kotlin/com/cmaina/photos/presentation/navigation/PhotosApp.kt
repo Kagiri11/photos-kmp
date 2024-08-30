@@ -1,6 +1,7 @@
 package com.cmaina.photos.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -14,6 +15,7 @@ import com.cmaina.photos.presentation.screens.user.UserScreen
 
 @Composable
 fun PhotosApp(
+    modifier: Modifier = Modifier,
     navController: NavHostController,
     startDestination: String = PhotosScreen.Home.route
 ) {

@@ -11,11 +11,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.NavigationRail
-import androidx.compose.material.NavigationRailItem
-import androidx.compose.material.Text
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationRailItem
+import androidx.compose.material3.NavigationRailItemDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -26,21 +27,26 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.cmaina.photos.presentation.utils.navigateTopScreens
 import org.jetbrains.compose.resources.stringResource
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavigationRail(navHostController: NavHostController) {
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
 
-    NavigationRail(
+    androidx.compose.material3.NavigationRail(
         modifier = Modifier.fillMaxHeight().wrapContentWidth(),
-        backgroundColor = MaterialTheme.colors.primary
+        containerColor = MaterialTheme.colorScheme.primary
     ) {
         TopLevelDestinations.forEach { screen ->
             val isSelected = navBackStackEntry?.destination?.route == screen.route
 
             NavigationRailItem(
-                selectedContentColor = MaterialTheme.colors.onPrimary,
-                unselectedContentColor = MaterialTheme.colors.primaryVariant,
                 selected = isSelected,
+                colors = NavigationRailItemDefaults.colors(
+                    selectedIconColor = MaterialTheme.colorScheme.onPrimary,
+                    unselectedIconColor = MaterialTheme.colorScheme.secondary,
+                    selectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                    unselectedTextColor = MaterialTheme.colorScheme.secondary,
+                ),
                 label = {
                     Text(
                         text = stringResource(screen.label),
