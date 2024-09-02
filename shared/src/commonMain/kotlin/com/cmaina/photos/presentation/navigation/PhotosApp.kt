@@ -55,7 +55,6 @@ fun PhotosApp(
 
         composable(route = PhotosScreen.User.route) {
             UserScreen(
-                onScreenLoad = {},
                 onBackPressed = {},
                 onUserPhotoClicked = {}
             )

@@ -28,6 +28,7 @@ kotlin {
             implementation(libs.coil.compose)
             implementation(libs.coil.mp)
             implementation(libs.coil.network.ktor)
+//            implementation("io.github.ismai117:kottie:1.9.3")
 
             implementation(compose.animation)
             implementation(compose.foundation)
@@ -50,6 +51,11 @@ kotlin {
             implementation(libs.ktor.client.logging)
             implementation(libs.ktor.client.json)
             implementation(libs.ktor.serialization.kotlinx.json)
+
+            implementation("io.github.alexzhirkevich:compottie:2.0.0-beta02")
+            implementation("io.github.alexzhirkevich:compottie-dot:2.0.0-beta02")
+            implementation("io.github.alexzhirkevich:compottie-network:2.0.0-beta02")
+            implementation("io.github.alexzhirkevich:compottie-resources:2.0.0-beta02")
 
             implementation(libs.material3.window.size)
             implementation(libs.navigation.compose)

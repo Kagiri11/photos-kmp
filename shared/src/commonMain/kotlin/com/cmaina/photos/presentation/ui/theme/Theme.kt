@@ -10,7 +10,7 @@ import com.cmaina.photos.presentation.screens.settings.SettingsUiState
 
 val DarkColorPalette = darkColorScheme(
     primary = FotosBlack,
-    secondary = FotosBlack,
+    secondary = FotosWhite,
     background = FotosBlack,
     surface = FotosBlack,
     onPrimary = FotosWhite,

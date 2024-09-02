@@ -116,7 +116,7 @@ fun UserDetailsScreen(
                     contentDescription = "",
                     model = userUiDetails.userImageUrl
                 )
-                
+
             }
 
             FotosTitleText(

@@ -17,6 +17,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -64,67 +65,69 @@ fun PhotoDetailsScreen(
             with(uiState.details) {
                 var page by remember { mutableStateOf(0) }
 
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    Button(
-                        onClick = onBackBtnClicked
+                Surface {
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = stringResource(Res.string.navigate_back)
-                        )
-                    }
-
-                    RelatedPhotosWrapper(
-                        images = relatedImages,
-                        pageInIteration = { page = it },
-                        onPageSwapped = { onPageSwappedEvent(it) }
-                    )
-
-                    Spacer(modifier = Modifier.height(5.dp))
-
-                    // region: Indicators
-                    Row(
-                        Modifier
-                            .height(50.dp)
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        repeat(relatedImages.size) { iteration ->
-                            val color = if (iteration == page) Color.Gray else Color.Black
-                            Box(
-                                modifier = Modifier
-                                    .padding(2.dp)
-                                    .clip(CircleShape)
-                                    .background(color)
-                                    .size(15.dp)
-
+                        Button(
+                            onClick = onBackBtnClicked
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.ArrowBack,
+                                contentDescription = stringResource(Res.string.navigate_back)
                             )
                         }
-                    }
 
-                    Row(
-                        modifier = Modifier.fillMaxWidth(0.95f),
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-
-                        LikeAndDownloadSection(
-                            userName = userName,
-                            userPhotoUrl = userPhotoImageUrl,
-                            numberOfLikes = numberOfLikes,
-                            userHasLikedPhoto = photoIsLikedByUser,
-                            onLikeClick = {
-
-                                onImageLikedEvent()
-                            },
-                            onDownloadClick = {},
-                            onUserSectionClicked = { onUserSectionClickedEvent(userName) }
+                        RelatedPhotosWrapper(
+                            images = relatedImages,
+                            pageInIteration = { page = it },
+                            onPageSwapped = { onPageSwappedEvent(it) }
                         )
-                    }
 
-                    Spacer(modifier = Modifier.height(10.dp))
+                        Spacer(modifier = Modifier.height(5.dp))
+
+                        // region: Indicators
+                        Row(
+                            Modifier
+                                .height(50.dp)
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            repeat(relatedImages.size) { iteration ->
+                                val color = if (iteration == page) Color.Gray else Color.Black
+                                Box(
+                                    modifier = Modifier
+                                        .padding(2.dp)
+                                        .clip(CircleShape)
+                                        .background(color)
+                                        .size(15.dp)
+
+                                )
+                            }
+                        }
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(0.95f),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+
+                            LikeAndDownloadSection(
+                                userName = userName,
+                                userPhotoUrl = userPhotoImageUrl,
+                                numberOfLikes = numberOfLikes,
+                                userHasLikedPhoto = photoIsLikedByUser,
+                                onLikeClick = {
+
+                                    onImageLikedEvent()
+                                },
+                                onDownloadClick = {},
+                                onUserSectionClicked = { onUserSectionClickedEvent(userName) }
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(10.dp))
+                    }
                 }
             }
         }
