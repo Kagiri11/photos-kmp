@@ -26,10 +26,10 @@ class HomeViewModel(
 
     init {
         fetchAppLanguage()
-        fetchPhotos()
     }
 
-    private fun fetchPhotos() {
+    fun fetchPhotos() {
+        _uiState.update { HomeUiState.Loading }
         viewModelScope.launch {
             _uiState.update {
                 when (val result = photosRepository.fetchPhotos()) {
