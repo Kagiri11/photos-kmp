@@ -24,11 +24,7 @@ kotlin {
             implementation(libs.androidx.datastore)
             implementation(libs.androidx.datastore.preferences.core)
 
-            implementation(libs.coil.compose.core)
-            implementation(libs.coil.compose)
-            implementation(libs.coil.mp)
-            implementation(libs.coil.network.ktor)
-//            implementation("io.github.ismai117:kottie:1.9.3")
+            implementation(libs.bundles.coil)
 
             implementation(compose.animation)
             implementation(compose.foundation)
@@ -44,19 +40,11 @@ kotlin {
             implementation(libs.kotlin.coroutines.core)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.koin.composeVM)
-            implementation(libs.ktor.client.auth)
-            implementation(libs.ktor.client.content.negotiation)
-            implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.cio)
-            implementation(libs.ktor.client.logging)
-            implementation(libs.ktor.client.json)
+            
+            implementation(libs.bundles.compottie)
+            implementation(libs.bundles.ktor)
+
             implementation(libs.ktor.serialization.kotlinx.json)
-
-            implementation("io.github.alexzhirkevich:compottie:2.0.0-beta02")
-            implementation("io.github.alexzhirkevich:compottie-dot:2.0.0-beta02")
-            implementation("io.github.alexzhirkevich:compottie-network:2.0.0-beta02")
-            implementation("io.github.alexzhirkevich:compottie-resources:2.0.0-beta02")
-
             implementation(libs.material3.window.size)
             implementation(libs.navigation.compose)
 
@@ -105,4 +93,5 @@ android {
 
 dependencies {
     ksp(libs.room.compiler)
+    ksp(libs.koin.ksp.compiler)
 }
