@@ -3,6 +3,7 @@ package com.cmaina.photos.presentation.components
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
@@ -14,7 +15,11 @@ import com.cmaina.photos.presentation.components.photoscards.PhotoCardItem
 import com.cmaina.photos.presentation.utils.items
 
 @Composable
-fun PhotosGrid(photos: LazyPagingItems<Photo>, onPhotoClicked: (Photo) -> Unit) {
+fun PhotosGrid(
+    state: LazyGridState,
+    photos: LazyPagingItems<Photo>,
+    onPhotoClicked: (Photo) -> Unit
+) {
     val lazyGridState = rememberLazyGridState()
 
     LazyVerticalGrid(

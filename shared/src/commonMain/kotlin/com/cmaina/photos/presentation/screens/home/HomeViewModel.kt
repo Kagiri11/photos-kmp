@@ -1,5 +1,7 @@
 package com.cmaina.photos.presentation.screens.home
 
+import androidx.compose.foundation.lazy.grid.LazyGridState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -23,6 +25,8 @@ class HomeViewModel(
 
     private val _uiState = MutableStateFlow<HomeUiState>(HomeUiState.Loading)
     val uiState: StateFlow<HomeUiState> get() = _uiState
+
+    val photosGridState = mutableStateOf(LazyGridState())
 
     init {
         fetchAppLanguage()
