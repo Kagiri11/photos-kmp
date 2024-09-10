@@ -51,19 +51,15 @@ fun MainScreen(
 ) {
     val windowSize = calculateWindowSizeClass()
     val navController: NavHostController = rememberNavController()
+    val currentDestination = navController.currentBackStackEntryAsState().value?.destination
+    val isTopLevelDestination = TopLevelDestinations.any { it.route == currentDestination?.route }
     val uiState by settingsViewModel.uiState.collectAsState()
 
     setSingletonImageLoaderFactory { context ->
         getAsyncImageLoader(context)
     }
 
-    val local =
-        if (uiState.currentLanguage.initials == "ar") LayoutDirection.Rtl else LayoutDirection.Ltr
-    val currentDestination = navController.currentBackStackEntryAsState().value?.destination
-    val isTopLevelDestination = TopLevelDestinations.any { it.route == currentDestination?.route }
-
-
-    CompositionLocalProvider(LocalLayoutDirection provides local) {
+    CompositionLocalProvider(LocalLayoutDirection provides uiState.layoutDirection) {
         PhotosTheme(uiState) {
             AnimatedContent(
                 targetState = windowSize.widthSizeClass < WindowWidthSizeClass.Medium,
@@ -75,30 +71,26 @@ fun MainScreen(
                 }
             ) { targetState ->
                 when (targetState) {
-                    true -> {
-                        Scaffold(
-                            bottomBar = { if(isTopLevelDestination) BottomNav(navController)},
-                            content = {
-                                PhotosApp(
-                                    modifier = Modifier.padding(it),
-                                    navController = navController
-                                )
-                            }
-                        )
-                    }
+                    true -> Scaffold(
+                        bottomBar = { if (isTopLevelDestination) BottomNav(navController) },
+                        content = {
+                            PhotosApp(
+                                modifier = Modifier.padding(it),
+                                navController = navController
+                            )
+                        }
+                    )
 
-                    false -> {
-                        Surface {
-                            Row {
-                                NavigationRail(navController)
-                                Spacer(modifier = Modifier.width(10.dp))
-                                Card(
-                                    modifier = Modifier.fillMaxSize(),
-                                    shape = RoundedCornerShape(0),
-                                    elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)
-                                ) {
-                                    PhotosApp(navController = navController)
-                                }
+                    false -> Surface {
+                        Row {
+                            NavigationRail(navController)
+                            Spacer(modifier = Modifier.width(10.dp))
+                            Card(
+                                modifier = Modifier.fillMaxSize(),
+                                shape = RoundedCornerShape(0),
+                                elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)
+                            ) {
+                                PhotosApp(navController = navController)
                             }
                         }
                     }

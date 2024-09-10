@@ -1,5 +1,6 @@
 package com.cmaina.photos.presentation.screens.settings
 
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cmaina.photos.domain.models.settings.AppTheme
@@ -20,15 +21,12 @@ class SettingsViewModel(private val appRepository: AppRepository) : ViewModel() 
     init {
         fetchAppTheme()
         fetchAppLanguage()
+        getLayoutDirection()
     }
 
     fun changeDialogOpenState() {
-        _uiState.update { it.copy(isThemeDialogOpen = !_uiState.value.isThemeDialogOpen) }
-    }
-
-    private fun fetchAppTheme() = viewModelScope.launch {
-        appRepository.fetchAppTheme().collect { theme ->
-            _uiState.update { it.copy(appTheme = theme) }
+        _uiState.update {
+            it.copy(isThemeDialogOpen = !_uiState.value.isThemeDialogOpen)
         }
     }
 
@@ -48,16 +46,29 @@ class SettingsViewModel(private val appRepository: AppRepository) : ViewModel() 
         }
     }
 
-    fun fetchAppLanguage() = viewModelScope.launch {
+    private fun fetchAppLanguage() = viewModelScope.launch {
         appRepository.fetchAppLanguage().collect { language ->
             _uiState.update { it.copy(currentLanguage = language) }
+            getLayoutDirection()
+        }
+    }
+
+    private fun getLayoutDirection() {
+        viewModelScope.launch {
+            _uiState.update {
+                it.copy(
+                    layoutDirection = if (it.currentLanguage.shouldShowInRTL) LayoutDirection.Rtl
+                    else LayoutDirection.Ltr
+                )
+            }
+        }
+    }
+
+    private fun fetchAppTheme() = viewModelScope.launch {
+        appRepository.fetchAppTheme().collect { theme ->
+            _uiState.update { it.copy(appTheme = theme) }
         }
     }
 }
 
-data class SettingsUiState(
-    val appTheme: AppTheme = AppThemes.first(),
-    val isThemeDialogOpen: Boolean,
-    val isLanguageSelectionDialogOpen: Boolean = false,
-    val currentLanguage: Language = LanguageList.first()
-)
+
