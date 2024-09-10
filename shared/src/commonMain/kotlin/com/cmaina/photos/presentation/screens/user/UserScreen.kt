@@ -1,6 +1,5 @@
 package com.cmaina.photos.presentation.screens.user
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -18,19 +17,15 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.collectAsLazyPagingItems
 import coil3.compose.AsyncImage
@@ -39,9 +34,7 @@ import com.cmaina.photos.presentation.components.photostext.FotosTitleText
 import com.cmaina.photos.presentation.components.userscreencomponents.FollowAndMessageButtons
 import com.cmaina.photos.presentation.components.userscreencomponents.FollowingSection
 import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.annotation.KoinExperimentalAPI
 
-@OptIn(KoinExperimentalAPI::class)
 @Composable
 fun UserScreen(
     onBackPressed: () -> Unit,
@@ -73,7 +66,6 @@ fun UserDetailsScreen(
     onUserPhotoClicked: (String) -> Unit
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
-        // Top Part
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -149,9 +141,6 @@ fun UserDetailsScreen(
             )
 
         }
-
-        // Bottom Part
     }
 }
 
-// endregion

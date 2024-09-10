@@ -35,11 +35,9 @@ import coil3.compose.AsyncImage
 import com.cmaina.photos.presentation.components.RelatedPhotosWrapper
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.annotation.KoinExperimentalAPI
 import photos.shared.generated.resources.Res
 import photos.shared.generated.resources.navigate_back
 
-@OptIn(KoinExperimentalAPI::class)
 @Composable
 fun PhotoDetailsScreen(
     onBackBtnClicked: () -> Unit,

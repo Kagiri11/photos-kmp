@@ -1,6 +1,5 @@
 package com.cmaina.photos.presentation.navigation
 
-import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.Home

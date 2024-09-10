@@ -4,10 +4,8 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cmaina.photos.domain.models.settings.AppTheme
-import com.cmaina.photos.domain.models.settings.AppThemes
 import com.cmaina.photos.domain.repositories.AppRepository
 import com.cmaina.photos.presentation.utils.Language
-import com.cmaina.photos.presentation.utils.LanguageList
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

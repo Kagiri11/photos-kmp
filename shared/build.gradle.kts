@@ -1,3 +1,7 @@
+import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
@@ -40,7 +44,7 @@ kotlin {
             implementation(libs.kotlin.coroutines.core)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.koin.composeVM)
-            
+
             implementation(libs.bundles.compottie)
             implementation(libs.bundles.ktor)
 
@@ -71,6 +75,19 @@ kotlin {
             implementation(libs.kotlinx.coroutines.swing)
             implementation(compose.desktop.currentOs)
         }
+    }
+}
+
+kotlin.sourceSets.all {
+    val libs = listOf(
+        "org.koin.core.annotation.KoinExperimentalAPI",
+        "androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi",
+        "coil3.annotation.ExperimentalCoilApi",
+        "androidx.compose.foundation.ExperimentalFoundationApi"
+    )
+
+    libs.forEach {
+        languageSettings.optIn(it)
     }
 }
 

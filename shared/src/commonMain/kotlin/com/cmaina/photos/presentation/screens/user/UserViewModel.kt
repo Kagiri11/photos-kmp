@@ -1,6 +1,5 @@
 package com.cmaina.photos.presentation.screens.user
 
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData

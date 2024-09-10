@@ -9,9 +9,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import com.cmaina.photos.presentation.components.photoscards.PhotoCardItem
 import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.annotation.KoinExperimentalAPI
 
-@OptIn(KoinExperimentalAPI::class)
 @Composable
 fun FavoritesScreen(
     favoritesViewModel: FavoritesViewModel = koinViewModel()

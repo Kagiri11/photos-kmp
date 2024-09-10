@@ -15,7 +15,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
@@ -24,12 +23,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import coil3.annotation.ExperimentalCoilApi
 import coil3.compose.setSingletonImageLoaderFactory
 import com.cmaina.photos.presentation.navigation.BottomNav
 import com.cmaina.photos.presentation.navigation.NavigationRail
@@ -39,12 +36,7 @@ import com.cmaina.photos.presentation.screens.settings.SettingsViewModel
 import com.cmaina.photos.presentation.ui.theme.PhotosTheme
 import com.cmaina.photos.presentation.utils.getAsyncImageLoader
 import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.annotation.KoinExperimentalAPI
 
-@OptIn(
-    ExperimentalMaterial3WindowSizeClassApi::class, ExperimentalCoilApi::class,
-    KoinExperimentalAPI::class
-)
 @Composable
 fun MainScreen(
     settingsViewModel: SettingsViewModel = koinViewModel()
