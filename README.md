@@ -36,6 +36,7 @@ Desktop - ✅
 - [**DataStore**](https://developer.android.com/kotlin/multiplatform/datastore): A multiplatform
   version of DataStore, used for storing key-value pairs and typed objects in a shared
   preferences-like manner across platforms.
+- [Coil](https://github.com/coil-kt/coil): An image loading library for Android and Compose Multiplatform
 - [**Ktor**](https://ktor.io/): A framework used for making network requests. Ktor is used in this
   project to handle HTTP requests and responses efficiently, allowing for seamless communication
   with backend services.

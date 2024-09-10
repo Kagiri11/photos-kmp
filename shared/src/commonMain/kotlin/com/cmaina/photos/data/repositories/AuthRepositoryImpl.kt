@@ -1,6 +1,7 @@
 package com.cmaina.photos.data.repositories
 
 import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import com.cmaina.photos.data.mappers.toDomain
@@ -16,7 +17,7 @@ import kotlinx.coroutines.flow.map
 
 class AuthRepositoryImpl(
     private val authRemoteSource: AuthRemoteSource,
-    private val preferences: DataStore<androidx.datastore.preferences.core.Preferences>,
+    private val preferences: DataStore<Preferences>,
 ) : AuthRepository {
 
     private val userAuthenticatedPref = booleanPreferencesKey("userAuthenticated")
