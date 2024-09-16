@@ -1,7 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
-import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
@@ -31,8 +27,7 @@ kotlin {
             implementation(libs.bundles.coil)
 
             implementation(compose.animation)
-            implementation(compose.foundation)
-            implementation(compose.animation)
+//            implementation(compose.foundation)
             implementation(compose.material3)
             implementation(compose.materialIconsExtended)
             implementation(compose.components.resources)

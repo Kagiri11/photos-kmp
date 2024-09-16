@@ -2,9 +2,15 @@ package com.cmaina.photos.presentation.utils
 
 import androidx.compose.foundation.lazy.grid.LazyGridItemScope
 import androidx.compose.foundation.lazy.grid.LazyGridScope
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridItemScope
 import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridScope
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.listSaver
 import androidx.paging.compose.LazyPagingItems
 import coil3.ImageLoader
 import coil3.PlatformContext
@@ -44,3 +50,23 @@ object PreferenceKeys {
     const val AppTheme = "app_theme"
     const val AppLanguage = "app_language"
 }
+
+@Composable
+fun <T : Any> LazyPagingItems<T>.rememberLazyGridState(): LazyGridState {
+    return when (itemCount) {
+        0 -> remember(this) { LazyGridState(0, 0) }
+        else -> androidx.compose.foundation.lazy.grid.rememberLazyGridState()
+    }
+}
+
+fun lazyListSaver(): Saver<MutableState<LazyGridState>, *> = listSaver(
+    save = { listOf(it.value.firstVisibleItemIndex, it.value.firstVisibleItemScrollOffset) },
+    restore = {
+        mutableStateOf(
+            LazyGridState(
+                firstVisibleItemIndex = it[0],
+                firstVisibleItemScrollOffset = it[1]
+            )
+        )
+    }
+)

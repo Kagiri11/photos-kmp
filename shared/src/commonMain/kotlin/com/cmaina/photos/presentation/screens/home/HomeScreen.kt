@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -22,22 +23,16 @@ import com.cmaina.photos.presentation.components.LoadingComponent
 import com.cmaina.photos.presentation.components.PhotosGrid
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.annotation.KoinExperimentalAPI
 import photos.shared.generated.resources.Res
 import photos.shared.generated.resources.home_screen_title
 
-@OptIn(KoinExperimentalAPI::class)
 @Composable
 fun HomeScreen(
     homeViewModel: HomeViewModel = koinViewModel(),
     onPhotoClicked: (Photo) -> Unit
 ) {
-    val uiState = homeViewModel.uiState.collectAsState().value
+    val uiState by homeViewModel.uiState.collectAsState()
     val gridState by homeViewModel.photosGridState
-
-    LaunchedEffect(Unit) {
-        homeViewModel.fetchPhotos()
-    }
 
     Surface {
         Column(
@@ -60,7 +55,8 @@ fun HomeScreen(
                 is HomeUiState.Error -> {}
 
                 is HomeUiState.Success -> {
-                    val photos = uiState.pagedPhotos.collectAsLazyPagingItems()
+                    val photos =
+                        (uiState as HomeUiState.Success).pagedPhotos.collectAsLazyPagingItems()
                     PhotosGrid(state = gridState, photos = photos) {
                         onPhotoClicked(it)
                     }

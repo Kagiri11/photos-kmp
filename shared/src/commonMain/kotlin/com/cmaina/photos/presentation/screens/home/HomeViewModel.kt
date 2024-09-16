@@ -30,9 +30,10 @@ class HomeViewModel(
 
     init {
         fetchAppLanguage()
+        fetchPhotos()
     }
 
-    fun fetchPhotos() {
+    private fun fetchPhotos() {
         _uiState.update { HomeUiState.Loading }
         viewModelScope.launch {
             _uiState.update {
@@ -53,13 +54,14 @@ class HomeViewModel(
     fun favoritePhoto(photo: Photo) = viewModelScope.launch {
         photosRepository.savePhoto(FavoritePhoto(id = photo.id, imageUrl = photo.photoUrls.regular))
     }
+
 }
 
 sealed interface HomeUiState {
 
     data class Success(val pagedPhotos: Flow<PagingData<Photo>>) : HomeUiState
 
-    object Loading : HomeUiState
+    data object Loading : HomeUiState
 
     data class Error(val errorMessage: String) : HomeUiState
 }
