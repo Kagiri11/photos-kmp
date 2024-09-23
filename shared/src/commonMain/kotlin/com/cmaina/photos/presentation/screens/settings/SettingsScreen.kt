@@ -66,10 +66,6 @@ fun SettingsScreen(settingsViewModel: SettingsViewModel = koinViewModel()) {
             ) {
                 Text(
                     text = stringResource(Res.string.display),
-                    /*style = MaterialTheme.typography.body1.copy(
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.SemiBold
-                    )*/
                 )
 
                 Setting(
