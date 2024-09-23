@@ -26,8 +26,6 @@ class HomeViewModel(
     private val _uiState = MutableStateFlow<HomeUiState>(HomeUiState.Loading)
     val uiState: StateFlow<HomeUiState> get() = _uiState
 
-    val photosGridState = mutableStateOf(LazyGridState())
-
     init {
         fetchAppLanguage()
         fetchPhotos()

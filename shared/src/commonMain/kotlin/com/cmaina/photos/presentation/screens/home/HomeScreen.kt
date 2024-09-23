@@ -32,7 +32,6 @@ fun HomeScreen(
     onPhotoClicked: (Photo) -> Unit
 ) {
     val uiState by homeViewModel.uiState.collectAsState()
-    val gridState by homeViewModel.photosGridState
 
     Surface {
         Column(
@@ -57,7 +56,7 @@ fun HomeScreen(
                 is HomeUiState.Success -> {
                     val photos =
                         (uiState as HomeUiState.Success).pagedPhotos.collectAsLazyPagingItems()
-                    PhotosGrid(state = gridState, photos = photos) {
+                    PhotosGrid(photos = photos) {
                         onPhotoClicked(it)
                     }
                 }

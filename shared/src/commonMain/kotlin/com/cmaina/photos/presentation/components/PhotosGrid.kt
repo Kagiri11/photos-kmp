@@ -16,7 +16,6 @@ import com.cmaina.photos.presentation.utils.items
 
 @Composable
 fun PhotosGrid(
-    state: LazyGridState,
     photos: LazyPagingItems<Photo>,
     onPhotoClicked: (Photo) -> Unit
 ) {
