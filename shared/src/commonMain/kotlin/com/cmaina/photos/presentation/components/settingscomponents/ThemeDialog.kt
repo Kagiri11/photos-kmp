@@ -41,7 +41,6 @@ fun ThemeDialog(
         properties = DialogProperties(usePlatformDefaultWidth = false)
     ) {
         Card(
-            colors = CardDefaults.cardColors(contentColor = MaterialTheme.colorScheme.primary),
             modifier = Modifier
                 .fillMaxHeight(0.3f)
                 .fillMaxWidth(0.8f)
