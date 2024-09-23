@@ -45,7 +45,7 @@ val repositoryModule = module {
         )
     }
     factory<UsersRepository> { UsersRepositoryImpl(usersRemoteSource = get()) }
-    single<AuthRepository> { AuthRepositoryImpl(authRemoteSource = get(), preferences = get()) }
+    factory<AuthRepository> { AuthRepositoryImpl(authRemoteSource = get(), preferences = get()) }
     factory<AppRepository> { AppRepositoryImpl(preferences = get()) }
 }
 

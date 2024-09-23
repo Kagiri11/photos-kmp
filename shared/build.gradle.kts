@@ -1,3 +1,4 @@
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
@@ -7,6 +8,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
 }
+
 
 kotlin {
     androidTarget {
@@ -20,15 +22,18 @@ kotlin {
     jvm("desktop")
 
     sourceSets {
-        sourceSets["commonMain"].dependencies {
+
+        val desktopMain by getting
+
+        commonMain.dependencies {
             implementation(libs.androidx.datastore)
             implementation(libs.androidx.datastore.preferences.core)
 
             implementation(libs.bundles.coil)
 
             implementation(compose.animation)
-//            implementation(compose.foundation)
             implementation(compose.material3)
+            implementation(compose.foundation)
             implementation(compose.materialIconsExtended)
             implementation(compose.components.resources)
 
@@ -53,19 +58,11 @@ kotlin {
             implementation(libs.paging.compose.common)
 
             implementation(libs.slf4j.api)
-
         }
-        sourceSets["commonTest"].dependencies {
+        commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
-
-        sourceSets["androidMain"].dependencies {
-        }
-        sourceSets["androidUnitTest"].dependencies {
-        }
-        sourceSets["androidInstrumentedTest"].dependencies {
-        }
-        sourceSets["desktopMain"].dependencies {
+        desktopMain.dependencies {
             implementation(libs.kotlin.coroutines.core)
             implementation(libs.kotlinx.coroutines.swing)
             implementation(compose.desktop.currentOs)

@@ -1,6 +1,6 @@
 package com.cmaina.photos.di
 
-import com.cmaina.photos.createAndroidDataStore
+import com.cmaina.photos.data.local.createAndroidDataStore
 import com.cmaina.photos.data.local.getDatabaseBuilder
 import org.koin.core.module.Module
 import org.koin.dsl.module

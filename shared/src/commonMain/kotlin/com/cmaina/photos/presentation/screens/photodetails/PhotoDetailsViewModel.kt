@@ -2,6 +2,7 @@ package com.cmaina.photos.presentation.screens.photodetails
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cmaina.photos.domain.models.users.User
 import com.cmaina.photos.domain.repositories.AuthRepository
 import com.cmaina.photos.domain.repositories.PhotosRepository
 import com.cmaina.photos.domain.utils.Result
@@ -62,5 +63,6 @@ data class Details(
     val userPhotoImageUrl: String,
     val numberOfLikes: Int,
     val relatedImages: List<String>,
-    val photoIsLikedByUser: Boolean
+    val photoIsLikedByUser: Boolean,
+    val user: User? = null
 )

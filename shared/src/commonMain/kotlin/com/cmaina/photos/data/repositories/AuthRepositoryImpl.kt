@@ -29,8 +29,8 @@ class AuthRepositoryImpl(
     }
 
     override suspend fun saveUserAuthentication(accessToken: String) {
-     /*   AppSettings.putString(key = "access_token", accessToken)
-        AppSettings.putBoolean(key = "isUserAuthenticated", true)*/
+        /*   AppSettings.putString(key = "access_token", accessToken)
+           AppSettings.putBoolean(key = "isUserAuthenticated", true)*/
     }
 
     override suspend fun clearStaleUserAuthentication() {

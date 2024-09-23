@@ -42,9 +42,10 @@ dependencies {
 
     implementation(libs.androidx.activity.compose)
 
-    implementation(libs.compose.ui)
+    implementation(compose.foundation)
+    implementation(compose.ui)
+    implementation(compose.material3)
     implementation(libs.compose.ui.tooling.preview)
-    implementation(libs.compose.material3)
 
     implementation(libs.koin.core)
     implementation(libs.koin.android1)
