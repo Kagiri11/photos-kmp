@@ -1,14 +1,19 @@
 package com.cmaina.photos.presentation.components.photoscards
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import coil3.compose.AsyncImage
 import com.cmaina.photos.presentation.utils.ClickAction
@@ -37,12 +42,13 @@ fun RowScope.PhotosPager(
 
     HorizontalPager(
         state = pagerState,
-        modifier = Modifier.weight(0.8f)
+        beyondViewportPageCount = 2,
+        modifier = Modifier.weight(0.8f).background(color = Color.Blue)
     ) { page ->
         pageInIteration(pagerState.currentPage)
         onPageSwapped(images[page])
         Card(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxWidth(0.7f).fillMaxHeight(),
             shape = RoundedCornerShape(2)
         ) {
             AsyncImage(

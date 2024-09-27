@@ -25,9 +25,7 @@ fun PhotoCardItem(
             .height(230.dp)
             .fillMaxWidth()
             .padding(1.dp)
-            .clickable(
-                onClick = onPhotoClicked
-            ),
+            .clickable(onClick = onPhotoClicked),
     ) {
         AsyncImage(
             modifier = Modifier.fillMaxSize(),

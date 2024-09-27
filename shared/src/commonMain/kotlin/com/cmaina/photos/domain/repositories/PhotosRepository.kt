@@ -5,7 +5,6 @@ import com.cmaina.photos.data.network.models.specificphoto.SpecificPhoto
 import com.cmaina.photos.domain.models.photos.FavoritePhoto
 import com.cmaina.photos.domain.models.photos.Photo
 import com.cmaina.photos.domain.models.photostats.DomainPhotoStatistics
-import com.cmaina.photos.domain.utils.Result
 import kotlinx.coroutines.flow.Flow
 
 interface PhotosRepository {
@@ -16,7 +15,7 @@ interface PhotosRepository {
 
     suspend fun getSpecificPhoto(photoId: String): Result<SpecificPhoto>
 
-    suspend fun fetchUserPhotos(username: String): Flow<androidx.paging.PagingData<Photo>>
+    suspend fun fetchUserPhotos(username: String): Flow<PagingData<Photo>>
 
     suspend fun getPhotoStatistics(photoId: String): Flow<Result<DomainPhotoStatistics>>
 
