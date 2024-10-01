@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.cmaina.photos.domain.models.users.User
 import com.cmaina.photos.domain.repositories.AuthRepository
 import com.cmaina.photos.domain.repositories.PhotosRepository
-import com.cmaina.photos.domain.utils.Result
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -20,9 +19,10 @@ class PhotoDetailsViewModel(
 
     fun fetchPhoto(photoId: String) {
         viewModelScope.launch {
-            when (val result = photosRepository.getSpecificPhoto(photoId = photoId)) {
-                is Result.Success -> {
-                    with(result.data) {
+            val result = photosRepository.getSpecificPhoto(photoId = photoId)
+            when {
+                result.isSuccess -> {
+                    with(result.getOrThrow()) {
                         val images =
                             this.relatedCollections.collections.flatMap { it.previewPhotos.map { it.urls.regular } }
                                 .toMutableList()
@@ -39,9 +39,11 @@ class PhotoDetailsViewModel(
                     }
                 }
 
-                is Result.Error -> {
+                else -> {
                     _uiState.value =
-                        PhotoDetailsUiState.Error(errorMessage = result.errorDetails)
+                        PhotoDetailsUiState.Error(
+                            errorMessage = result.exceptionOrNull()?.message ?: "Unknown error"
+                        )
                 }
             }
         }

@@ -1,7 +1,6 @@
 package com.cmaina.photos.domain.repositories
 
 import com.cmaina.photos.domain.models.auth.AuthDomainResponse
-import com.cmaina.photos.domain.utils.Result
 import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {

@@ -1,5 +1,5 @@
 [versions]
-agp = "8.6.0-beta02"
+agp = "8.6.1"
 compottieDot = "2.0.0-beta02"
 datastorePreferencesCore = "1.1.1"
 kotlinxCoroutinesSwing = "1.9.0-RC"

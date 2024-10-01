@@ -17,9 +17,10 @@ class PhotosPagingSource(private val photosRemoteSource: PhotosRemoteSource) :
         val call = photosRemoteSource.fetchPhotos(page = nextPageNumber)
         val result = InOut<List<PhotoListItem>, List<Photo>>(call.body())
             .apiCall(call) { it.map { it.toDomain() } }
-        return when (result) {
-            is com.cmaina.photos.domain.utils.Result.Success -> {
-                val dataResponse = result.data
+
+        return when {
+            result.isSuccess -> {
+                val dataResponse = result.getOrThrow()
                 LoadResult.Page(
                     data = dataResponse,
                     prevKey = if (nextPageNumber == 1) null else nextPageNumber - 1,
@@ -27,8 +28,8 @@ class PhotosPagingSource(private val photosRemoteSource: PhotosRemoteSource) :
                 )
             }
 
-            is com.cmaina.photos.domain.utils.Result.Error -> {
-                LoadResult.Error(Throwable(message = result.errorDetails))
+            else -> {
+                LoadResult.Error(Throwable(message = result.exceptionOrNull()?.message))
             }
         }
     }

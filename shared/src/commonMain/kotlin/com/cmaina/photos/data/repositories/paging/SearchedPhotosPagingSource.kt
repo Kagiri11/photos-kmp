@@ -24,11 +24,9 @@ class SearchedPhotosPagingSource(
         val result = InOut<PhotoSearchResultDto, PhotoSearchResultDomainModel>(call.body())
             .apiCall(response = call) { it.toDomain() }
 
-        return when (
-            result
-        ) {
-            is com.cmaina.photos.domain.utils.Result.Success -> {
-                val dataResponse = result.data.searchedPhotoDomainModels
+        return when {
+            result.isSuccess -> {
+                val dataResponse = result.getOrThrow().searchedPhotoDomainModels
                 LoadResult.Page(
                     data = dataResponse ?: emptyList(),
                     prevKey = null,
@@ -36,8 +34,8 @@ class SearchedPhotosPagingSource(
                 )
             }
 
-            is com.cmaina.photos.domain.utils.Result.Error -> {
-                LoadResult.Error(throwable = Throwable(result.errorDetails))
+            else -> {
+                LoadResult.Error(throwable = Throwable(result.exceptionOrNull()))
             }
         }
     }
