@@ -6,7 +6,6 @@ import androidx.paging.PagingData
 import com.cmaina.photos.domain.models.photos.Photo
 import com.cmaina.photos.domain.repositories.PhotosRepository
 import com.cmaina.photos.domain.repositories.UsersRepository
-import com.cmaina.photos.domain.utils.Result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,25 +21,22 @@ class UserViewModel(
 
     fun fetchUser(username: String) = viewModelScope.launch {
         usersRepository.fetchUser(username = username).collect { networkResult ->
-            when (networkResult) {
-                is Result.Success -> {
-                    with(networkResult.data) {
-                        val details = UserUiDetails(
-                            numberOfPhotosByUser = totalPhotos,
-                            userImageUrl = profileImage.large ?: "",
-                            followersCount = followersCount,
-                            followingCount = followingCount,
-                            userPhotos = photosRepository.fetchUserPhotos(username),
-                            userName = this.name
-                        )
-                        _uiState.value = UserUiState.Success(uiDetails = details)
-                    }
+            networkResult
+                .onSuccess { user ->
+                    val details = UserUiDetails(
+                        numberOfPhotosByUser = user.totalPhotos,
+                        userImageUrl = user.profileImage.large ?: "",
+                        followersCount = user.followersCount,
+                        followingCount = user.followingCount,
+                        userPhotos = photosRepository.fetchUserPhotos(username),
+                        userName = user.name
+                    )
+                    _uiState.value = UserUiState.Success(uiDetails = details)
                 }
-
-                is Result.Error -> {
-                    _uiState.value = UserUiState.Error(errorMessage = networkResult.errorDetails)
+                .onFailure {
+                    _uiState.value =
+                        UserUiState.Error(errorMessage = it.message ?: "Something went wrong")
                 }
-            }
         }
     }
 }

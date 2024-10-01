@@ -10,7 +10,6 @@ import com.cmaina.photos.data.network.InOut
 import com.cmaina.photos.data.network.models.auth.AuthRemoteResponse
 import com.cmaina.photos.domain.models.auth.AuthDomainResponse
 import com.cmaina.photos.domain.repositories.AuthRepository
-import com.cmaina.photos.domain.utils.Result
 import io.ktor.client.call.body
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

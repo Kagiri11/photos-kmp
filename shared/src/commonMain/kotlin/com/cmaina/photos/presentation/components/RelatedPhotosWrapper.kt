@@ -21,6 +21,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.cmaina.photos.presentation.components.photoscards.PhotosPager
 import com.cmaina.photos.presentation.utils.ClickAction
@@ -70,7 +71,6 @@ fun ColumnScope.RelatedPhotosWrapper(
         PhotosPager(
             images = images,
             pageInIteration = {
-                println("page in iteration: $it")
                 page = it
                 pageInIteration(it)
             },

@@ -1,16 +1,14 @@
 package com.cmaina.photos.presentation.screens.home
 
-import androidx.compose.foundation.lazy.grid.LazyGridState
-import androidx.compose.runtime.mutableStateOf
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import app.cash.paging.PagingData
 import com.cmaina.photos.domain.models.photos.FavoritePhoto
 import com.cmaina.photos.domain.models.photos.Photo
 import com.cmaina.photos.domain.repositories.AppRepository
 import com.cmaina.photos.domain.repositories.PhotosRepository
-import com.cmaina.photos.domain.utils.Result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -34,12 +32,15 @@ class HomeViewModel(
     private fun fetchPhotos() {
         _uiState.update { HomeUiState.Loading }
         viewModelScope.launch {
-            _uiState.update {
-                when (val result = photosRepository.fetchPhotos()) {
-                    is Result.Success -> HomeUiState.Success(result.data.cachedIn(viewModelScope))
-                    is Result.Error -> HomeUiState.Error(errorMessage = result.errorDetails)
+            val result = photosRepository.fetchPhotos()
+            result
+                .onSuccess { photos ->
+                    _uiState.update { HomeUiState.Success(photos.cachedIn(viewModelScope)) }
                 }
-            }
+                .onFailure { error ->
+                    _uiState.update { HomeUiState.Error(errorMessage = error.localizedMessage) }
+                }
+
         }
     }
 

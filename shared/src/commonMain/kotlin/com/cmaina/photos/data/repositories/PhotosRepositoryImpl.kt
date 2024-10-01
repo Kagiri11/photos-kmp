@@ -18,7 +18,6 @@ import com.cmaina.photos.domain.models.photos.FavoritePhoto
 import com.cmaina.photos.domain.models.photos.Photo
 import com.cmaina.photos.domain.models.photostats.DomainPhotoStatistics
 import com.cmaina.photos.domain.repositories.PhotosRepository
-import com.cmaina.photos.domain.utils.Result
 import io.ktor.client.call.body
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
@@ -36,7 +35,7 @@ class PhotosRepositoryImpl(
         val photosPager = Pager(pagingConfig) {
             PhotosPagingSource(photosRemoteSource = photosRemoteSource)
         }.flow
-        return Result.Success(photosPager)
+        return Result.success(photosPager)
     }
 
     override suspend fun getRandomPhoto(): Result<Photo> {

@@ -21,11 +21,9 @@ class UserPhotosPagingSource(
         val response = usersRemoteSource.getUserPhotos(username = username, page = nextPageNumber)
         val result = InOut<List<PhotoListItem>, List<Photo>>(response.body())
             .apiCall(response) { it.map { it.toDomain() } }
-        return when (
-            result
-        ) {
-            is com.cmaina.photos.domain.utils.Result.Success -> {
-                val dataResponse = result.data
+        return when {
+            result.isSuccess -> {
+                val dataResponse = result.getOrThrow()
                 LoadResult.Page(
                     data = dataResponse,
                     prevKey = if (nextPageNumber == 1) null else nextPageNumber - 1,
@@ -33,8 +31,8 @@ class UserPhotosPagingSource(
                 )
             }
 
-            is com.cmaina.photos.domain.utils.Result.Error -> {
-                LoadResult.Error(throwable = Throwable())
+            else -> {
+                LoadResult.Error(throwable = Throwable(message = result.exceptionOrNull()?.message))
             }
         }
     }

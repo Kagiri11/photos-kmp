@@ -1,6 +1,5 @@
 package com.cmaina.photos.data.repositories
 
-
 import com.cmaina.photos.data.network.models.users.UserDto
 import com.cmaina.photos.data.mappers.toDomain
 import com.cmaina.photos.data.network.InOut
@@ -17,7 +16,7 @@ class UsersRepositoryImpl(
     private val usersRemoteSource: UsersRemoteSource
 ) : UsersRepository {
 
-    override suspend fun fetchUser(username: String): Flow<com.cmaina.photos.domain.utils.Result<User>> {
+    override suspend fun fetchUser(username: String): Flow<Result<User>> {
         val response = usersRemoteSource.getUser(username = username)
 
         return flowOf(
