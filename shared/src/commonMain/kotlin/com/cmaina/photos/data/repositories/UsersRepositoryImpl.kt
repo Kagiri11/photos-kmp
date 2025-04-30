@@ -16,7 +16,7 @@ class UsersRepositoryImpl(
     private val usersRemoteSource: UsersRemoteSource
 ) : UsersRepository {
 
-    override suspend fun fetchUser(username: String): Flow<Result<User>> {
+    override suspend fun getUser(username: String): Flow<Result<User>> {
         val response = usersRemoteSource.getUser(username = username)
 
         return flowOf(
@@ -25,7 +25,7 @@ class UsersRepositoryImpl(
         )
     }
 
-    override suspend fun fetchUserProfile(): Flow<User> {
+    override suspend fun getUserProfile(): Flow<User> {
         return flowOf()
     }
 

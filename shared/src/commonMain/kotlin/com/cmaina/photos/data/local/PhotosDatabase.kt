@@ -12,7 +12,7 @@ abstract class PhotosDatabase : RoomDatabase() {
     abstract fun favoritePhotosDao(): FavoritePhotosDao
 }
 
-fun getPhotosDatabase(
+fun createPhotosDatabase(
     builder: RoomDatabase.Builder<PhotosDatabase>
 ): PhotosDatabase {
     return builder

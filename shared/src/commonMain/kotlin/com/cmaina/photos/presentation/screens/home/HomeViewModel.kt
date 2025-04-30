@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import app.cash.paging.PagingData
+import com.cmaina.photos.data.network.utils.Constants
 import com.cmaina.photos.domain.models.photos.FavoritePhoto
 import com.cmaina.photos.domain.models.photos.Photo
 import com.cmaina.photos.domain.repositories.AppRepository
@@ -16,6 +17,10 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.Locale
 
+/** View model for the home screen
+ *  Fetches photos from the [photosRepository] and updates the UI state accordingly.
+ *  Also fetches the app language from the [appRepository] and sets it as the default locale.
+ */
 class HomeViewModel(
     private val photosRepository: PhotosRepository,
     private val appRepository: AppRepository
@@ -32,20 +37,20 @@ class HomeViewModel(
     private fun fetchPhotos() {
         _uiState.update { HomeUiState.Loading }
         viewModelScope.launch {
-            val result = photosRepository.fetchPhotos()
+            val result = photosRepository.getPhotos()
             result
                 .onSuccess { photos ->
                     _uiState.update { HomeUiState.Success(photos.cachedIn(viewModelScope)) }
                 }
                 .onFailure { error ->
-                    _uiState.update { HomeUiState.Error(errorMessage = error.localizedMessage) }
+                    _uiState.update { HomeUiState.Error(errorMessage = error.localizedMessage ?: Constants.UNKNOWN_ERROR) }
                 }
 
         }
     }
 
     private fun fetchAppLanguage() = viewModelScope.launch {
-        appRepository.fetchAppLanguage().collect { language ->
+        appRepository.getAppLanguage().collect { language ->
             Locale.setDefault(Locale(language.initials))
         }
     }
@@ -56,11 +61,9 @@ class HomeViewModel(
 
 }
 
+/** UI state for the home screen */
 sealed interface HomeUiState {
-
     data class Success(val pagedPhotos: Flow<PagingData<Photo>>) : HomeUiState
-
-    data object Loading : HomeUiState
-
     data class Error(val errorMessage: String) : HomeUiState
+    data object Loading : HomeUiState
 }

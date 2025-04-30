@@ -1,16 +1,12 @@
 package com.cmaina.photos.domain.repositories
 
 import com.cmaina.photos.domain.models.users.User
+import com.cmaina.photos.domain.models.users.portfolio.UserPortFolioDomainModel
+import com.cmaina.photos.domain.models.users.statistics.UserStatistics
 import kotlinx.coroutines.flow.Flow
 
 interface UsersRepository {
-
-    suspend fun fetchUser(username: String): Flow<Result<User>>
-
-    suspend fun fetchUserProfile(): Flow<User>
-
-
-    suspend fun fetchUserPortFolio(): Flow<com.cmaina.photos.domain.models.users.portfolio.UserPortFolioDomainModel>
-
-    suspend fun fetchUserStatistics(): Flow<com.cmaina.photos.domain.models.users.statistics.UserStatistics>
+    suspend fun fetchUserPortFolio(): Flow<UserPortFolioDomainModel>
+    suspend fun getUser(username: String): Flow<Result<User>>
+    suspend fun fetchUserStatistics(): Flow<UserStatistics>
 }

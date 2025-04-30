@@ -7,6 +7,8 @@ import androidx.room.Query
 import com.cmaina.photos.domain.models.photos.FavoritePhoto
 import kotlinx.coroutines.flow.Flow
 
+/** Data access object for favorite photos
+ */
 @Dao
 interface FavoritePhotosDao {
     @Insert

@@ -14,14 +14,14 @@ import kotlinx.coroutines.flow.map
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-class AppRepositoryImpl(
+internal class AppRepositoryImpl(
     private val preferences: DataStore<Preferences>
 ) : AppRepository {
 
     private val themePreference = stringPreferencesKey(PreferenceKeys.AppTheme)
     private val languagePreference = stringPreferencesKey(PreferenceKeys.AppLanguage)
 
-    override suspend fun fetchAppTheme(): Flow<AppTheme> {
+    override suspend fun getAppTheme(): Flow<AppTheme> {
         return preferences.data.map { pref ->
             AppThemes.find { it.entity.name == pref[themePreference] }
                 ?: return@map AppThemes.first()
@@ -36,7 +36,7 @@ class AppRepositoryImpl(
         }
     }
 
-    override suspend fun fetchAppLanguage(): Flow<Language> {
+    override suspend fun getAppLanguage(): Flow<Language> {
         return preferences.data.map { pref ->
             LanguageList.find { it.name == pref[languagePreference] }
                 ?: return@map LanguageList.first()

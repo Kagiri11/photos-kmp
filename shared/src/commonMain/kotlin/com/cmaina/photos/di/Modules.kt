@@ -1,7 +1,7 @@
 package com.cmaina.photos.di
 
 import com.cmaina.photos.data.local.PhotosDatabase
-import com.cmaina.photos.data.local.getPhotosDatabase
+import com.cmaina.photos.data.local.createPhotosDatabase
 import com.cmaina.photos.data.network.client.createClient
 import com.cmaina.photos.data.network.sources.AuthRemoteSource
 import com.cmaina.photos.data.network.sources.PhotosRemoteSource
@@ -24,19 +24,10 @@ import org.koin.compose.viewmodel.dsl.viewModelOf
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-val localModule = module {
-    single { getPhotosDatabase(builder = get()) }
-    single { get<PhotosDatabase>().favoritePhotosDao() }
-}
-
-val networkModule = module {
-    single<HttpClient> { createClient() }
-    factory { PhotosRemoteSource(client = get()) }
-    factory { UsersRemoteSource(client = get()) }
-    factory { AuthRemoteSource(client = get()) }
-}
-
 val repositoryModule = module {
+    factory<AuthRepository> { AuthRepositoryImpl(authRemoteSource = get(), preferences = get()) }
+    factory<UsersRepository> { UsersRepositoryImpl(usersRemoteSource = get()) }
+    factory<AppRepository> { AppRepositoryImpl(preferences = get()) }
     single<PhotosRepository> {
         PhotosRepositoryImpl(
             photosRemoteSource = get(),
@@ -44,17 +35,26 @@ val repositoryModule = module {
             favoritePhotosDao = get()
         )
     }
-    factory<UsersRepository> { UsersRepositoryImpl(usersRemoteSource = get()) }
-    factory<AuthRepository> { AuthRepositoryImpl(authRemoteSource = get(), preferences = get()) }
-    factory<AppRepository> { AppRepositoryImpl(preferences = get()) }
+}
+
+val localModule = module {
+    single { get<PhotosDatabase>().favoritePhotosDao() }
+    single { createPhotosDatabase(builder = get()) }
+}
+
+val networkModule = module {
+    factory { PhotosRemoteSource(client = get()) }
+    factory { UsersRemoteSource(client = get()) }
+    factory { AuthRemoteSource(client = get()) }
+    single<HttpClient> { createClient() }
 }
 
 val presentationModule = module {
-    viewModelOf(::HomeViewModel)
     viewModelOf(::PhotoDetailsViewModel)
+    viewModelOf(::FavoritesViewModel)
     viewModelOf(::SettingsViewModel)
     viewModelOf(::UserViewModel)
-    viewModelOf(::FavoritesViewModel)
+    viewModelOf(::HomeViewModel)
 }
 
 expect fun platformModule(): Module

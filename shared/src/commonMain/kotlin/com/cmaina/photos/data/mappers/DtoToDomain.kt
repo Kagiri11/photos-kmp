@@ -28,6 +28,8 @@ import com.cmaina.photos.domain.models.photostats.DomainPhotoStatsViews
 import com.cmaina.photos.domain.models.search.PhotoSearchResultDomainModel
 import com.cmaina.photos.domain.models.users.ProfileImageDomainModel
 
+/** Maps DTOs from data layer to domain layer
+ */
 internal fun PhotoListItem.toDomain() = Photo(
     blurHash = blurHash ?: "",
     description = description ?: "",
@@ -41,7 +43,6 @@ internal fun PhotoListItem.toDomain() = Photo(
 internal fun User.toDomain() = PhotoUser(
     userName = username ?: "",
     userPhotoImageUrl = this.userProfileImage.medium
-
 )
 
 internal fun PhotoStatistics.toDomain() = DomainPhotoStatistics(
@@ -66,9 +67,9 @@ internal fun UserProfileImage.toDomain() = DomainUserProfileImage(
 )
 
 internal fun Social.toDomain() = DomainUserSocial(
-    instagramUsername = instagram_username,
-    portfolioUrl = portfolio_url,
-    twitterUsername = twitter_username
+    instagramUsername = instagramUsername,
+    portfolioUrl = portfolioUrl,
+    twitterUsername = twitterUsername
 )
 
 internal fun Urls.toDomain() = PhotoUrls(
@@ -117,10 +118,10 @@ internal fun PhotoSearchResultDto.toDomain() = PhotoSearchResultDomainModel(
 )
 
 internal fun SearchedPhotoDto.toDomain() = Photo(
-    blurHash = blur_hash,
+    blurHash = blurHash,
     description = description,
     id = id,
-    likedByUser = liked_by_user,
+    likedByUser = likedByUser,
     likes = likes,
     photoUrls = urls.toDomain(),
     user = this.user.toDomain()

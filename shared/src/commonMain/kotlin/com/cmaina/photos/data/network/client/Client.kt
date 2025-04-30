@@ -1,6 +1,7 @@
 package com.cmaina.photos.data.network.client
 
 import com.cmaina.fotos.shared.data.network.utils.TokenStorage
+import com.cmaina.photos.data.network.utils.Constants
 import io.github.aakira.napier.Napier
 import io.ktor.client.*
 import io.ktor.client.call.body
@@ -24,7 +25,7 @@ fun createClient(): HttpClient = HttpClient(CIO) {
     }
 
     install(DefaultRequest){
-        url("https://api.unsplash.com/")
+        url(Constants.BASE_URL)
     }
 
     install(Auth) {
@@ -38,7 +39,7 @@ fun createClient(): HttpClient = HttpClient(CIO) {
     install(Logging) {
         logger = object : Logger {
             override fun log(message: String) {
-                Napier.d(tag = "Ktor Log ==> ", message = message)
+                Napier.d(tag = Constants.KTOR_LOG_TAG, message = message)
             }
         }
 
@@ -47,7 +48,7 @@ fun createClient(): HttpClient = HttpClient(CIO) {
 
     install(ResponseObserver) {
         onResponse { response ->
-            Napier.d(tag = "HTTP response:", message = "${response.body<Any>()}")
+            Napier.d(tag = Constants.NAPIER_TAG, message = "${response.body<Any>()}")
         }
     }
 }

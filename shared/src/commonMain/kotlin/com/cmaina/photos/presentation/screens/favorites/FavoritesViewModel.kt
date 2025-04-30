@@ -20,7 +20,7 @@ class FavoritesViewModel(
     }
 
     private fun fetchFavoritePhotos() = viewModelScope.launch {
-        photosRepository.fetchFavoritePhotos().collect { photos ->
+        photosRepository.getFavoritePhotos().collect { photos ->
             _uiState.update { it.copy(favoritePhotos = photos) }
         }
     }

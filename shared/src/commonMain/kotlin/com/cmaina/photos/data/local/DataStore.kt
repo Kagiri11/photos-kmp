@@ -5,9 +5,9 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import okio.Path.Companion.toPath
 
-fun createDataStore(producePath: () -> String = { dataStoreFileName}): DataStore<Preferences> =
+fun createDataStore(producePath: () -> String = { DataStoreFileName}): DataStore<Preferences> =
     PreferenceDataStoreFactory.createWithPath(produceFile = {
         producePath().toPath()
     })
 
-internal const val dataStoreFileName = "photos.preferences_pb"
+internal const val DataStoreFileName = "photos.preferences_pb"

@@ -28,9 +28,9 @@ class PhotosRepositoryImpl(
     private val favoritePhotosDao: FavoritePhotosDao
 ) : PhotosRepository {
 
-    override suspend fun fetchFavoritePhotos() = favoritePhotosDao.getAllPhotos()
+    override suspend fun getFavoritePhotos() = favoritePhotosDao.getAllPhotos()
 
-    override suspend fun fetchPhotos(): Result<Flow<PagingData<Photo>>> {
+    override suspend fun getPhotos(): Result<Flow<PagingData<Photo>>> {
         val pagingConfig = PagingConfig(pageSize = 30)
         val photosPager = Pager(pagingConfig) {
             PhotosPagingSource(photosRemoteSource = photosRemoteSource)
@@ -61,7 +61,7 @@ class PhotosRepositoryImpl(
         )
     }
 
-    override suspend fun fetchUserPhotos(username: String): Flow<PagingData<Photo>> {
+    override suspend fun getUserPhotos(username: String): Flow<PagingData<Photo>> {
         val pagingConfig = PagingConfig(pageSize = 30)
         val userPhotosPager = Pager(pagingConfig) {
             UserPhotosPagingSource(usersRemoteSource = usersRemoteSource, username = username)

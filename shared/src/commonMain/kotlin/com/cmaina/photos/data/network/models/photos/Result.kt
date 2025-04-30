@@ -1,6 +1,5 @@
 package com.cmaina.photos.data.network.models.photos
 
-import com.cmaina.photos.data.network.models.photos.CoverPhoto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

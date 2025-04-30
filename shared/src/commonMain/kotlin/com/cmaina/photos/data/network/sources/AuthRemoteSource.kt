@@ -1,22 +1,19 @@
 package com.cmaina.photos.data.network.sources
 
-import com.cmaina.fotos.shared.data.Constants.BASEURL
+import com.cmaina.photos.data.network.utils.Constants
 import io.ktor.client.HttpClient
 import io.ktor.client.request.post
 
 class AuthRemoteSource(private val client: HttpClient) {
 
     suspend fun authorizeUser(
-        clientId: String = "pbq2xfRl6EbYjlRQeGfkp5dBfdzSuETZQiBPrbSSswk",
-        clientSecret: String = "mj232Q-hkm9J3Ufyn5EJ5I0q4yYs_hkPp85udjOqo4c",
-        redirectUri: String = "fotos://callback",
         code: String,
         grantType: String = "authorization_code"
     ) = client.post("oauth/token") {
         url {
-            parameters.append("client_id", clientId)
-            parameters.append("client_secret", clientSecret)
-            parameters.append("redirect_uri", redirectUri)
+            parameters.append("client_id", Constants.CLIENT_ID)
+            parameters.append("client_secret", Constants.CLIENT_SECRET)
+            parameters.append("redirect_uri", Constants.REDIRECT_URI)
             parameters.append("code", code)
             parameters.append("grant_type", grantType)
         }

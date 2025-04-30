@@ -6,6 +6,7 @@ import com.cmaina.photos.domain.models.settings.AppThemes
 import com.cmaina.photos.presentation.utils.Language
 import com.cmaina.photos.presentation.utils.LanguageList
 
+/** UI state for the settings screen */
 data class SettingsUiState(
     val appTheme: AppTheme = AppThemes.first(),
     val isThemeDialogOpen: Boolean,

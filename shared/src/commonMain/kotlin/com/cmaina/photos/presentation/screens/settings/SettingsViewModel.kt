@@ -45,7 +45,7 @@ class SettingsViewModel(private val appRepository: AppRepository) : ViewModel() 
     }
 
     private fun fetchAppLanguage() = viewModelScope.launch {
-        appRepository.fetchAppLanguage().collect { language ->
+        appRepository.getAppLanguage().collect { language ->
             _uiState.update { it.copy(currentLanguage = language) }
             getLayoutDirection()
         }
@@ -63,7 +63,7 @@ class SettingsViewModel(private val appRepository: AppRepository) : ViewModel() 
     }
 
     private fun fetchAppTheme() = viewModelScope.launch {
-        appRepository.fetchAppTheme().collect { theme ->
+        appRepository.getAppTheme().collect { theme ->
             _uiState.update { it.copy(appTheme = theme) }
         }
     }

@@ -5,7 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import com.cmaina.photos.domain.models.settings.AppThemeEntity
+import com.cmaina.photos.domain.models.settings.ThemeType
 import com.cmaina.photos.presentation.screens.settings.SettingsUiState
 
 val DarkColorPalette = darkColorScheme(
@@ -36,9 +36,9 @@ fun PhotosTheme(
     content: @Composable () -> Unit
 ) {
     val colors = when (uiState.appTheme.entity) {
-        AppThemeEntity.LIGHT -> LightColorPalette
-        AppThemeEntity.DARK -> DarkColorPalette
-        AppThemeEntity.SYSTEM -> if (isSystemInDarkTheme()) DarkColorPalette else LightColorPalette
+        ThemeType.LIGHT -> LightColorPalette
+        ThemeType.DARK -> DarkColorPalette
+        ThemeType.SYSTEM -> if (isSystemInDarkTheme()) DarkColorPalette else LightColorPalette
     }
 
     MaterialTheme(

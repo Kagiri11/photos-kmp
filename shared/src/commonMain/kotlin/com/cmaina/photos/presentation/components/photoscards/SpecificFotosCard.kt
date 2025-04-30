@@ -36,24 +36,24 @@ fun RowScope.PhotosPager(
         when (action) {
             ClickAction.Next -> pagerState.scrollToPage(pagerState.currentPage + 1)
             ClickAction.Prev -> pagerState.scrollToPage(pagerState.currentPage - 1)
-            ClickAction.None -> {}
+            ClickAction.None -> Unit
         }
     }
 
     HorizontalPager(
         state = pagerState,
-        beyondViewportPageCount = 2,
         modifier = Modifier.weight(0.8f).background(color = Color.Blue)
     ) { page ->
         pageInIteration(pagerState.currentPage)
         onPageSwapped(images[page])
         Card(
-            modifier = Modifier.fillMaxWidth(0.7f).fillMaxHeight(),
+            modifier = Modifier.fillMaxHeight(),
             shape = RoundedCornerShape(2)
         ) {
             AsyncImage(
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop,
+                alignment = Alignment.Center,
                 model = images[page],
                 contentDescription = "related image"
             )
