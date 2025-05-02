@@ -11,7 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import coil3.ImageLoader
 import coil3.compose.AsyncImage
+import coil3.compose.LocalPlatformContext
+import coil3.svg.SvgDecoder
+import org.jetbrains.compose.resources.painterResource
+import photos.shared.generated.resources.Res
+import photos.shared.generated.resources.image
 
 @Composable
 fun PhotoCardItem(
@@ -19,6 +25,12 @@ fun PhotoCardItem(
     contentDescription: String,
     onPhotoClicked: () -> Unit
 ) {
+    val context = LocalPlatformContext.current
+    val imageLoader = ImageLoader.Builder(context = context)
+        .components{
+            add(SvgDecoder.Factory())
+        }
+        .build()
     Card(
         shape = RoundedCornerShape(2),
         modifier = Modifier
@@ -28,10 +40,12 @@ fun PhotoCardItem(
             .clickable(onClick = onPhotoClicked),
     ) {
         AsyncImage(
+            imageLoader = imageLoader,
             modifier = Modifier.fillMaxSize(),
             contentDescription = contentDescription,
             contentScale = ContentScale.Crop,
-            model = imageUrl
+            model = imageUrl,
+            placeholder = painterResource(Res.drawable.image)
         )
     }
 }

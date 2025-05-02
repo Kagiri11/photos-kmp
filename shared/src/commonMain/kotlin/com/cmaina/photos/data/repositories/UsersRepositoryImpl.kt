@@ -25,10 +25,6 @@ class UsersRepositoryImpl(
         )
     }
 
-    override suspend fun getUserProfile(): Flow<User> {
-        return flowOf()
-    }
-
     override suspend fun fetchUserPortFolio(): Flow<UserPortFolioDomainModel> {
         return flowOf()
     }

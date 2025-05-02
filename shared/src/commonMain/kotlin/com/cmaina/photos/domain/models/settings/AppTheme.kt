@@ -6,13 +6,13 @@ import photos.shared.generated.resources.theme_dark
 import photos.shared.generated.resources.theme_light
 import photos.shared.generated.resources.theme_sys_default
 
-internal enum class ThemeType {
+enum class ThemeType {
     LIGHT,
     DARK,
     SYSTEM
 }
 
-internal data class AppTheme(
+data class AppTheme(
     val entity: ThemeType,
     val themeResource: StringResource
 )
