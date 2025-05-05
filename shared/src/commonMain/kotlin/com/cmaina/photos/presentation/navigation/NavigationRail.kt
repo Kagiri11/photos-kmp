@@ -2,7 +2,9 @@ package com.cmaina.photos.presentation.navigation
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.icons.Icons
@@ -35,6 +37,7 @@ fun NavigationRail(navHostController: NavHostController) {
         val isNotTopLevelScreen = navBackStackEntry?.destination?.route !in TopLevelDestinations.map { it.route }
 
         if (isNotTopLevelScreen){
+            Spacer(Modifier.height(3.dp))
             NavigationRailItem(
                 selected = false,
                 colors = NavigationRailItemDefaults.colors(
@@ -56,12 +59,14 @@ fun NavigationRail(navHostController: NavHostController) {
                 label = {},
                 alwaysShowLabel = false
             )
+            Spacer(Modifier.height(3.dp))
         }
 
         NavigationRail(
             modifier = Modifier.fillMaxHeight().wrapContentWidth(),
             containerColor = MaterialTheme.colorScheme.primary
         ) {
+            Spacer(Modifier.height(3.dp))
             TopLevelDestinations.forEach { screen ->
                 val isSelected = navBackStackEntry?.destination?.route == screen.route
 
