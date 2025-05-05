@@ -34,9 +34,9 @@ fun NavigationRail(navHostController: NavHostController) {
     Column(
         modifier = Modifier.animateContentSize()
     ) {
-        val isNotTopLevelScreen = navBackStackEntry?.destination?.route !in TopLevelDestinations.map { it.route }
+        val isTopLevelScreen = navBackStackEntry?.destination?.route in TopLevelDestinations.map { it.route }
 
-        if (isNotTopLevelScreen){
+        if (!isTopLevelScreen){
             Spacer(Modifier.height(3.dp))
             NavigationRailItem(
                 selected = false,
