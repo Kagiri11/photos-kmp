@@ -68,15 +68,7 @@ fun PhotoDetailsScreen(
                         modifier = Modifier.fillMaxSize(),
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
-                        Button(
-                            onClick = onBackBtnClicked
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.ArrowBack,
-                                contentDescription = stringResource(Res.string.navigate_back)
-                            )
-                        }
-
+                        Spacer(modifier = Modifier.height(10.dp))
                         RelatedPhotosWrapper(
                             images = relatedImages,
                             pageInIteration = { page = it },

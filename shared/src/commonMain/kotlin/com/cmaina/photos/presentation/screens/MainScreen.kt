@@ -57,12 +57,11 @@ fun MainScreen(
                 targetState = windowSize.widthSizeClass < WindowWidthSizeClass.Medium,
                 label = "MainScreen",
                 transitionSpec = {
-                    fadeIn(
-                        animationSpec = tween(3000)
-                    ) togetherWith fadeOut(animationSpec = tween(3000))
+                    fadeIn(animationSpec = tween(3000)) togetherWith
+                    fadeOut(animationSpec = tween(3000))
                 }
-            ) { targetState ->
-                when (targetState) {
+            ) { isCompact ->
+                when (isCompact) {
                     true -> Scaffold(
                         bottomBar = { if (isTopLevelDestination) BottomNav(navController) },
                         content = {
