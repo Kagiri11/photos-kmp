@@ -1,5 +1,6 @@
 package com.cmaina.photos.presentation.components.photoscards
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,12 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.ImageLoader
-import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
+import coil3.compose.rememberAsyncImagePainter
+import coil3.request.CachePolicy
+import coil3.request.ImageRequest
 import coil3.svg.SvgDecoder
-import org.jetbrains.compose.resources.painterResource
-import photos.shared.generated.resources.Res
-import photos.shared.generated.resources.image
 
 @Composable
 fun PhotoCardItem(
@@ -26,11 +26,16 @@ fun PhotoCardItem(
     onPhotoClicked: () -> Unit
 ) {
     val context = LocalPlatformContext.current
-    val imageLoader = ImageLoader.Builder(context = context)
-        .components{
-            add(SvgDecoder.Factory())
-        }
-        .build()
+    val painter = rememberAsyncImagePainter(
+        model = ImageRequest.Builder(context)
+            .data(imageUrl)
+            .memoryCachePolicy(CachePolicy.ENABLED)
+            .diskCachePolicy(CachePolicy.ENABLED)
+            .build(),
+        imageLoader = ImageLoader.Builder(context)
+            .components { add(SvgDecoder.Factory()) }
+            .build()
+    )
     Card(
         shape = RoundedCornerShape(2),
         modifier = Modifier
@@ -39,13 +44,11 @@ fun PhotoCardItem(
             .padding(1.dp)
             .clickable(onClick = onPhotoClicked),
     ) {
-        AsyncImage(
-            imageLoader = imageLoader,
-            modifier = Modifier.fillMaxSize(),
+        Image(
+            painter = painter,
             contentDescription = contentDescription,
-            contentScale = ContentScale.Crop,
-            model = imageUrl,
-            placeholder = painterResource(Res.drawable.image)
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
         )
     }
 }
