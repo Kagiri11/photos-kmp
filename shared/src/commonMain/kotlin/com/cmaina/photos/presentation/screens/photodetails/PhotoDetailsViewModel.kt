@@ -23,15 +23,15 @@ class PhotoDetailsViewModel(
             when {
                 result.isSuccess -> {
                     with(result.getOrThrow()) {
-                        val images =
+                        /*val images =
                             this.relatedCollections.collections.flatMap { it.previewPhotos.map { it.urls.regular } }
                                 .toMutableList()
-                        images.add(this.urls.regular)
+                        images.add(this.urls.regular)*/
                         val details = Details(
-                            userName = user.name,
-                            userPhotoImageUrl = user.userProfileImage.medium,
-                            numberOfLikes = likes,
-                            relatedImages = images.reversed(),
+                            userName = user.name.orEmpty(),
+                            userPhotoImageUrl = user.profileImage.medium ?: "",
+                            numberOfLikes = 0,
+                            relatedImages = listOf(),
                             photoIsLikedByUser = false
                         )
                         _uiState.value =

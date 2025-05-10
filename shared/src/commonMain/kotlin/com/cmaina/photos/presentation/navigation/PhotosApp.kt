@@ -38,7 +38,9 @@ fun PhotosApp(
             val photoId = backStackEntry.arguments?.getString("id") ?: return@composable
             PhotoDetailsScreen(
                 photoId = photoId,
-                onUserSectionClickedEvent = {},
+                onUserSectionClickedEvent = { userName ->
+                    navController.navigate(PhotosScreen.User.route + "/$userName")
+                },
                 onImageLikedEvent = {},
                 onPageSwappedEvent = {},
                 onBackBtnClicked = { navController.navigateUp() }
@@ -53,8 +55,13 @@ fun PhotosApp(
             FavoritesScreen()
         }
 
-        composable(route = PhotosScreen.User.route) {
+        composable(
+            route = PhotosScreen.User.route + "/{userName}",
+            arguments = listOf(navArgument("userName") { type = NavType.StringType })
+        ) {backStackEntry ->
+            val userName = backStackEntry.arguments?.getString("userName") ?: return@composable
             UserScreen(
+                userName = userName,
                 onBackPressed = {},
                 onUserPhotoClicked = {}
             )

@@ -24,16 +24,16 @@ class UserViewModel(
     val uiState: StateFlow<UserUiState> get() = _uiState
 
     fun fetchUser(username: String) = viewModelScope.launch {
-        usersRepository.getUser(username = username).collect { networkResult ->
+        usersRepository.getUser(username = username).let { networkResult ->
             networkResult
                 .onSuccess { user ->
                     val details = UserUiDetails(
-                        numberOfPhotosByUser = user.totalPhotos,
-                        userImageUrl = user.profileImage.large.orEmpty(),
-                        followersCount = user.followersCount,
-                        followingCount = user.followingCount,
+                        numberOfPhotosByUser = 0,
+                        userImageUrl = "",
+                        followersCount =  0,
+                        followingCount = 0,
                         userPhotos = photosRepository.getUserPhotos(username),
-                        userName = user.name
+                        userName = user.name.orEmpty()
                     )
                     _uiState.value = UserUiState.Success(uiDetails = details)
                 }

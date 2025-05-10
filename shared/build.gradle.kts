@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import com.codingfeline.buildkonfig.compiler.FieldSpec
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -5,6 +7,7 @@ plugins {
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    id("com.codingfeline.buildkonfig") version "+"
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
 }
@@ -103,4 +106,30 @@ android {
 dependencies {
     ksp(libs.room.compiler)
     ksp(libs.koin.ksp.compiler)
+}
+
+buildkonfig {
+    packageName = "com.codingfeline.buildkonfigsample"
+
+    defaultConfigs {
+        val accessToken: String = gradleLocalProperties(rootDir, providers).getProperty("accessToken")
+        val refreshToken: String = gradleLocalProperties(rootDir, providers).getProperty("refreshToken")
+        buildConfigField(FieldSpec.Type.STRING, "accessToken", accessToken, nullable = false)
+        buildConfigField(FieldSpec.Type.STRING, "refreshToken", refreshToken, nullable = false)
+    }
+
+    targetConfigs {
+        create("jvm") {
+            buildConfigField(FieldSpec.Type.STRING, "target", "jvm")
+        }
+        create("ios") {
+            buildConfigField(FieldSpec.Type.STRING, "target", "ios")
+        }
+        create("desktop") {
+            buildConfigField(FieldSpec.Type.STRING, "desktopvalue", "desktop")
+        }
+        create("jsCommon") {
+            buildConfigField(FieldSpec.Type.STRING, "target", "jsCommon")
+        }
+    }
 }

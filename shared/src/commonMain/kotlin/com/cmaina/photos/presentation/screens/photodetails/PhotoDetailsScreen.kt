@@ -1,6 +1,7 @@
 package com.cmaina.photos.presentation.screens.photodetails
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -135,7 +136,7 @@ fun LikeAndDownloadSection(
     onUserSectionClicked: () -> Unit
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        Row {
+        Row(modifier = Modifier.clickable { onUserSectionClicked() }) {
             AsyncImage(
                 modifier = Modifier.clip(CircleShape).size(50.dp),
                 model = userPhotoUrl,

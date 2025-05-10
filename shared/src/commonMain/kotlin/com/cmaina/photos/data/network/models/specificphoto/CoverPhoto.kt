@@ -2,7 +2,7 @@ package com.cmaina.photos.data.network.models.specificphoto
 
 import com.cmaina.photos.data.network.models.photos.PhotoLinks
 import com.cmaina.photos.data.network.models.photos.Urls
-import com.cmaina.photos.data.network.models.photos.User
+import com.cmaina.photos.domain.models.users.User
 
 data class CoverPhoto(
     val alt_description: String,

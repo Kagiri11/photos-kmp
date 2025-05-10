@@ -7,7 +7,9 @@ import io.ktor.client.*
 import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.DefaultRequest
+import io.ktor.client.plugins.HttpResponseValidator
 import io.ktor.client.plugins.auth.Auth
+import io.ktor.client.plugins.auth.providers.BearerTokens
 import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
@@ -18,6 +20,8 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 fun createClient(): HttpClient = HttpClient(CIO) {
+    expectSuccess = true
+
     install(ContentNegotiation) {
         json(
             Json { isLenient = true; ignoreUnknownKeys = true }
@@ -31,7 +35,9 @@ fun createClient(): HttpClient = HttpClient(CIO) {
     install(Auth) {
         bearer {
             loadTokens {
-                TokenStorage.first()
+                BearerTokens(accessToken = "nueRl77S9f32ELcEJ_PczCSIWEe36Tp2pwqSN8GMEPI",
+                    refreshToken = "NaMaKRipmUUIAxpyynsXXFm3iA7JLpxpRAZ_jKVWcZo")
+//                TokenStorage.first()
             }
         }
     }

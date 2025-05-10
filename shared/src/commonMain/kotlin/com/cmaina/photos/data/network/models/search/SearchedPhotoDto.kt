@@ -3,7 +3,7 @@ package com.cmaina.photos.data.network.models.search
 import com.cmaina.photos.data.network.models.photos.Collections
 import com.cmaina.photos.data.network.models.photos.PhotoLinks
 import com.cmaina.photos.data.network.models.photos.Urls
-import com.cmaina.photos.data.network.models.photos.User
+import com.cmaina.photos.domain.models.users.User
 
 data class SearchedPhotoDto(
     val altDescription: String,
