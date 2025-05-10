@@ -1,3 +1,4 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.codingfeline.buildkonfig.compiler.FieldSpec
 
 plugins {
@@ -6,9 +7,9 @@ plugins {
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    id("com.codingfeline.buildkonfig") version "+"
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
-    id("com.codingfeline.buildkonfig")
 }
 
 
@@ -111,11 +112,10 @@ buildkonfig {
     packageName = "com.codingfeline.buildkonfigsample"
 
     defaultConfigs {
-        buildConfigField(FieldSpec.Type.STRING, "test", "testvalue")
-        buildConfigField(FieldSpec.Type.STRING, "target", "common")
-        buildConfigField(FieldSpec.Type.STRING, "testKey1", null, nullable = true)
-        buildConfigField(FieldSpec.Type.STRING, "testKey2", "testValue2", nullable = false)
-        buildConfigField(FieldSpec.Type.STRING, "testKey3", "testValue3", nullable = false, const = true)
+        val accessToken: String = gradleLocalProperties(rootDir, providers).getProperty("accessToken")
+        val refreshToken: String = gradleLocalProperties(rootDir, providers).getProperty("refreshToken")
+        buildConfigField(FieldSpec.Type.STRING, "accessToken", accessToken, nullable = false)
+        buildConfigField(FieldSpec.Type.STRING, "refreshToken", refreshToken, nullable = false)
     }
 
     targetConfigs {
