@@ -11,8 +11,6 @@ data class User(
     val name: String?,
     @SerialName("bio")
     val bio: String?,
-    /*@SerialName("downloads")
-    val downloads: Int?,*/
     @SerialName("last_name")
     val lastName: String?,
     @SerialName("for_hire")
@@ -28,5 +26,7 @@ data class User(
     @SerialName("instagram_username")
     val instagramUsername: String?,
     @SerialName("profile_image")
-    val profileImage: ProfileImageDomainModel
+    val profileImage: ProfileImageDomainModel,
+    @SerialName("downloads")
+    val downloads: Int? = 0,
 )
