@@ -1,3 +1,4 @@
+import com.codingfeline.buildkonfig.compiler.FieldSpec
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -7,6 +8,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    id("com.codingfeline.buildkonfig")
 }
 
 
@@ -103,4 +105,31 @@ android {
 dependencies {
     ksp(libs.room.compiler)
     ksp(libs.koin.ksp.compiler)
+}
+
+buildkonfig {
+    packageName = "com.codingfeline.buildkonfigsample"
+
+    defaultConfigs {
+        buildConfigField(FieldSpec.Type.STRING, "test", "testvalue")
+        buildConfigField(FieldSpec.Type.STRING, "target", "common")
+        buildConfigField(FieldSpec.Type.STRING, "testKey1", null, nullable = true)
+        buildConfigField(FieldSpec.Type.STRING, "testKey2", "testValue2", nullable = false)
+        buildConfigField(FieldSpec.Type.STRING, "testKey3", "testValue3", nullable = false, const = true)
+    }
+
+    targetConfigs {
+        create("jvm") {
+            buildConfigField(FieldSpec.Type.STRING, "target", "jvm")
+        }
+        create("ios") {
+            buildConfigField(FieldSpec.Type.STRING, "target", "ios")
+        }
+        create("desktop") {
+            buildConfigField(FieldSpec.Type.STRING, "desktopvalue", "desktop")
+        }
+        create("jsCommon") {
+            buildConfigField(FieldSpec.Type.STRING, "target", "jsCommon")
+        }
+    }
 }
