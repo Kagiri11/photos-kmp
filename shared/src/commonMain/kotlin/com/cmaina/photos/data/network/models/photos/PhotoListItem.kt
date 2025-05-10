@@ -1,5 +1,6 @@
 package com.cmaina.photos.data.network.models.photos
 
+import com.cmaina.photos.domain.models.users.User
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

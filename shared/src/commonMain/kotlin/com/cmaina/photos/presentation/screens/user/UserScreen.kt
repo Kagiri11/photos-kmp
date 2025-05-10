@@ -22,6 +22,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,10 +38,14 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun UserScreen(
+    userName: String,
     onBackPressed: () -> Unit,
     onUserPhotoClicked: (String) -> Unit,
     userViewModel: UserViewModel = koinViewModel()
 ) {
+    LaunchedEffect(Unit){ // TODO: Come back to this
+        userViewModel.fetchUser(userName)
+    }
     val uiState = userViewModel.uiState.collectAsState().value
 
     when (uiState) {

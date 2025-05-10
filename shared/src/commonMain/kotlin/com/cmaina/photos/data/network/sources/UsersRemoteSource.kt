@@ -1,11 +1,13 @@
 package com.cmaina.photos.data.network.sources
 
+import com.cmaina.photos.domain.models.users.User
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
 import io.ktor.client.request.get
 
 class UsersRemoteSource(private val client: HttpClient) {
 
-    suspend fun getUser(username: String) = client.get("users/$username")
+    suspend fun getUser(username: String): User = client.get("users/$username").body()
 
     suspend fun getUserPhotos(
         username: String,

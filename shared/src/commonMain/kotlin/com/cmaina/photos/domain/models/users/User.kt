@@ -1,24 +1,32 @@
 package com.cmaina.photos.domain.models.users
 
-import com.cmaina.photos.domain.models.photos.DomainUserSocial
-import com.cmaina.photos.domain.models.photos.Photo
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class User(
-    val bio: String,
-    val downloads: Int,
-    val firstName: String?,
-    val followedByUser: Boolean,
-    val followersCount: Int,
-    val followingCount: Int,
-    val forHire: Boolean,
+    @SerialName("id")
     val id: String,
-    val instagramUsername: String,
-    val lastName: String,
-    val name: String,
-    val userPhotos: List<com.cmaina.photos.domain.models.photos.Photo>,
-    val profileImage: com.cmaina.photos.domain.models.users.ProfileImageDomainModel,
-    val social: com.cmaina.photos.domain.models.photos.DomainUserSocial,
-    val totalLikes: Int,
-    val totalPhotos: Int,
-    val username: String
+    @SerialName("name")
+    val name: String?,
+    @SerialName("bio")
+    val bio: String?,
+    /*@SerialName("downloads")
+    val downloads: Int?,*/
+    @SerialName("last_name")
+    val lastName: String?,
+    @SerialName("for_hire")
+    val forHire: Boolean?,
+    @SerialName("username")
+    val userName: String?,
+    @SerialName("first_name")
+    val firstName: String?,
+    @SerialName("total_likes")
+    val totalLikes: Int?,
+    @SerialName("total_photos")
+    val totalPhotos: Int?,
+    @SerialName("instagram_username")
+    val instagramUsername: String?,
+    @SerialName("profile_image")
+    val profileImage: ProfileImageDomainModel
 )

@@ -5,7 +5,6 @@ import com.cmaina.photos.data.network.models.photos.PhotoListItem
 import com.cmaina.photos.data.network.models.photos.ProfileImage
 import com.cmaina.photos.data.network.models.photos.Social
 import com.cmaina.photos.data.network.models.photos.Urls
-import com.cmaina.photos.data.network.models.photos.User
 import com.cmaina.photos.data.network.models.photos.UserProfileImage
 import com.cmaina.photos.data.network.models.photostats.Downloads
 import com.cmaina.photos.data.network.models.photostats.Likes
@@ -13,7 +12,6 @@ import com.cmaina.photos.data.network.models.photostats.PhotoStatistics
 import com.cmaina.photos.data.network.models.photostats.Views
 import com.cmaina.photos.data.network.models.search.PhotoSearchResultDto
 import com.cmaina.photos.data.network.models.search.SearchedPhotoDto
-import com.cmaina.photos.data.network.models.users.UserDto
 import com.cmaina.photos.domain.models.auth.AuthDomainResponse
 import com.cmaina.photos.domain.models.photos.DomainProfileImage
 import com.cmaina.photos.domain.models.photos.DomainUserProfileImage
@@ -27,6 +25,7 @@ import com.cmaina.photos.domain.models.photostats.DomainPhotoStatistics
 import com.cmaina.photos.domain.models.photostats.DomainPhotoStatsViews
 import com.cmaina.photos.domain.models.search.PhotoSearchResultDomainModel
 import com.cmaina.photos.domain.models.users.ProfileImageDomainModel
+import com.cmaina.photos.domain.models.users.User
 
 /** Maps DTOs from data layer to domain layer
  */
@@ -37,12 +36,7 @@ internal fun PhotoListItem.toDomain() = Photo(
     likedByUser = likedByUser ?: false,
     likes = likes ?: 0,
     photoUrls = urls!!.toDomain(),
-    user = user?.toDomain()!!,
-)
-
-internal fun User.toDomain() = PhotoUser(
-    userName = username ?: "",
-    userPhotoImageUrl = this.userProfileImage.medium
+    user = user,
 )
 
 internal fun PhotoStatistics.toDomain() = DomainPhotoStatistics(
@@ -87,27 +81,6 @@ internal fun ProfileImage.toDomain() = DomainProfileImage(
     small = small
 )
 
-// user section
-internal fun UserDto.toDomain() = com.cmaina.photos.domain.models.users.User(
-    bio = bio,
-    downloads = downloads,
-    firstName = first_name,
-    followedByUser = followed_by_user,
-    followersCount = followers_count,
-    followingCount = following_count,
-    forHire = for_hire,
-    id = id,
-    instagramUsername = instagram_username,
-    lastName = last_name as String,
-    name = name,
-    userPhotos = photos.map { it.toDomain() },
-    profileImage = profile_image.toDomain(),
-    social = social.toDomain(),
-    totalLikes = total_likes,
-    totalPhotos = total_photos,
-    username = username
-)
-
 internal fun com.cmaina.photos.data.network.models.users.ProfileImage.toDomain() =
     ProfileImageDomainModel(large, medium, small)
 
@@ -124,7 +97,7 @@ internal fun SearchedPhotoDto.toDomain() = Photo(
     likedByUser = likedByUser,
     likes = likes,
     photoUrls = urls.toDomain(),
-    user = this.user.toDomain()
+    user = this.user
 )
 
 internal fun AuthRemoteResponse.toDomain() = AuthDomainResponse(

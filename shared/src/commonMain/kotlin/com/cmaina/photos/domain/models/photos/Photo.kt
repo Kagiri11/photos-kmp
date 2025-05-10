@@ -1,5 +1,7 @@
 package com.cmaina.photos.domain.models.photos
 
+import com.cmaina.photos.domain.models.users.User
+
 
 data class Photo(
     val id: String,
@@ -8,7 +10,7 @@ data class Photo(
     val photoUrls: PhotoUrls,
     val likedByUser: Boolean,
     val likes: Int,
-    val user: PhotoUser,
+    val user: User?,
     val relatedPhotos: List<Pair<String, String>> = emptyList()
 )
 
