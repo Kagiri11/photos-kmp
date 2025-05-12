@@ -32,7 +32,6 @@ out/
 # Gradle files
 .gradle/
 build/
-shared/src/commonMain/keys.properties
 
 # Local configuration file (sdk path, etc)
 local.properties
