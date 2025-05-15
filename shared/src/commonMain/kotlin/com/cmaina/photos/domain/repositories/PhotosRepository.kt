@@ -11,7 +11,7 @@ interface PhotosRepository {
     suspend fun getPhotoStatistics(photoId: String): Flow<Result<DomainPhotoStatistics>>
     suspend fun getUserPhotos(username: String): Flow<PagingData<Photo>>
     suspend fun searchPhoto(searchString: String): Flow<PagingData<Photo>>
-    suspend fun getSpecificPhoto(photoId: String): Result<SpecificPhoto>
+    suspend fun getSpecificPhoto(photoId: String): Result<Photo>
     suspend fun getFavoritePhotos(): Flow<List<FavoritePhoto>>
     suspend fun getPhotos(): Result<Flow<PagingData<Photo>>>
     suspend fun getRandomPhoto(): Result<Photo>

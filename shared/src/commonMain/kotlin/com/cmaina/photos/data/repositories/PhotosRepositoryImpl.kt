@@ -40,25 +40,21 @@ class PhotosRepositoryImpl(
 
     override suspend fun getRandomPhoto(): Result<Photo> {
         val call = photosRemoteSource.fetchRandomPhoto()
-        return InOut<PhotoListItem, Photo>(
-            call.body()
-        ).apiCall(
-            response = call,
-            mapper = { it.toDomain() }
-        )
+        return Result.failure(Exception("Error fetching random photo"))
     }
 
 
-    override suspend fun getSpecificPhoto(photoId: String): Result<SpecificPhoto> {
-        val call = photosRemoteSource.fetchPhoto(photoId)
-        return InOut<SpecificPhoto, SpecificPhoto>(
-            call.body()
-        ).apiCall(
-            response = call,
-            mapper = {
-                it
+    override suspend fun getSpecificPhoto(photoId: String): Result<Photo> {
+        val response = photosRemoteSource.fetchPhoto(photoId)
+        return try{
+            if (response.status.value == 200){
+                Result.success(response.body<Photo>())
+            } else {
+                Result.failure(Exception("Error fetching photo"))
             }
-        )
+        } catch (e: Exception){
+            Result.failure(e)
+        }
     }
 
     override suspend fun getUserPhotos(username: String): Flow<PagingData<Photo>> {

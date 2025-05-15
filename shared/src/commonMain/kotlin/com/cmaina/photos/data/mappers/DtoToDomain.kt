@@ -27,18 +27,6 @@ import com.cmaina.photos.domain.models.search.PhotoSearchResultDomainModel
 import com.cmaina.photos.domain.models.users.ProfileImageDomainModel
 import com.cmaina.photos.domain.models.users.User
 
-/** Maps DTOs from data layer to domain layer
- */
-internal fun PhotoListItem.toDomain() = Photo(
-    blurHash = blurHash ?: "",
-    description = description ?: "",
-    id = id,
-    likedByUser = likedByUser ?: false,
-    likes = likes ?: 0,
-    photoUrls = urls!!.toDomain(),
-    user = user,
-)
-
 internal fun PhotoStatistics.toDomain() = DomainPhotoStatistics(
     id = id,
     domainPhotoStatLikes = likes.toDomain(),
@@ -55,50 +43,6 @@ internal fun Downloads.toDomain() =
 
 internal fun Views.toDomain() =
     DomainPhotoStatsViews(total = total)
-
-internal fun UserProfileImage.toDomain() = DomainUserProfileImage(
-    large, medium, small
-)
-
-internal fun Social.toDomain() = DomainUserSocial(
-    instagramUsername = instagramUsername,
-    portfolioUrl = portfolioUrl,
-    twitterUsername = twitterUsername
-)
-
-internal fun Urls.toDomain() = PhotoUrls(
-    full = full,
-    raw = raw,
-    regular = regular,
-    small = small,
-    smallS3 = small_s3,
-    thumb = thumb
-)
-
-internal fun ProfileImage.toDomain() = DomainProfileImage(
-    large = large,
-    medium = medium,
-    small = small
-)
-
-internal fun com.cmaina.photos.data.network.models.users.ProfileImage.toDomain() =
-    ProfileImageDomainModel(large, medium, small)
-
-internal fun PhotoSearchResultDto.toDomain() = PhotoSearchResultDomainModel(
-    searchedPhotoDomainModels = results.map { it.toDomain() },
-    total = total,
-    totalPages = total_pages
-)
-
-internal fun SearchedPhotoDto.toDomain() = Photo(
-    blurHash = blurHash,
-    description = description,
-    id = id,
-    likedByUser = likedByUser,
-    likes = likes,
-    photoUrls = urls.toDomain(),
-    user = this.user
-)
 
 internal fun AuthRemoteResponse.toDomain() = AuthDomainResponse(
     accessToken = accessToken,

@@ -33,7 +33,7 @@ fun UserPhotos(
         items(photos) { pic ->
             UserPhoto(
                 userImageUrl = pic.photoUrls.small,
-                contentDescription = pic.description,
+                contentDescription = pic.description.orEmpty(),
                 onClick = { onUserPhotoClicked(pic.id) }
             )
         }

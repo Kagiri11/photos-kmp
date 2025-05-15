@@ -32,7 +32,7 @@ fun PhotosGrid(
         ) { photo ->
             PhotoCardItem(
                 imageUrl = photo.photoUrls.full,
-                contentDescription = photo.description,
+                contentDescription = photo.description.orEmpty(),
             ) {
                 onPhotoClicked(photo)
             }

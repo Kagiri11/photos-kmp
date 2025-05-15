@@ -14,9 +14,15 @@ class PhotosPagingSource(private val photosRemoteSource: PhotosRemoteSource) :
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Photo> {
         val nextPageNumber = params.key ?: 1
-        val call = photosRemoteSource.fetchPhotos(page = nextPageNumber)
-        val result = InOut<List<PhotoListItem>, List<Photo>>(call.body())
-            .apiCall(call) { it.map { it.toDomain() } }
+        val response = photosRemoteSource.fetchPhotos(page = nextPageNumber)
+        /*val result = InOut<List<PhotoListItem>, List<Photo>>(call.body())
+            .apiCall(call) { it.map { it.toDomain() } }*/
+
+        val result = if (response.status.value == 200){
+            Result.success(response.body<List<Photo>>())
+        } else {
+            Result.failure(Exception("Error fetching photos"))
+        }
 
         return when {
             result.isSuccess -> {

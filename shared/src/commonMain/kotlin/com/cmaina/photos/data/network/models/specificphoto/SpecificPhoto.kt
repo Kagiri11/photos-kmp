@@ -1,8 +1,5 @@
 package com.cmaina.photos.data.network.models.specificphoto
 
-import com.cmaina.photos.data.network.models.photos.PhotoLinks
-import com.cmaina.photos.data.network.models.photos.RelatedCollections
-import com.cmaina.photos.data.network.models.photos.Urls
 import com.cmaina.photos.domain.models.users.User
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

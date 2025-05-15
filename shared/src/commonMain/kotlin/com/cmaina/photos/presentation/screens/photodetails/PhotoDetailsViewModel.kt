@@ -28,8 +28,8 @@ class PhotoDetailsViewModel(
                                 .toMutableList()
                         images.add(this.urls.regular)*/
                         val details = Details(
-                            userName = user.name.orEmpty(),
-                            userPhotoImageUrl = user.profileImage.medium ?: "",
+                            userName = user?.name.orEmpty(),
+                            userPhotoImageUrl = user?.profileImage?.medium ?: "",
                             numberOfLikes = 0,
                             relatedImages = listOf(),
                             photoIsLikedByUser = false
@@ -46,6 +46,12 @@ class PhotoDetailsViewModel(
                         )
                 }
             }
+        }
+    }
+
+    fun fetchUserPhotos(){
+        viewModelScope.launch {
+//            photosRepository.getUserPhotos()
         }
     }
 }

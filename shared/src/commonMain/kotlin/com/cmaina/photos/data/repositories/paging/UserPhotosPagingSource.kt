@@ -19,8 +19,10 @@ class UserPhotosPagingSource(
         val nextPageNumber = params.key ?: 1
 
         val response = usersRemoteSource.getUserPhotos(username = username, page = nextPageNumber)
-        val result = InOut<List<PhotoListItem>, List<Photo>>(response.body())
-            .apiCall(response) { it.map { it.toDomain() } }
+        /*val result = InOut<List<PhotoListItem>, List<Photo>>(response.body())
+            .apiCall(response) { it.map { it.toDomain() } }*/
+
+        val result = Result.success(listOf<Photo>())
         return when {
             result.isSuccess -> {
                 val dataResponse = result.getOrThrow()

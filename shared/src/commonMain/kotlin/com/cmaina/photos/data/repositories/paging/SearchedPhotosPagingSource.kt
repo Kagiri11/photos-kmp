@@ -21,12 +21,14 @@ class SearchedPhotosPagingSource(
             searchQuery = searchString,
             page = nextPageNumber
         )
-        val result = InOut<PhotoSearchResultDto, PhotoSearchResultDomainModel>(call.body())
-            .apiCall(response = call) { it.toDomain() }
+        /*val result = InOut<PhotoSearchResultDto, PhotoSearchResultDomainModel>(call.body())
+            .apiCall(response = call) { it.toDomain() }*/
+
+        val result = Result.success(listOf<Photo>())
 
         return when {
             result.isSuccess -> {
-                val dataResponse = result.getOrThrow().searchedPhotoDomainModels
+                val dataResponse = result.getOrThrow()
                 LoadResult.Page(
                     data = dataResponse ?: emptyList(),
                     prevKey = null,
