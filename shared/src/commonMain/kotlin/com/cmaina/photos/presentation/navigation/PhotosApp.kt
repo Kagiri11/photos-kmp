@@ -41,9 +41,7 @@ fun PhotosApp(
                 onUserSectionClickedEvent = { userName ->
                     navController.navigate(PhotosScreen.User.route + "/$userName")
                 },
-                onImageLikedEvent = {},
-                onPageSwappedEvent = {},
-                onBackBtnClicked = { navController.navigateUp() }
+                onPageSwappedEvent = {}
             )
         }
 

@@ -29,13 +29,12 @@ class PhotoDetailsViewModel(
                         images.add(this.urls.regular)*/
                         val details = Details(
                             userName = user?.name.orEmpty(),
-                            userPhotoImageUrl = user?.profileImage?.medium ?: "",
-                            numberOfLikes = 0,
+                            userPhotoImageUrl = user?.profileImage?.medium.orEmpty(),
+                            numberOfLikes = likes,
                             relatedImages = listOf(),
                             photoIsLikedByUser = false
                         )
-                        _uiState.value =
-                            PhotoDetailsUiState.Success(details = details)
+                        _uiState.value = PhotoDetailsUiState.Success(details = details)
                     }
                 }
 

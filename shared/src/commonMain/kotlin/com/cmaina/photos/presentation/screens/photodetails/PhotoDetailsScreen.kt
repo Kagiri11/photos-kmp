@@ -41,10 +41,8 @@ import photos.shared.generated.resources.navigate_back
 
 @Composable
 fun PhotoDetailsScreen(
-    onBackBtnClicked: () -> Unit,
     photoId: String,
     onUserSectionClickedEvent: (String) -> Unit,
-    onImageLikedEvent: () -> Unit,
     onPageSwappedEvent: (String) -> Unit,
     photoDetailsViewModel: PhotoDetailsViewModel = koinViewModel()
 ) {
@@ -102,17 +100,10 @@ fun PhotoDetailsScreen(
                             modifier = Modifier.fillMaxWidth(0.95f),
                             horizontalArrangement = Arrangement.Center
                         ) {
-
                             LikeAndDownloadSection(
                                 userName = userName,
                                 userPhotoUrl = userPhotoImageUrl,
                                 numberOfLikes = numberOfLikes,
-                                userHasLikedPhoto = photoIsLikedByUser,
-                                onLikeClick = {
-
-                                    onImageLikedEvent()
-                                },
-                                onDownloadClick = {},
                                 onUserSectionClicked = { onUserSectionClickedEvent(userName) }
                             )
                         }
@@ -130,9 +121,6 @@ fun LikeAndDownloadSection(
     userName: String,
     userPhotoUrl: String,
     numberOfLikes: Int,
-    userHasLikedPhoto: Boolean,
-    onLikeClick: () -> Unit,
-    onDownloadClick: () -> Unit,
     onUserSectionClicked: () -> Unit
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
