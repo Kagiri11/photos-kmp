@@ -4,11 +4,9 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.cmaina.photos.data.local.dao.FavoritePhotosDao
-import com.cmaina.photos.data.network.models.photos.PhotoListItem
 import com.cmaina.photos.data.network.models.photostats.PhotoStatistics
 import com.cmaina.photos.data.mappers.toDomain
 import com.cmaina.photos.data.network.InOut
-import com.cmaina.photos.data.network.models.specificphoto.SpecificPhoto
 import com.cmaina.photos.data.network.sources.PhotosRemoteSource
 import com.cmaina.photos.data.network.sources.UsersRemoteSource
 import com.cmaina.photos.data.repositories.paging.PhotosPagingSource

@@ -2,12 +2,8 @@ package com.cmaina.photos.data.repositories.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.cmaina.photos.data.mappers.toDomain
-import com.cmaina.photos.data.network.InOut
 import com.cmaina.photos.data.network.sources.UsersRemoteSource
-import com.cmaina.photos.data.network.models.photos.PhotoListItem
 import com.cmaina.photos.domain.models.photos.Photo
-import io.ktor.client.call.body
 
 class UserPhotosPagingSource(
     private val usersRemoteSource: UsersRemoteSource,

@@ -1,7 +1,6 @@
 package com.cmaina.photos.domain.repositories
 
 import androidx.paging.PagingData
-import com.cmaina.photos.data.network.models.specificphoto.SpecificPhoto
 import com.cmaina.photos.domain.models.photos.FavoritePhoto
 import com.cmaina.photos.domain.models.photos.Photo
 import com.cmaina.photos.domain.models.photostats.DomainPhotoStatistics
